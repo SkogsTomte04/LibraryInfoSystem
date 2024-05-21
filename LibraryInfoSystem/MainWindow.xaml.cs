@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryInfoSystem.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,5 +30,12 @@ namespace LibraryInfoSystem
         {
 
         }
+
+        private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
+        {
+            mongohandler.ConnectToDatabase();
+            GamesDataGrid.ItemsSource = mongohandler.items;
+        }
+        private MongoHandler mongohandler = new MongoHandler();
     }
 }

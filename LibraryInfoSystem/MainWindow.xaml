@@ -8,6 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="390,206,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <DataGrid x:Name="GamesDataGrid" Height= "200" Width="400" >
+            
+        </DataGrid>
+        <Button Height="30" Width="50" Content="button" Name="UpdateDataGrid" Click="UpdateDataGrid_Click" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
