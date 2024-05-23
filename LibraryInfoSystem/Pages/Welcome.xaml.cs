@@ -14,20 +14,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryInfoSystem
+namespace LibraryInfoSystem.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Welcome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Welcome : Page
     {
-        public MainWindow()
+        public Welcome()
         {
             InitializeComponent();
         }
 
-        
 
 
+
+
+        private void NavButton_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
     }
 }

@@ -14,20 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryInfoSystem
+namespace LibraryInfoSystem.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DataPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DataPage : Page
     {
-        public MainWindow()
+        public DataPage()
         {
             InitializeComponent();
         }
-
-        
-
-
+        private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
+        {
+            mongohandler.ConnectToDatabase();
+            GamesDataGrid.ItemsSource = mongohandler.items;
+        }
+        private MongoHandler mongohandler = new MongoHandler();
     }
 }

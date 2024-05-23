@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -23,11 +25,32 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("platform")]
         public ObservableCollection<string> platform { get; set; }
 
-        DataBaseItem(string? Title, double? Price, ObservableCollection<string> Platform)
+        [BsonElement("image")]
+        public string? image { get; set; }
+
+        DataBaseItem(string? Title, double? Price, ObservableCollection<string> Platform, string? Image)
         {
             title = Title;
             price = Price;
             platform = Platform;
+            image = Image;
+        }
+        public BitmapSource BitmapFromBase64(string? b64string)
+
+        {
+
+            var bytes = Convert.FromBase64String(b64string);
+
+            using (var stream = new MemoryStream(bytes))
+
+            {
+
+                return BitmapFrame.Create(stream,
+
+                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+
+            }
+
         }
     }
 }
