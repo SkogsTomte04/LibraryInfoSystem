@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using MongoDB.Driver.Core.WireProtocol.Messages.Encoders.BinaryEncoders;
+using System.Diagnostics;
+using System.Windows;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -23,19 +26,22 @@ namespace LibraryInfoSystem.Tools
         public double? price { get; set; }
 
         [BsonElement("platform")]
-        public ObservableCollection<string> platform { get; set; }
+        public ObservableCollection<string>? platform { get; set; }
 
         [BsonElement("image")]
-        public string? image { get; set; }
+        public string? image_str { get; set; } 
 
-        DataBaseItem(string? Title, double? Price, ObservableCollection<string> Platform, string? Image)
+        public BitmapSource? bitmapSource { get; set; }
+
+        
+        public DataBaseItem()
         {
-            title = Title;
-            price = Price;
-            platform = Platform;
-            image = Image;
+            bitmapSource = BitmapFromBase64(image_str);
+            
         }
-        public BitmapSource BitmapFromBase64(string? b64string)
+
+
+        public BitmapSource BitmapFromBase64(string? b64string) // This might need a fix
 
         {
 
