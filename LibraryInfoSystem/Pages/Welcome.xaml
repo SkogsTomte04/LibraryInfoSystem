@@ -12,8 +12,8 @@
 
     <Grid Background="White">
         <StackPanel ButtonBase.Click="NavButton_Click" Orientation="Horizontal" HorizontalAlignment="Center">
-            <n:NavButton Text="DataBase" NavUri="/Pages/DataPage.xaml" Background="LightGray" Height="50"/>
-            <n:NavButton Text="Log In" NavUri="/Pages/LogIn.xaml" Background="LightGray" Height="50"/>
+            <n:NavButton Text="DataBase" NavUri="/Pages/DataPage.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
+            <n:NavButton Text="Log In" NavUri="/Pages/LogIn.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
         </StackPanel>
 
         

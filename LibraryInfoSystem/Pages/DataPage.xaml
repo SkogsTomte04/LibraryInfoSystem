@@ -5,14 +5,30 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryInfoSystem.Pages"
       xmlns:n="clr-namespace:LibraryInfoSystem"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataPage">
 
+    <Page.Resources>
+        <Style TargetType="DataGrid" x:Key="GamesDataGridStyle">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+
+        </Style>
+    </Page.Resources>
+    
     <Grid Background="AliceBlue">
         <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <StackPanel>
-            <DataGrid x:Name="GamesDataGrid" Height= "200" Width="400"/>
+            <DataGrid x:Name="GamesDataGrid" Style="{StaticResource GamesDataGridStyle}" Height= "200" Width="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="title"/>
+                    <DataGridTextColumn Header="price"/>
+                    <DataGridComboBoxColumn Header="platform"/>
+                    <DataGridTextColumn Header="image"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Button Height="30" Width="50" Content="button" Name="UpdateDataGrid" Click="UpdateDataGrid_Click" VerticalAlignment="Bottom"/>
         </StackPanel>
         

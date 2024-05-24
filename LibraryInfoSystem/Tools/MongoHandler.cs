@@ -25,7 +25,6 @@ namespace LibraryInfoSystem.Tools
             try
             {
                 var result = client.GetDatabase("GameDataBase");
-                MessageBox.Show("Pinged your deployment. You successfully connected to MongoDB!");
                 IMongoCollection<DataBaseItem> collection = result.GetCollection<DataBaseItem>("games");
 
                 items = collection.AsQueryable().ToList<DataBaseItem>();
