@@ -10,11 +10,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Welcome">
 
-    <Grid Background="White">
+    <Grid Background="#FF212529">
         <StackPanel ButtonBase.Click="NavButton_Click" Orientation="Horizontal" HorizontalAlignment="Center">
-            <n:NavButton Text="DataBase" NavUri="/Pages/DataPage.xaml" Background="LightGray" Height="50"/>
-            <n:NavButton Text="Log In" NavUri="/Pages/LogIn.xaml" Background="LightGray" Height="50"/>
-            <n:NavButton Text="Games" NavUri="/Pages/Games.xaml" Background="LightGray" Height="50"/>
+            <n:NavButton Text="DataBase" NavUri="/Pages/DataPage.xaml" Background="#FF6C757D" Foreground="#FFDEE2E6" Height="50"/>
+            <n:NavButton Text="Log In" NavUri="/Pages/LogIn.xaml" Background="#FF6C757D" Foreground="#FFDEE2E6" Height="50"/>
+            <n:NavButton Text="Games" NavUri="/Pages/Games.xaml" Background="#FF6C757D" Foreground="#FFDEE2E6" Height="50"/>
         </StackPanel>
 
         
