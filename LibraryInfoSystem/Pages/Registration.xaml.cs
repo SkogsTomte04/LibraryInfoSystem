@@ -16,25 +16,13 @@ using System.Windows.Shapes;
 namespace LibraryInfoSystem.Pages
 {
     /// <summary>
-    /// Interaction logic for LogIn.xaml
+    /// Interaction logic for Registration.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class Registration : Page
     {
-        public LogIn()
+        public Registration()
         {
             InitializeComponent();
-        }
-
-
-        private void register_Click(object sender, RoutedEventArgs e)
-        {
-            var ClickedButton = e.OriginalSource as NavButton;
-            NavigationService.Navigate(ClickedButton.NavUri);
-        }
-
-        private void txtBox_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
