@@ -23,6 +23,7 @@ namespace LibraryInfoSystem.Components
         public txtBox()
         {
             InitializeComponent();
+            txtInput.TextChanged += txtInput_TextChanged;
         }
 
         private string placeholder;
@@ -47,6 +48,12 @@ namespace LibraryInfoSystem.Components
         {
             txtInput.Clear();
             txtInput.Focus();
+        }
+
+        public string Text
+        {
+            get { return txtInput.Text; }
+            set { txtInput.Text = value; }
         }
     }
 }

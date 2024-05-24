@@ -12,7 +12,7 @@ namespace LibraryInfoSystem.Tools
     class MongoHandler
     {
         const string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-        public List<DataBaseItem> items;
+        public List<DataBaseUser> items;
         public void ConnectToDatabase(string DataBase, string Collection)
         {
 
@@ -25,9 +25,9 @@ namespace LibraryInfoSystem.Tools
             try
             {
                 var result = client.GetDatabase(DataBase);
-                IMongoCollection<DataBaseItem> collection = result.GetCollection<DataBaseItem>(Collection);
+                IMongoCollection<DataBaseUser> collection = result.GetCollection<DataBaseUser>(Collection);
 
-                items = collection.AsQueryable().ToList<DataBaseItem>();
+                items = collection.AsQueryable().ToList<DataBaseUser>();
             }
             catch (Exception ex)
             {
