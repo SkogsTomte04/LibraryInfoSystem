@@ -13,7 +13,7 @@ namespace LibraryInfoSystem.Tools
     {
         const string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
         public List<DataBaseItem> items;
-        public void ConnectToDatabase()
+        public void ConnectToDatabase(string DataBase, string Collection)
         {
 
             var settings = MongoClientSettings.FromConnectionString(connectionUri);
@@ -24,8 +24,8 @@ namespace LibraryInfoSystem.Tools
             // Send a ping to confirm a successful connection
             try
             {
-                var result = client.GetDatabase("GameDataBase");
-                IMongoCollection<DataBaseItem> collection = result.GetCollection<DataBaseItem>("games");
+                var result = client.GetDatabase(DataBase);
+                IMongoCollection<DataBaseItem> collection = result.GetCollection<DataBaseItem>(Collection);
 
                 items = collection.AsQueryable().ToList<DataBaseItem>();
             }
