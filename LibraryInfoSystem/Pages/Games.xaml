@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Games">
 
-    <Grid Background="#FF463F3A">
+    <Grid Background="#FF212529">
         <Image HorizontalAlignment="Left" Height="100" Margin="10,58,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg?t=1710411171"/>
         <Image HorizontalAlignment="Center" Height="100" Margin="0,58,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg?t=1715334241" RenderTransformOrigin="0.857,0.515"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="590,58,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1716311593" RenderTransformOrigin="0.857,0.515"/>
@@ -18,15 +18,15 @@
         <Image HorizontalAlignment="Left" Height="100" Margin="10,321,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1746860/header.jpg?t=1701807368" RenderTransformOrigin="0.467,1.248"/>
         <Image HorizontalAlignment="Center" Height="100" Margin="0,321,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg?t=1713271288" RenderTransformOrigin="0.467,1.248"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="590,321,0,0" VerticalAlignment="Top" Width="200" Source="https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg?t=1715066651" RenderTransformOrigin="0.467,1.248"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="90,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="670,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="90,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="670,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="90,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="670,420,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="90,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="670,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="90,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="670,290,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Click="Button_Click_1" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="90,419,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Click="Button_Click_2" Background="#FF6C757D"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="670,420,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.22,0.163" Background="#FF6C757D"/>
 
     </Grid>
 </Page>
