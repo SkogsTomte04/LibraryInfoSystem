@@ -27,7 +27,7 @@ namespace LibraryInfoSystem.Pages
         }
         private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
         {
-            mongohandler.ConnectToDatabase("GameDataBase", "games");
+            mongohandler.ConnectToGames();
             GamesDataGrid.ItemsSource = mongohandler.items;
         }
         private MongoHandler mongohandler = new MongoHandler();

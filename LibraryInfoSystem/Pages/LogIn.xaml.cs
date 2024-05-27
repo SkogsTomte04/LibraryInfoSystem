@@ -38,7 +38,7 @@ namespace LibraryInfoSystem.Pages
 
         private void logInBtn_Click(object sender, RoutedEventArgs e)
         {
-            logIn.ConnectToDatabase("GameDataBase", "users");
+            logIn.ConnectToUsers();
 
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;
@@ -51,7 +51,7 @@ namespace LibraryInfoSystem.Pages
         {
             var filter = Builders<BsonDocument>.Filter.Eq("Username", username);
 
-            foreach(var user in logIn.items)
+            foreach(var user in logIn.users)
             {
                 if (user.UserId == username)
                 {
