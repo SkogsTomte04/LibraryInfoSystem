@@ -1,5 +1,4 @@
-﻿using LibraryInfoSystem.Components;
-using LibraryInfoSystem.Tools;
+﻿using LibraryInfoSystem.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,33 +23,12 @@ namespace LibraryInfoSystem.Pages
     {
         public DataPage()
         {
-            
             InitializeComponent();
-            build();
         }
         private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
-        public void build()
-        {
-            mongohandler.ConnectToDatabase("GameDataBase", "games");
-            foreach(DataBaseItem baseItem in mongohandler.items)
-            {
-                GameComponent gameComponent = new GameComponent();
-                gameComponent.title = baseItem._title;
-                gameComponent.price = baseItem._price;
-                gameComponent.platform = baseItem._platform;
-
-                if (string.IsNullOrWhiteSpace(baseItem._image) == false)
-                {
-                    BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
-                    gameComponent.image_cover.Source = convertedImage;
-                }
-                else { MessageBox.Show("Bitmapconversion error"); }
-
-                GamesStack.Children.Add(gameComponent);
-            }
+            mongohandler.ConnectToGames();
+            GamesDataGrid.ItemsSource = mongohandler.items;
         }
         private MongoHandler mongohandler = new MongoHandler();
     }
