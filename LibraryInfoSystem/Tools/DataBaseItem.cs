@@ -20,43 +20,16 @@ namespace LibraryInfoSystem.Tools
         protected ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public string? title { get; set; }
+        public string? _title { get; set; }
 
         [BsonElement("price")]
-        public double? price { get; set; }
+        public double? _price { get; set; }
 
         [BsonElement("platform")]
-        public ObservableCollection<string>? platform { get; set; }
+        public List<string>? _platform { get; set; }
 
         [BsonElement("image")]
-        public string? image_str { get; set; } 
-
-        public BitmapSource? bitmapSource { get; set; }
-
-        
-        public DataBaseItem()
-        {
-            bitmapSource = BitmapFromBase64(image_str);
-            
-        }
-
-
-        public BitmapSource BitmapFromBase64(string? b64string) // This might need a fix
-
-        {
-
-            var bytes = Convert.FromBase64String(b64string);
-
-            using (var stream = new MemoryStream(bytes))
-
-            {
-
-                return BitmapFrame.Create(stream,
-
-                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-
-            }
-
-        }
+        public string? _image { get; set; }
     }
+
 }

@@ -21,21 +21,9 @@
     <Grid Background="AliceBlue">
         <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <StackPanel>
-            <DataGrid x:Name="GamesDataGrid" Style="{StaticResource GamesDataGridStyle}" Height= "200" Width="400">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="title" Binding="{Binding title}"/>
-                    <DataGridTextColumn Header="price" Binding="{Binding price}"/>
-                    <DataGridComboBoxColumn Header="platform"/>
-                    <DataGridTemplateColumn Header="Image" IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Height="20" Width="20" Source="{Binding bitmapSource}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
-                </DataGrid.Columns>
-            </DataGrid>
+            <StackPanel x:Name="GamesStack">
+                
+            </StackPanel>
             <Button Height="30" Width="50" Content="button" Name="UpdateDataGrid" Click="UpdateDataGrid_Click" VerticalAlignment="Bottom"/>
         </StackPanel>
         

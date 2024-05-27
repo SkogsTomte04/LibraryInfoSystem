@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -33,6 +35,23 @@ namespace LibraryInfoSystem.Tools
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+        public BitmapSource BitmapFromBase64(string? b64string)
+
+        {
+
+            var bytes = Convert.FromBase64String(b64string);
+
+            using (var stream = new MemoryStream(bytes))
+
+            {
+
+                return BitmapFrame.Create(stream,
+
+                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+
+            }
+
         }
     }
 }
