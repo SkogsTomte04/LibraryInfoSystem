@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace LibraryInfoSystem.Tools
 {
-    class DataBaseUser
+    public class DataBaseUser
     {
 
         [BsonId]
@@ -38,7 +38,7 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("isAdmin")]
         public Boolean? IsAdmin { get; set; }
 
-        DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin)
+        public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin)
         {
             FirstName = firstName;
             LastName = lastName;
