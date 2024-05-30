@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using MongoDB.Driver.Core.WireProtocol.Messages.Encoders.BinaryEncoders;
+using System.Diagnostics;
+using System.Windows;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -17,40 +20,16 @@ namespace LibraryInfoSystem.Tools
         protected ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public string? title { get; set; }
+        public string? _title { get; set; }
 
         [BsonElement("price")]
-        public double? price { get; set; }
+        public double? _price { get; set; }
 
         [BsonElement("platform")]
-        public ObservableCollection<string> platform { get; set; }
+        public List<string>? _platform { get; set; }
 
         [BsonElement("image")]
-        public string? image { get; set; }
-
-        DataBaseItem(string? Title, double? Price, ObservableCollection<string> Platform, string? Image)
-        {
-            title = Title;
-            price = Price;
-            platform = Platform;
-            image = Image;
-        }
-        public BitmapSource BitmapFromBase64(string? b64string)
-
-        {
-
-            var bytes = Convert.FromBase64String(b64string);
-
-            using (var stream = new MemoryStream(bytes))
-
-            {
-
-                return BitmapFrame.Create(stream,
-
-                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-
-            }
-
-        }
+        public string? _image { get; set; }
     }
+
 }

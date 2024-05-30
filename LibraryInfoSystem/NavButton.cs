@@ -38,5 +38,19 @@ namespace LibraryInfoSystem
             set { SetValue(TextProperty, value); }
         }
 
+
+
+        public bool Bordervisible
+        {
+            get { return (bool)GetValue(BordervisibleProperty); }
+            set { SetValue(BordervisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Bordervisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BordervisibleProperty =
+            DependencyProperty.Register("Bordervisible", typeof(bool), typeof(NavButton), new PropertyMetadata(true));
+
+
+
     }
 }
