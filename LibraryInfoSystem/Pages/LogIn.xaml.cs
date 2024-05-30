@@ -28,7 +28,7 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
         }
 
-        private MongoHandler logIn = new MongoHandler();
+        private MongoHandler logIn = new MongoHandler(DataType.Users);
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
@@ -38,7 +38,7 @@ namespace LibraryInfoSystem.Pages
 
         private void logInBtn_Click(object sender, RoutedEventArgs e)
         {
-            logIn.ConnectToUsers();
+            logIn.GetUsersCollection();
 
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;

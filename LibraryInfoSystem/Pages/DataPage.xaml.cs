@@ -34,7 +34,6 @@ namespace LibraryInfoSystem.Pages
         }
         public void build()
         {
-            mongohandler.ConnectToGames();
             foreach (DataBaseItem baseItem in mongohandler.items)
             {
                 GameComponent gameComponent = new GameComponent();
@@ -52,6 +51,6 @@ namespace LibraryInfoSystem.Pages
                 GamesStack.Children.Add(gameComponent);
             }
         }
-        private MongoHandler mongohandler = new MongoHandler();
+        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
     }
 }

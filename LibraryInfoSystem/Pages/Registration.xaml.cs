@@ -23,20 +23,28 @@ namespace LibraryInfoSystem.Pages
     /// </summary> mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     public partial class Registration : Page
     {
+        private MongoHandler register = new MongoHandler(DataType.Users);
         private IMongoCollection<DataBaseUser> _usersCollection;
+        private List<DataBaseUser> _usersList;
 
         public Registration()
         {
-            InitializeComponent();
-            InitializeMongoDB();
-            
+            InitializeComponent();     
+            ConnectToUsers();
+
         }
 
-        private void InitializeMongoDB()
+        private void ConnectToUsers()
         {
-            var client = new MongoClient("mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
-            var database = client.GetDatabase("GameDataBase");
-            _usersCollection = database.GetCollection<DataBaseUser>("users");
+            try
+            {
+                _usersCollection = register.GetUsersCollection();
+                _usersList = register.users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private async void registerBtn_Click(object sender, RoutedEventArgs e)
@@ -63,9 +71,23 @@ namespace LibraryInfoSystem.Pages
 
             try
             {
-                await _usersCollection.InsertOneAsync(newUser);
+                //define filter 
+                var filter = Builders<DataBaseUser>.Filter.Eq(r => r.Email, newUser.Email) | Builders<DataBaseUser>.Filter.Eq(r => r.UserId, newUser.UserId);
+
+                //check if a user with the same email already exists
+                var existing = _usersCollection.Find(filter).FirstOrDefault();
+
+                if (existing != null)
+                {
+                    MessageBox.Show("A user with this email and/or username already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                //if no user exists with the same email
+                _usersCollection.InsertOne(newUser);
                 MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
