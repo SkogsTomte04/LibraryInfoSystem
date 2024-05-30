@@ -15,7 +15,8 @@ namespace LibraryInfoSystem.Tools
     public enum DataType
     {
         Users,
-        Games
+        Games,
+        Due
     }
     class MongoHandler
     {
@@ -23,6 +24,7 @@ namespace LibraryInfoSystem.Tools
         private IMongoDatabase database;
         public List<DataBaseUser> users;
         public List<DataBaseItem> items;
+        public List<DataBaseItem> dueGames;
 
         public MongoHandler(DataType dataType)
         {
@@ -34,6 +36,9 @@ namespace LibraryInfoSystem.Tools
                     break;
                 case DataType.Games:
                     LoadItems();
+                    break;
+                case DataType.Due:
+                    LoadDue();
                     break;
                 default:
                     throw new ArgumentException("Invalid data type specified.");
@@ -58,6 +63,11 @@ namespace LibraryInfoSystem.Tools
             return database.GetCollection<DataBaseItem>("games");
         }
 
+        public IMongoCollection<DataBaseDue> GetDueCollection()
+        {
+            return database.GetCollection<DataBaseDue>("duedate_games");
+        }
+
         private void LoadUsers()
         {
             try
@@ -77,6 +87,20 @@ namespace LibraryInfoSystem.Tools
             {
                 var itemsCollection = GetItemsCollection();
                 items = itemsCollection.AsQueryable().ToList();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void LoadDue()
+        {
+            try
+            {
+                var dueCollection = GetDueCollection();
+                dueGames = dueCollection.AsQueryable().ToList();
             }
 
             catch (Exception ex)

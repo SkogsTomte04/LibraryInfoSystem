@@ -10,14 +10,14 @@
 
     <Grid Background="#FFC1D0FF">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Width="400" Height="auto" Margin="0, 100, 0, 0" Orientation="Vertical" VerticalAlignment="Center">
+            <StackPanel Width="400" Height="auto" Margin="0, 100, 0, 0" Orientation="Vertical" VerticalAlignment="Center">
                 <TextBlock Text="Registration" Margin="5" TextAlignment="Center" FontSize="20"/>
                 <UserControl:txtBox x:Name="firstName" Margin="5" Width="Auto" Height="Auto" Placeholder="First Name"/>
-            <UserControl:txtBox x:Name="lastName" Margin="5" Width="Auto" Height="Auto" Placeholder="Last Name"/>
-            <UserControl:txtBox x:Name="username" Margin="5" Width="Auto" Height="Auto" Placeholder="Username"/>
-            <UserControl:txtBox x:Name="password" Margin="5" Width="Auto" Height="Auto" Placeholder="Password"/>
-            <UserControl:txtBox x:Name="email" Margin="5" Width="Auto" Height="Auto" Placeholder="Email"/>
-            <UserControl:txtBox x:Name="phoneNumber" Margin="5" Width="Auto" Height="Auto" Placeholder="Phone Number"/>
+                <UserControl:txtBox x:Name="lastName" Margin="5" Width="Auto" Height="Auto" Placeholder="Last Name"/>
+                <UserControl:txtBox x:Name="username" Margin="5" Width="Auto" Height="Auto" Placeholder="Username"/>
+                <UserControl:txtBox x:Name="password" Margin="5" Width="Auto" Height="Auto" Placeholder="Password"/>
+                <UserControl:txtBox x:Name="email" Margin="5" Width="Auto" Height="Auto" Placeholder="Email"/>
+                <UserControl:txtBox x:Name="phoneNumber" Margin="5" Width="Auto" Height="Auto" Placeholder="Phone Number"/>
                 <Button x:Name="registerBtn" Margin="10" FontSize="16" Foreground="Black" Background="Transparent" BorderThickness="0" Content="Register" Click="registerBtn_Click"/>
             </StackPanel>
         </ScrollViewer>
