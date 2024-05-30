@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryInfoSystem.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="100">
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -13,19 +13,24 @@
         </Style>
         
     </UserControl.Resources>
-    
-    <Grid Background="White" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0"/>
-        <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="1"/>
-        <TextBlock Text="{Binding platform, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="2"/>
-        <Image x:Name="image_cover" Grid.Column="3" Width="50" Height="50"/>
 
+    <Grid Background="White" Width="100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" Panel.ZIndex="1"/>
+
+        <StackPanel Grid.Row="0">
+            <Image x:Name="image_cover"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding platform, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -17,15 +17,23 @@
 
         </Style>
     </Page.Resources>
-    
-    <Grid Background="AliceBlue">
-        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <StackPanel>
-            <StackPanel x:Name="GamesStack">
-                
-            </StackPanel>
+
+    <ScrollViewer>
+        <Grid Background="AliceBlue">
+            <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+            <Grid x:Name="GamesStack">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+            </Grid>
             <Button Height="30" Width="50" Content="button" Name="UpdateDataGrid" Click="UpdateDataGrid_Click" VerticalAlignment="Bottom"/>
-        </StackPanel>
-        
-    </Grid>
+
+        </Grid>
+    </ScrollViewer>
+    
 </Page>

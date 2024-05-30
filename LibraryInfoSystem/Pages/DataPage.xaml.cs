@@ -34,24 +34,38 @@ namespace LibraryInfoSystem.Pages
         }
         public void build()
         {
+            int columncount = 0;
+            int rowcount = 0;
+
             mongohandler.ConnectToGames();
-            foreach (DataBaseItem baseItem in mongohandler.items)
+            foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
+                
+
                 GameComponent gameComponent = new GameComponent();
                 gameComponent.title = baseItem._title;
                 gameComponent.price = baseItem._price;
                 gameComponent.platform = baseItem._platform;
 
-                if (string.IsNullOrWhiteSpace(baseItem._image) == false)
+                if (string.IsNullOrWhiteSpace(baseItem._image) == false) //image conversion
                 {
                     BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
                     gameComponent.image_cover.Source = convertedImage;
                 }
                 else { MessageBox.Show("Bitmapconversion error"); }
 
+
+                
+                if(columncount > 4) { GamesStack.RowDefinitions.Add(new RowDefinition()); rowcount++; columncount = 0;} //Creates a new row for every 4th list item
+
                 GamesStack.Children.Add(gameComponent);
+                Grid.SetColumn(gameComponent, columncount);
+                Grid.SetRow(gameComponent, rowcount);
+                
+                columncount++;
             }
         }
+        
         private MongoHandler mongohandler = new MongoHandler();
     }
 }
