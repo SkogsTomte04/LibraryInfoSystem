@@ -1,5 +1,4 @@
-﻿using LibraryInfoSystem.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,24 +16,13 @@ using System.Windows.Shapes;
 namespace LibraryInfoSystem.Pages
 {
     /// <summary>
-    /// Interaction logic for Welcome.xaml
+    /// Interaction logic for ProductPage.xaml
     /// </summary>
-    public partial class Welcome : Page
+    public partial class ProductPage : Page
     {
-        public Welcome()
+        public ProductPage()
         {
             InitializeComponent();
-        }
-
-
-
-
-
-        private void NavButton_Click(object sender, RoutedEventArgs e)
-        {
-            var ClickedButton = e.OriginalSource as NavButton;
-            NavigationService.Navigate(ClickedButton.NavUri);
-            
         }
     }
 }

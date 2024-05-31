@@ -60,14 +60,9 @@ namespace LibraryInfoSystem.Components
         public static readonly DependencyProperty platformProperty =
             DependencyProperty.Register("platform", typeof(List<string>), typeof(GameComponent), new PropertyMetadata(null));
 
-
-
-        
-
-
-
-
-
-
+        private void ComponentClick_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
