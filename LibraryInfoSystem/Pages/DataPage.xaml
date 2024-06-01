@@ -25,13 +25,14 @@
         <Grid Background="AliceBlue">
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
-            <Grid x:Name="GamesStack">
+            <Grid x:Name="GamesStack" ButtonBase.Click="GameComponent_Click">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
 
             </Grid>
             

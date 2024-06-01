@@ -40,7 +40,7 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <n:NavButton x:Name="ComponentClick" NavUri="/Pages/ProductPage.xaml" Grid.RowSpan="2" Panel.ZIndex="1" BorderBrush="Gray" BorderThickness="1" Click="ComponentClick_Click"/>
+        <Button Grid.RowSpan="2" Panel.ZIndex="1"/>
 
         <StackPanel Grid.Row="0">
             <Image x:Name="image_cover"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryInfoSystem.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,25 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class ProductPage : Page
     {
+        GameComponent? ObjectValue;
         public ProductPage()
         {
             InitializeComponent();
+        }
+        public ProductPage(GameComponent obj) : this()
+        {
+            ObjectValue = obj;
+            this.Loaded += new RoutedEventHandler(ProductPage_Loaded);
+            
+
+        }
+        void ProductPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Title.Text = $"Value passed from page1 is: {ObjectValue.price}";
+        }
+        private void Build()
+        {
+            
         }
     }
 }

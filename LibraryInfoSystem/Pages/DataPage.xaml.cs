@@ -28,10 +28,6 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
             build();
         }
-        private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public void build()
         {
             int columncount = 0;
@@ -67,5 +63,18 @@ namespace LibraryInfoSystem.Pages
         }
         
         private MongoHandler mongohandler = new MongoHandler();
+
+        private void GameComponent_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            GameComponent? ClickedButton = e.OriginalSource as GameComponent; // i need a way to identify what button has been clicked
+            //ProductPage page = new ProductPage(ClickedButton);
+            MessageBox.Show(ClickedButton.title);
+            //this.NavigationService.Navigate(page);
+
+        }
+
+
     }
 }

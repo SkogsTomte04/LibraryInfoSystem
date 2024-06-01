@@ -8,7 +8,14 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductPage">
 
-    <Grid>
-        
+    <Grid Background="#FFBDBDBD">
+        <Image x:Name="Cover_img" Height="200" Width="150"/>
+
+        <StackPanel>
+            <TextBlock x:Name="Title" Text="BRRRR"/>
+            <TextBlock x:Name="price" Text="BRRRR"/>
+            <TextBlock x:Name="platform" Text="BRRRR"/>
+            
+        </StackPanel>
     </Grid>
 </Page>
