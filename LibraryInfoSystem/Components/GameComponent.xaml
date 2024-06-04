@@ -35,12 +35,12 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="White" Width="100" >
+    <Grid Background="White" Width="100">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Button Grid.RowSpan="2" Panel.ZIndex="1"/>
+        <Button x:Name="button" Grid.RowSpan="2" Panel.ZIndex="1"/>
 
         <StackPanel Grid.Row="0">
             <Image x:Name="image_cover"/>

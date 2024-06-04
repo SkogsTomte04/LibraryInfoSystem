@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -43,6 +44,8 @@ namespace LibraryInfoSystem.Pages
                 gameComponent.price = baseItem._price;
                 gameComponent.platform = baseItem._platform;
 
+                gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
+
                 if (string.IsNullOrWhiteSpace(baseItem._image) == false) //image conversion
                 {
                     BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
@@ -61,20 +64,25 @@ namespace LibraryInfoSystem.Pages
                 columncount++;
             }
         }
-        
+
+
         private MongoHandler mongohandler = new MongoHandler();
 
-        private void GameComponent_Click(object sender, RoutedEventArgs e)
+        private void Game_Click(object sender, RoutedEventArgs e)
         {
-            
+            GameComponent ClickedButton = sender as GameComponent; // i need a way to identify what button has been clicked
 
-            GameComponent? ClickedButton = e.OriginalSource as GameComponent; // i need a way to identify what button has been clicked
-            //ProductPage page = new ProductPage(ClickedButton);
-            MessageBox.Show(ClickedButton.title);
-            //this.NavigationService.Navigate(page);
+            if(ClickedButton != null)
+            {
+                ProductPage page = new ProductPage(ClickedButton);
+                this.NavigationService.Navigate(page);
+            }
+            else
+            {
+                MessageBox.Show("Null");
+            }
 
         }
-
 
     }
 }

@@ -9,12 +9,21 @@
       Title="ProductPage">
 
     <Grid Background="#FFBDBDBD">
-        <Image x:Name="Cover_img" Height="200" Width="150"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        
+        <StackPanel Height="200" Width="150" VerticalAlignment="Center">
+            <Image x:Name="Cover_img" Stretch="UniformToFill"/>
+        </StackPanel>
 
-        <StackPanel>
-            <TextBlock x:Name="Title" Text="BRRRR"/>
-            <TextBlock x:Name="price" Text="BRRRR"/>
-            <TextBlock x:Name="platform" Text="BRRRR"/>
+
+        <StackPanel Grid.Column="1" Width="300" Height="200" Background="Gainsboro">
+            <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
+            <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
+            <TextBlock x:Name="platform" Text=".{Template}"/>
             
         </StackPanel>
     </Grid>

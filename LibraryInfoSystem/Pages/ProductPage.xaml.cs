@@ -21,21 +21,24 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class ProductPage : Page
     {
-        GameComponent? ObjectValue;
+        GameComponent? GameItem;
         public ProductPage()
         {
             InitializeComponent();
         }
         public ProductPage(GameComponent obj) : this()
         {
-            ObjectValue = obj;
+            GameItem = obj;
             this.Loaded += new RoutedEventHandler(ProductPage_Loaded);
             
 
         }
         void ProductPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Title.Text = $"Value passed from page1 is: {ObjectValue.price}";
+            Cover_img.Source = GameItem.image_cover.Source;
+            Title.Text = $"{GameItem.title}";
+            price.Text = $"{GameItem.price}";
+            platform.Text = $"{GameItem.platform}";
         }
         private void Build()
         {
