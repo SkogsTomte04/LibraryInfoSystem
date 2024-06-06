@@ -41,10 +41,20 @@ namespace LibraryInfoSystem.Components
         public List<string>? platform
         {
             get { return (List<string>)GetValue(platformProperty); }
-            set { SetValue(platformProperty, value); }
+            set { SetValue(platformProperty, value); FillStack(value); } //FillStack() is called here to pass value: List<String> = { Xbox, Pc, Playstation}
         }
 
-
+        public void FillStack(List<string> platform_list)
+        {
+            foreach (string p in platform_list)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = p;
+                textBlock.Style = Resources["Textstyle2"] as Style;
+                platform_stack.Children.Add(textBlock);
+            }
+        }
+ 
 
         public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(GameComponent), new PropertyMetadata(null));
         public static readonly DependencyProperty priceProperty = DependencyProperty.Register("price", typeof(double), typeof(GameComponent), new PropertyMetadata(null));

@@ -8,10 +8,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="100">
     <UserControl.Resources>
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" x:Key="Textstyle1">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="Textstyle2">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        
+        
+        
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
@@ -33,6 +39,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
     </UserControl.Resources>
 
     <Grid Background="White" Width="100">
@@ -47,9 +54,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" >
-            <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" TextWrapping="Wrap" Margin="0"/>
-            <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="0"/>
-            <TextBlock Text="{Binding platform, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="0"/>
+            <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}"/>
+            
+            <StackPanel x:Name="platform_stack" Orientation="Horizontal" >
+                
+            </StackPanel>
         </StackPanel>
 
     </Grid>

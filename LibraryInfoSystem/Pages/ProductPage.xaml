@@ -7,24 +7,33 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductPage">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="#FFBDBDBD">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         
-        <StackPanel Height="200" Width="150" VerticalAlignment="Center">
-            <Image x:Name="Cover_img" Stretch="UniformToFill"/>
-        </StackPanel>
+        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Grid Background="WhiteSmoke" Width="600" Height="300">
+            <StackPanel Width="200" Margin="100,10,10,10" HorizontalAlignment="Left" Background="lightGray">
+                <Image x:Name="Cover_img" Stretch="UniformToFill" Width="200"/>
+            </StackPanel>
+            <StackPanel Width="200" Background="Gainsboro" HorizontalAlignment="Right">
+                <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
+                <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
+                <StackPanel x:Name="platform_stack" Orientation="Horizontal">
+                    <TextBlock Text=".{Template}"/>
+                    <TextBlock Text=".{Template}"/>
 
+                </StackPanel>
 
-        <StackPanel Grid.Column="1" Width="300" Height="200" Background="Gainsboro">
-            <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
-            <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
-            <TextBlock x:Name="platform" Text=".{Template}"/>
+            </StackPanel>
             
-        </StackPanel>
+        </Grid>
+
+        
+
     </Grid>
 </Page>

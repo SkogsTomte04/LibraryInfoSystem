@@ -11,11 +11,6 @@
       Title="DataPage">
 
     <Page.Resources>
-        <Style TargetType="DataGrid" x:Key="GamesDataGridStyle">
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-
-        </Style>
         <Style TargetType="n:GameComponent">
             <Setter Property="Margin" Value="5"/>
         </Style>

@@ -38,7 +38,15 @@ namespace LibraryInfoSystem.Pages
             Cover_img.Source = GameItem.image_cover.Source;
             Title.Text = $"{GameItem.title}";
             price.Text = $"{GameItem.price}";
-            platform.Text = $"{GameItem.platform}";
+
+            platform_stack.Children.Clear();
+
+            foreach(string str in GameItem.platform)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = str;
+                platform_stack.Children.Add(textBlock);
+            }
         }
         private void Build()
         {
