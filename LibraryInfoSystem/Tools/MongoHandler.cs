@@ -1,4 +1,5 @@
-﻿using LibraryInfoSystem.Pages;
+﻿using DnsClient;
+using LibraryInfoSystem.Pages;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace LibraryInfoSystem.Tools
         private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
         private IMongoDatabase database;
         public List<DataBaseUser> users;
+        public DataBaseUser CurrentUser { get; set; }
         public List<DataBaseItem> items;
 
         public MongoHandler(DataType dataType)
@@ -78,6 +80,45 @@ namespace LibraryInfoSystem.Tools
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+
+        public bool AdminValidation(string username)
+        {
+            foreach (var user in users)
+            {
+                if (user.UserId == username)
+                {
+                    if (user.IsAdmin == true) { return true; }
+                }
+            }
+            return false;
+        }
+
+        public bool Validation(string username, string password)
+        {
+            foreach (var user in users)
+            {
+                if (user.UserId == username)
+                {
+                    if (user.Password == password)
+                    {
+                        CurrentUser = user; //Set current user on successful log-in
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool IsLoggedIn()
+        {
+            return CurrentUser != null;
+        }
+
+        public bool LoggedOut()
+        {
+            return CurrentUser == null;
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)
