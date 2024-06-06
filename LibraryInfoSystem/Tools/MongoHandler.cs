@@ -48,21 +48,16 @@ namespace LibraryInfoSystem.Tools
             database = client.GetDatabase("GameDataBase");
         }
 
-        public IMongoCollection<DataBaseUser> GetUsersCollection()
+        public IMongoCollection<T> GetCollection<T>(string collection)
         {
-            return database.GetCollection<DataBaseUser>("users");
-        }
-
-        public IMongoCollection<DataBaseItem> GetItemsCollection()
-        {
-            return database.GetCollection<DataBaseItem>("games");
+            return database.GetCollection<T>(collection);
         }
 
         private void LoadUsers()
         {
             try
             {
-                var usersCollection = GetUsersCollection();
+                var usersCollection = GetCollection<DataBaseUser>("users");
                 users = usersCollection.AsQueryable().ToList();
             }
             catch (Exception ex)
@@ -75,7 +70,7 @@ namespace LibraryInfoSystem.Tools
         {
             try
             {
-                var itemsCollection = GetItemsCollection();
+                var itemsCollection = GetCollection<DataBaseItem>("games");
                 items = itemsCollection.AsQueryable().ToList();
             }
 
