@@ -28,8 +28,6 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
-
             </Grid>
             
         </Grid>

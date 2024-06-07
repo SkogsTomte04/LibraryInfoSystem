@@ -39,21 +39,7 @@ namespace LibraryInfoSystem.Pages
             {
                 
 
-                GameComponent gameComponent = new GameComponent();
-                gameComponent.title = baseItem._title;
-                gameComponent.price = baseItem._price;
-                gameComponent.platform = baseItem._platform;
-
-                gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
-
-                if (string.IsNullOrWhiteSpace(baseItem._image) == false) //image conversion
-                {
-                    BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
-                    gameComponent.image_cover.Source = convertedImage;
-                }
-                else { MessageBox.Show("Bitmapconversion error"); }
-
-
+                GameComponent gameComponent = createcomponent(baseItem);
                 
                 if(columncount > 4) { GamesStack.RowDefinitions.Add(new RowDefinition()); rowcount++; columncount = 0;} //Creates a new row for every 4th list item
 
@@ -65,12 +51,46 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
+        private GameComponent createcomponent(DataBaseItem baseItem)
+        {
+            GameComponent gameComponent = new GameComponent();
+            gameComponent.title = baseItem._title;
+            gameComponent.price = baseItem._price;
+            gameComponent.platform = baseItem._platform;
+
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
+            gameComponent.image_cover.Source = convertbitmap(baseItem._image);
+
+            if (baseItem._demoimg != null)
+            {
+                List<ImageSource> convertedlist = new List<ImageSource>();
+                foreach (string img in baseItem._demoimg)
+                {
+                    convertedlist.Add(convertbitmap(img));
+                }
+
+                gameComponent.demoImg = convertedlist;
+            }
+            
+
+            return gameComponent;
+        }
+
+        private ImageSource convertbitmap(string bit)
+        {
+            if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
+            {
+                BitmapSource convertedImage = mongohandler.BitmapFromBase64(bit);
+                return convertedImage;
+            }
+            else { MessageBox.Show("Bitmapconversion error"); return null; }
+        }
 
         private MongoHandler mongohandler = new MongoHandler();
 
         private void Game_Click(object sender, RoutedEventArgs e)
         {
-            GameComponent ClickedButton = sender as GameComponent; // i need a way to identify what button has been clicked
+            GameComponent ClickedButton = sender as GameComponent;
 
             if(ClickedButton != null)
             {

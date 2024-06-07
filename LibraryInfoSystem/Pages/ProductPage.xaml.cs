@@ -36,6 +36,11 @@ namespace LibraryInfoSystem.Pages
         void ProductPage_Loaded(object sender, RoutedEventArgs e)
         {
             Cover_img.Source = GameItem.image_cover.Source;
+
+            Img1.SourceImage = GameItem.demoImg[0];
+            Img2.SourceImage = GameItem.demoImg[1];
+            Img3.SourceImage = GameItem.demoImg[2];
+
             Title.Text = $"{GameItem.title}";
             price.Text = $"{GameItem.price}";
 
@@ -51,6 +56,16 @@ namespace LibraryInfoSystem.Pages
         private void Build()
         {
             
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e) //NEEDS A FIX PRONTO
+        {
+            ImageButton clickedbutton = sender as ImageButton;
+            if (clickedbutton != null)
+            {
+                Cover_img.Source = clickedbutton.SourceImage;
+            }
+            else { MessageBox.Show("Null"); }
         }
     }
 }

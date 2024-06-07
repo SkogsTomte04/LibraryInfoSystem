@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryInfoSystem.Pages"
+      xmlns:n="clr-namespace:LibraryInfoSystem.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductPage">
@@ -11,23 +12,41 @@
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="10"/>
         </Style>
+        <Style TargetType="n:ImageButton">
+            <Setter Property="Height" Value="60"/>
+        </Style>
     </Page.Resources>
 
-    <Grid Background="#FFBDBDBD">
+    <Grid Background="white">
         
         <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Grid Background="WhiteSmoke" Width="600" Height="300">
-            <StackPanel Width="200" Margin="100,10,10,10" HorizontalAlignment="Left" Background="lightGray">
-                <Image x:Name="Cover_img" Stretch="UniformToFill" Width="200"/>
-            </StackPanel>
-            <StackPanel Width="200" Background="Gainsboro" HorizontalAlignment="Right">
+            <DockPanel Width="350" HorizontalAlignment="Left">
+                <Grid DockPanel.Dock="Left" Background="AliceBlue" Width="60" ButtonBase.Click="Grid_Click">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <n:ImageButton x:Name="Img1" Grid.Row="0"/>
+                    <n:ImageButton x:Name="Img2" Grid.Row="1"/>
+                    <n:ImageButton x:Name="Img3" Grid.Row="2"/>
+                    <n:ImageButton x:Name="Img4" Grid.Row="3"/>
+                </Grid>
+                <Grid>
+                    <Image x:Name="Cover_img" Stretch="Uniform" VerticalAlignment="Center" Width="200"/>
+                </Grid>
+            </DockPanel>
+            
+            <StackPanel Width="200" Background="Gainsboro" Margin="10" HorizontalAlignment="Right">
                 <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
                 <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
-                <StackPanel x:Name="platform_stack" Orientation="Horizontal">
+                <WrapPanel x:Name="platform_stack" Orientation="Horizontal">
                     <TextBlock Text=".{Template}"/>
                     <TextBlock Text=".{Template}"/>
 
-                </StackPanel>
+                </WrapPanel>
 
             </StackPanel>
             

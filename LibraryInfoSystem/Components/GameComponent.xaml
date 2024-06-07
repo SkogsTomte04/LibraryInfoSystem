@@ -57,9 +57,9 @@
             <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}" TextWrapping="Wrap"/>
             <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}"/>
             
-            <StackPanel x:Name="platform_stack" Orientation="Horizontal" >
+            <WrapPanel x:Name="platform_stack" Orientation="Horizontal" >
                 
-            </StackPanel>
+            </WrapPanel>
         </StackPanel>
 
     </Grid>

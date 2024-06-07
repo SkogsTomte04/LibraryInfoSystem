@@ -54,7 +54,20 @@ namespace LibraryInfoSystem.Components
                 platform_stack.Children.Add(textBlock);
             }
         }
- 
+
+
+
+        public List<ImageSource> demoImg
+        {
+            get { return (List<ImageSource>)GetValue(demoImgProperty); }
+            set { SetValue(demoImgProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for demoImg.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty demoImgProperty =
+            DependencyProperty.Register("demoImg", typeof(List<ImageSource>), typeof(GameComponent), new PropertyMetadata(null));
+
+
 
         public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(GameComponent), new PropertyMetadata(null));
         public static readonly DependencyProperty priceProperty = DependencyProperty.Register("price", typeof(double), typeof(GameComponent), new PropertyMetadata(null));
