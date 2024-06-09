@@ -9,7 +9,7 @@
              d:DesignHeight="60" d:DesignWidth="60">
     <Grid>
         <Button>
-            <Image Source="{Binding SourceImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="Uniform"/>
+            <Image Source="{Binding SourceImage, RelativeSource={RelativeSource AncestorType=UserControl}}" Stretch="UniformToFill"/>
         </Button>
     </Grid>
 </UserControl>

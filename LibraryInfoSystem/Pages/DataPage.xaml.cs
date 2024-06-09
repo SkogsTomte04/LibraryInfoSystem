@@ -37,6 +37,16 @@ namespace LibraryInfoSystem.Pages
             mongohandler.ConnectToGames();
             foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
+
+
+                GameComponent gameComponent = createcomponent(baseItem);
+
+                GamesWrap.Children.Add(gameComponent);
+
+                columncount++;
+            }
+            /*foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
+            {
                 
 
                 GameComponent gameComponent = createcomponent(baseItem);
@@ -48,7 +58,7 @@ namespace LibraryInfoSystem.Pages
                 Grid.SetRow(gameComponent, rowcount);
                 
                 columncount++;
-            }
+            }*/
         }
 
         private GameComponent createcomponent(DataBaseItem baseItem)
