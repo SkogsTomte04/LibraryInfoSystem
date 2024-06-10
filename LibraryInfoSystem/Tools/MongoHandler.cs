@@ -16,7 +16,8 @@ namespace LibraryInfoSystem.Tools
     {
         Users,
         Games,
-        Due
+        Duedate,
+        Overdue
     }
     class MongoHandler
     {
@@ -24,7 +25,8 @@ namespace LibraryInfoSystem.Tools
         private IMongoDatabase database;
         public List<DataBaseUser> users;
         public List<DataBaseItem> items;
-        public List<DataBaseItem> dueGames;
+        public List<DataBaseDuedate> duedate;
+        public List<DataBaseOverdue> overdue;
 
         public MongoHandler(DataType dataType)
         {
@@ -37,8 +39,11 @@ namespace LibraryInfoSystem.Tools
                 case DataType.Games:
                     LoadItems();
                     break;
-                case DataType.Due:
-                    LoadDue();
+                case DataType.Duedate:
+                    LoadDuedate();
+                    break;
+                case DataType.Overdue:
+                    LoadOverdue();
                     break;
                 default:
                     throw new ArgumentException("Invalid data type specified.");
@@ -63,9 +68,14 @@ namespace LibraryInfoSystem.Tools
             return database.GetCollection<DataBaseItem>("games");
         }
 
-        public IMongoCollection<DataBaseDue> GetDueCollection()
+        public IMongoCollection<DataBaseDuedate> GetDuedateCollection()
         {
-            return database.GetCollection<DataBaseDue>("duedate_games");
+            return database.GetCollection<DataBaseDuedate>("duedate_games");
+        }
+
+        public IMongoCollection<DataBaseOverdue> GetOverdueCollection()
+        {
+            return database.GetCollection<DataBaseOverdue>("overdue_games");
         }
 
         private void LoadUsers()
@@ -95,12 +105,26 @@ namespace LibraryInfoSystem.Tools
             }
         }
 
-        private void LoadDue()
+        private void LoadDuedate()
         {
             try
             {
-                var dueCollection = GetDueCollection();
-                dueGames = dueCollection.AsQueryable().ToList();
+                var DuedateCollection = GetDuedateCollection();
+                duedate = DuedateCollection.AsQueryable().ToList();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void LoadOverdue()
+        {
+            try
+            {
+                var OverdueCollection = GetOverdueCollection();
+                overdue = OverdueCollection.AsQueryable().ToList();
             }
 
             catch (Exception ex)

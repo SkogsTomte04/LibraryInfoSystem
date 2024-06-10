@@ -31,7 +31,6 @@ namespace LibraryInfoSystem.Pages
         {
             InitializeComponent();     
             ConnectToUsers();
-
         }
 
         private void ConnectToUsers()
