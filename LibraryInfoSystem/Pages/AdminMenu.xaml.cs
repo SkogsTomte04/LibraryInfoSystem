@@ -27,7 +27,7 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
         }
 
-        private void ViewBookBtn_Click(object sender, RoutedEventArgs e)
+        private void ViewGameBtn_Click(object sender, RoutedEventArgs e)
         {
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
