@@ -34,7 +34,6 @@ namespace LibraryInfoSystem.Pages
             int columncount = 0;
             int rowcount = 0;
 
-            mongohandler.ConnectToGames();
             foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
 
@@ -96,7 +95,7 @@ namespace LibraryInfoSystem.Pages
             else { MessageBox.Show("Bitmapconversion error"); return null; }
         }
 
-        private MongoHandler mongohandler = new MongoHandler();
+        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
 
         private void Game_Click(object sender, RoutedEventArgs e)
         {
