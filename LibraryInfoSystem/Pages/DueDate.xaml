@@ -9,17 +9,16 @@
       Title="DueDate">
 
     <Grid>
-        <ListView ItemsSource="{Binding DueDates}">
+        <ListView ItemsSource="{Binding YourDueDateCollection}">
             <ListView.View>
                 <GridView>
-                    <!-- Bindings to display the properties -->
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding _title}"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding _price}"/>
-                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding _userId}"/>
-                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding _bookedDate}"/>
-                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding _deadlineDate}"/>
-                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding _paymentMethod}"/>
-                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding _isAdmin}"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="50"/>
+                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserID}" Width="100"/>
+                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding BookedDate}" Width="100"/>
+                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding DeadlineDate}" Width="100"/>
+                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding PaymentMethod}" Width="100"/>
+                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding IsAdmin}" Width="50"/>
                 </GridView>
             </ListView.View>
         </ListView>
