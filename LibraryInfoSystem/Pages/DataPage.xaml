@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <Style TargetType="n:GameComponent">
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="20"/>
         </Style>
         
     </Page.Resources>
@@ -29,6 +29,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
             </Grid>
+            <WrapPanel x:Name="GamesWrap" Width="500">
+                
+            </WrapPanel>
             
         </Grid>
     </ScrollViewer>

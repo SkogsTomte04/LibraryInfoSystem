@@ -35,11 +35,8 @@ namespace LibraryInfoSystem.Pages
         }
         void ProductPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Cover_img.Source = GameItem.image_cover.Source;
-
-            Img1.SourceImage = GameItem.demoImg[0];
-            Img2.SourceImage = GameItem.demoImg[1];
-            Img3.SourceImage = GameItem.demoImg[2];
+            
+            LoadImages();
 
             Title.Text = $"{GameItem.title}";
             price.Text = $"{GameItem.price}";
@@ -53,9 +50,16 @@ namespace LibraryInfoSystem.Pages
                 platform_stack.Children.Add(textBlock);
             }
         }
-        private void Build()
+        private void LoadImages()
         {
-            
+            Cover_img.Source = GameItem.image_cover.Source;
+            Img1.SourceImage = Cover_img.Source;
+            if (GameItem.demoImg != null)
+            {
+                Img2.SourceImage = GameItem.demoImg[0];
+                Img3.SourceImage = GameItem.demoImg[1];
+                Img4.SourceImage = GameItem.demoImg[2];
+            }
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e) //NEEDS A FIX PRONTO

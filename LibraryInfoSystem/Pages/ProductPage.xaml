@@ -17,25 +17,25 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="white">
+    <Grid Background="WhiteSmoke">
         
         <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Grid Background="WhiteSmoke" Width="600" Height="300">
-            <DockPanel Width="350" HorizontalAlignment="Left">
-                <Grid DockPanel.Dock="Left" Background="AliceBlue" Width="60" ButtonBase.Click="Grid_Click">
+        <Grid Background="SlateGray" Width="650" Height="300">
+            <DockPanel Width="400" HorizontalAlignment="Left">
+                <Grid Margin="10" DockPanel.Dock="Left" Width="60">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <n:ImageButton x:Name="Img1" Grid.Row="0"/>
-                    <n:ImageButton x:Name="Img2" Grid.Row="1"/>
-                    <n:ImageButton x:Name="Img3" Grid.Row="2"/>
-                    <n:ImageButton x:Name="Img4" Grid.Row="3"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img1" Grid.Row="0"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img2" Grid.Row="1"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img3" Grid.Row="2"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img4" Grid.Row="3"/>
                 </Grid>
-                <Grid>
-                    <Image x:Name="Cover_img" Stretch="Uniform" VerticalAlignment="Center" Width="200"/>
+                <Grid Margin="50,10,0,10">
+                    <Image x:Name="Cover_img" Stretch="Uniform"/>
                 </Grid>
             </DockPanel>
             
