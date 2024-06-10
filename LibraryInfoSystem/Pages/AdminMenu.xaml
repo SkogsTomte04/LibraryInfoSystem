@@ -10,9 +10,9 @@
 
     <Grid Background="#FF9E8383">
         <StackPanel VerticalAlignment="Center">
-        <n:NavButton x:Name="ViewBookBtn" Text="View Books" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="ViewBookBtn_Click"
-                     NavUri="/Pages/AdminVB.xaml"/>
+        <n:NavButton x:Name="ViewBookBtn" Text="View Games" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="ViewGameBtn_Click"
+                     NavUri="/Pages/AdminVG.xaml"/>
         <n:NavButton x:Name="ViewMemBtn" Text="View Members" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"/>
         <n:NavButton x:Name="LogOutBtn"  Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Center"

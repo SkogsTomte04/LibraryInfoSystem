@@ -20,11 +20,11 @@ namespace LibraryInfoSystem.Pages
     /// <summary>
     /// Interaction logic for AdminVB.xaml
     /// </summary>
-    public partial class AdminVB : Page
+    public partial class AdminVG : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Games);
         private MongoHandler admin = new MongoHandler(DataType.Users);
-        public AdminVB()
+        public AdminVG()
         {
             InitializeComponent();
             build();

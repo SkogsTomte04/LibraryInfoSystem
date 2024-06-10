@@ -44,20 +44,6 @@ namespace LibraryInfoSystem.Pages
 
                 columncount++;
             }
-            /*foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
-            {
-                
-
-                GameComponent gameComponent = createcomponent(baseItem);
-                
-                if(columncount > 4) { GamesStack.RowDefinitions.Add(new RowDefinition()); rowcount++; columncount = 0;} //Creates a new row for every 4th list item
-
-                GamesStack.Children.Add(gameComponent);
-                Grid.SetColumn(gameComponent, columncount);
-                Grid.SetRow(gameComponent, rowcount);
-                
-                columncount++;
-            }*/
         }
 
         private GameComponent createcomponent(DataBaseItem baseItem)

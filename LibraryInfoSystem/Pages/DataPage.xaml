@@ -14,7 +14,6 @@
         <Style TargetType="n:GameComponent">
             <Setter Property="Margin" Value="20"/>
         </Style>
-
     </Page.Resources>
 
     <ScrollViewer>
