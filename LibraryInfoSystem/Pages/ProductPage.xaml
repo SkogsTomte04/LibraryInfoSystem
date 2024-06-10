@@ -38,17 +38,22 @@
                     <Image x:Name="Cover_img" Stretch="Uniform"/>
                 </Grid>
             </DockPanel>
+
+            <Grid Width="200" Background="Gainsboro" Margin="10" HorizontalAlignment="Right">
+                <StackPanel >
+                    <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
+                    <WrapPanel x:Name="platform_stack" Orientation="Horizontal">
+                        <TextBlock Text=".{Template}"/>
+                        <TextBlock Text=".{Template}"/>
+
+                    </WrapPanel>
+
+
+                </StackPanel>
+                <Button Content="Add To Cart" Click="Button_Click"  Width="70" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            </Grid>
             
-            <StackPanel Width="200" Background="Gainsboro" Margin="10" HorizontalAlignment="Right">
-                <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
-                <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
-                <WrapPanel x:Name="platform_stack" Orientation="Horizontal">
-                    <TextBlock Text=".{Template}"/>
-                    <TextBlock Text=".{Template}"/>
-
-                </WrapPanel>
-
-            </StackPanel>
             
         </Grid>
 

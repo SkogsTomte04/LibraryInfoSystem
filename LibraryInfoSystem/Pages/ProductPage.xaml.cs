@@ -71,5 +71,10 @@ namespace LibraryInfoSystem.Pages
             }
             else { MessageBox.Show("Null"); }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        { // for Shan: element to put in cart = GameItem
+
+        }
     }
 }
