@@ -9,7 +9,7 @@
       Title="DueDate">
 
     <Grid>
-        <ListView ItemsSource="{Binding YourDueDateCollection}">
+        <ListView ItemsSource="{Binding DuedateGames}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150"/>
