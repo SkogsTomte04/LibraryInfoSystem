@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,29 +29,80 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
             build();
         }
-        private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public void build()
         {
-            foreach (DataBaseItem baseItem in mongohandler.items)
-            {
-                GameComponent gameComponent = new GameComponent();
-                gameComponent.title = baseItem._title;
-                gameComponent.price = baseItem._price;
-                gameComponent.platform = baseItem._platform;
+            int columncount = 0;
+            int rowcount = 0;
 
-                if (string.IsNullOrWhiteSpace(baseItem._image) == false)
-                {
-                    BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
-                    gameComponent.image_cover.Source = convertedImage;
-                }
-                else { MessageBox.Show("Bitmapconversion error"); }
+            mongohandler.ConnectToGames();
+            foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
+            {
+                
+
+                GameComponent gameComponent = createcomponent(baseItem);
+                
+                if(columncount > 4) { GamesStack.RowDefinitions.Add(new RowDefinition()); rowcount++; columncount = 0;} //Creates a new row for every 4th list item
 
                 GamesStack.Children.Add(gameComponent);
+                Grid.SetColumn(gameComponent, columncount);
+                Grid.SetRow(gameComponent, rowcount);
+                
+                columncount++;
             }
         }
-        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
+
+        private GameComponent createcomponent(DataBaseItem baseItem)
+        {
+            GameComponent gameComponent = new GameComponent();
+            gameComponent.title = baseItem._title;
+            gameComponent.price = baseItem._price;
+            gameComponent.platform = baseItem._platform;
+
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
+            gameComponent.image_cover.Source = convertbitmap(baseItem._image);
+
+            if (baseItem._demoimg != null)
+            {
+                List<ImageSource> convertedlist = new List<ImageSource>();
+                foreach (string img in baseItem._demoimg)
+                {
+                    convertedlist.Add(convertbitmap(img));
+                }
+
+                gameComponent.demoImg = convertedlist;
+            }
+            
+
+            return gameComponent;
+        }
+
+        private ImageSource convertbitmap(string bit)
+        {
+            if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
+            {
+                BitmapSource convertedImage = mongohandler.BitmapFromBase64(bit);
+                return convertedImage;
+            }
+            else { MessageBox.Show("Bitmapconversion error"); return null; }
+        }
+
+        private MongoHandler mongohandler = new MongoHandler();
+
+        private void Game_Click(object sender, RoutedEventArgs e)
+        {
+            GameComponent ClickedButton = sender as GameComponent;
+
+            if(ClickedButton != null)
+            {
+                ProductPage page = new ProductPage(ClickedButton);
+                this.NavigationService.Navigate(page);
+            }
+            else
+            {
+                MessageBox.Show("Null");
+            }
+
+        }
+
     }
 }

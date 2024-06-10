@@ -34,6 +34,7 @@ namespace LibraryInfoSystem.Pages
         {
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
+            
         }
     }
 }
