@@ -24,9 +24,14 @@ namespace LibraryInfoSystem.Tools
 
         [BsonElement("bookedDate")]
         public string? _bookedDate { get; set; }
-        [BsonElement("paymentDate")]
-        public string? _paymentDate { get; set; }
+
+        [BsonElement("deadlineDate")]
+        public string? _deadlineDate { get; set; }
+
         [BsonElement("paymentMethod")]
         public string? _paymentMethod { get; set; }
+
+        [BsonElement("isAdmin")]
+        public bool? _isAdmin { get; set; }
     }
 }

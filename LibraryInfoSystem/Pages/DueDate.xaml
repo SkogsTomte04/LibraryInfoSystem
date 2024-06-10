@@ -9,6 +9,19 @@
       Title="DueDate">
 
     <Grid>
-        
+        <ListView ItemsSource="{Binding DueDates}">
+            <ListView.View>
+                <GridView>
+                    <!-- Bindings to display the properties -->
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding _title}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding _price}"/>
+                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding _userId}"/>
+                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding _bookedDate}"/>
+                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding _deadlineDate}"/>
+                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding _paymentMethod}"/>
+                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding _isAdmin}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>
