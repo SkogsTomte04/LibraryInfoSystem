@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="LibraryInfoSystem.Components.UserComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryInfoSystem.Components"
+             xmlns:n="clr-namespace:LibraryInfoSystem"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White" Width="200" Height="200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Gray" Grid.ColumnSpan="2" BorderThickness="2" Panel.ZIndex="1"/>
+        <StackPanel Margin="5" >
+            <TextBlock Text="FirstName: "/>
+            <TextBlock Text="LastName: "/>
+            <TextBlock Text="UserID: "/>
+            <TextBlock Text="Password: "/>
+            <TextBlock Text="Email: "/>
+            <TextBlock Text="PhoneNumber: "/>
+            <TextBlock Text="Admin:"/>
+        </StackPanel>
+        <StackPanel Margin="5" Grid.Column="1">
+            <TextBlock Text="{Binding firstname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding lastname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding userid, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding password, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding phonenumber, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding isadmin, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </StackPanel>
+        
+
+    </Grid>
+</UserControl>
