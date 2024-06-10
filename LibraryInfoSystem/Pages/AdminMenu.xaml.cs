@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryInfoSystem.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class AdminMenu : Page
     {
+        private MongoHandler Admin = new MongoHandler(DataType.Users);
         public AdminMenu()
         {
             InitializeComponent();
         }
+
+        private void ViewBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+
+        }
+
+        private void LogOutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Admin.LoggedOut();
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+            MessageBox.Show("You have been logged out.", "Success");
+        }
+
+
     }
 }
