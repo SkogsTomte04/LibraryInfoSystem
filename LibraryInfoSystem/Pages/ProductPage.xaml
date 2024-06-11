@@ -51,7 +51,7 @@
 
 
                 </StackPanel>
-                <Button Content="Add To Cart" Click="Button_Click"  Width="70" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <Button Content="Add To Cart" Click="Cart_Click"  Width="70" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
             </Grid>
             
             

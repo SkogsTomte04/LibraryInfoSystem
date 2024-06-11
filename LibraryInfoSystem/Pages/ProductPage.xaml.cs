@@ -1,4 +1,6 @@
 ﻿using LibraryInfoSystem.Components;
+using LibraryInfoSystem.Tools;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +24,36 @@ namespace LibraryInfoSystem.Pages
     public partial class ProductPage : Page
     {
         GameComponent? GameItem;
+        public static List<GameComponent>? ShoppingCart { get; set; } = new List<GameComponent>();
         public ProductPage()
         {
+            
             InitializeComponent();
         }
+
         public ProductPage(GameComponent obj) : this()
         {
             GameItem = obj;
             this.Loaded += new RoutedEventHandler(ProductPage_Loaded);
-            
-
         }
+
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+
+            ImageButton clickedbutton = sender as ImageButton;
+            if (clickedbutton != null)
+            {
+                Cover_img.Source = clickedbutton.SourceImage;
+            }
+            else { MessageBox.Show("Null"); }
+        }
+
+        private void Cart_Click(object sender, RoutedEventArgs e)
+        { // for Shan: element to put in cart = GameItem
+            AddToCart(GameItem);
+        }
+
         void ProductPage_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -62,19 +83,23 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
-        private void Grid_Click(object sender, RoutedEventArgs e) //NEEDS A FIX PRONTO
-        {
-            ImageButton clickedbutton = sender as ImageButton;
-            if (clickedbutton != null)
+        public static void AddToCart(GameComponent obj) 
+        {           
+            if (obj == null)
             {
-                Cover_img.Source = clickedbutton.SourceImage;
+                MessageBox.Show("Game item is null. Cannot add to cart.");
+                return;
             }
-            else { MessageBox.Show("Null"); }
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        { // for Shan: element to put in cart = GameItem
+            if (ShoppingCart == null)
+            {
+                ShoppingCart = new List<GameComponent>();
+            }
 
+            ShoppingCart.Add(obj);
+
+            MessageBox.Show("Added to Cart.");
         }
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,15 @@ namespace LibraryInfoSystem.Components
                 textBlock.Style = Resources["Textstyle2"] as Style;
                 platform_stack.Children.Add(textBlock);
             }
+        }
+
+        [BsonIgnore] public string PlatformAsString
+        {
+            get
+            {
+                return string.Join(", ", platform);
+            }
+            set { }
         }
 
 
