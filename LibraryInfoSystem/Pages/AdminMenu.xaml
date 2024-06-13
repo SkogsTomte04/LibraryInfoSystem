@@ -14,7 +14,8 @@
                 Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="ViewGameBtn_Click"
                      NavUri="/Pages/AdminVG.xaml"/>
         <n:NavButton x:Name="ViewMemBtn" Text="View Members" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"/>
+                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"
+                     NavUri="/Pages/AdminVM.xaml"/>
         <n:NavButton x:Name="LogOutBtn"  Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"
                      NavUri="/Pages/Welcome.xaml" Click="LogOutBtn_Click"/>

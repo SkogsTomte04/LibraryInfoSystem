@@ -22,13 +22,25 @@ namespace LibraryInfoSystem.Tools
     {
         private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
         private IMongoDatabase database;
+        private DataType dataType;
         public List<DataBaseUser> users;
         public DataBaseUser CurrentUser { get; set; }
         public List<DataBaseItem> items;
 
-        public MongoHandler(DataType dataType)
+        public MongoHandler(DataType dt)
         {
+            dataType = dt;
             ConnectToDatabase();
+            
+        }
+
+        private void ConnectToDatabase()
+        {
+            var settings = MongoClientSettings.FromConnectionString(connectionUri);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+            var client = new MongoClient(settings);
+            database = client.GetDatabase("GameDataBase");
+
             switch (dataType)
             {
                 case DataType.Users:
@@ -40,14 +52,6 @@ namespace LibraryInfoSystem.Tools
                 default:
                     throw new ArgumentException("Invalid data type specified.");
             }
-        }
-
-        private void ConnectToDatabase()
-        {
-            var settings = MongoClientSettings.FromConnectionString(connectionUri);
-            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-            var client = new MongoClient(settings);
-            database = client.GetDatabase("GameDataBase");
         }
 
         public IMongoCollection<T> GetCollection<T>(string collection)
