@@ -31,8 +31,6 @@ namespace LibraryInfoSystem.Pages
         }
         public void build()
         {
-            int columncount = 0;
-            int rowcount = 0;
 
             foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
@@ -41,8 +39,6 @@ namespace LibraryInfoSystem.Pages
                 GameComponent gameComponent = createcomponent(baseItem);
 
                 GamesWrap.Children.Add(gameComponent);
-
-                columncount++;
             }
         }
 
