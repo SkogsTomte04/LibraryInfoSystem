@@ -43,8 +43,8 @@
             <TextBlock Text="{Binding firstname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding lastname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding userid, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            <TextBlock Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding password, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding phonenumber, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding isadmin, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
         </StackPanel>
@@ -52,8 +52,8 @@
             <TextBox Name="fn" Text="{Binding firstname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBox Name="ln" Text="{Binding lastname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBox Name="ui" Text="{Binding userid, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            <TextBox Name="pas" Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            <TextBox Name="em" Text="{Binding password, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="pas" Text="{Binding password, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="em" Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBox Name="ph" Text="{Binding phonenumber, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <CheckBox Name="ad" IsChecked="{Binding isadmin, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="5"/>
             
@@ -65,7 +65,7 @@
 
         <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Visibility="Collapsed" Height="30" >
             <Button x:Name="RemoveUser_Button" Content="REMOVE" Click="RemoveUser_Button_Click" FontWeight="Bold" Width="70" HorizontalAlignment="Left" Background="#FFD13434" Command=""/>
-            <Button x:Name="Save" Content="Save" Width="70" HorizontalAlignment="Right" />
+            <Button x:Name="Save" Content="Save" Width="70" Click="Save_Click" HorizontalAlignment="Right" />
         </Grid>
 
 

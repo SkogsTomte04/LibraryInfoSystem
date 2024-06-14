@@ -41,13 +41,6 @@ namespace LibraryInfoSystem.Pages
         private UserComponent CreateComponent(DataBaseUser baseUser)
         {
             UserComponent userComponent = new UserComponent(baseUser);
-            userComponent.firstname = baseUser.FirstName;
-            userComponent.lastname = baseUser.LastName;
-            userComponent.userid = baseUser.UserId;
-            userComponent.password = baseUser.Password;
-            userComponent.email = baseUser.Email;
-            userComponent.phonenumber = baseUser.PhoneNumber;
-            userComponent.isadmin = baseUser.IsAdmin;
 
             userComponent.RemoveUser_Button.Click += RemoveUser; 
 

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using static MongoDB.Driver.WriteConcern;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -68,6 +69,12 @@ namespace LibraryInfoSystem.Tools
             MessageBox.Show($"Deleted {user.FirstName}");
             
             
+        }
+        public void EditUser(DataBaseUser newUser)
+        {
+            var filter = Builders<DataBaseUser>.Filter.Eq("_id", newUser.GetMongoId());
+            GetCollection<DataBaseUser>("users").ReplaceOne(filter, newUser);
+
         }
 
         public IMongoCollection<T> GetCollection<T>(string collection)

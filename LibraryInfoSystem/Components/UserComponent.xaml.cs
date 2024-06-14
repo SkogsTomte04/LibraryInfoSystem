@@ -27,8 +27,18 @@ namespace LibraryInfoSystem.Components
         {
             InitializeComponent();
             User = user;
+            build();
         }
-
+        private void build()
+        {
+            firstname = User.FirstName;
+            lastname = User.LastName;
+            userid = User.UserId;
+            email = User.Email;
+            password = User.Password;
+            phonenumber = User.PhoneNumber;
+            isadmin = User.IsAdmin;
+        }
 
 
         public string firstname
@@ -119,6 +129,7 @@ namespace LibraryInfoSystem.Components
                 ButtonControls_Grid.Visibility = Visibility.Visible;
             } else if(UserInfo_Stack.Visibility == Visibility.Collapsed)
             {
+                build();
                 UserInfo_Stack.Visibility = Visibility.Visible;
                 EditUser_Stack.Visibility = Visibility.Collapsed;
                 ButtonControls_Grid.Visibility = Visibility.Collapsed;
@@ -129,5 +140,13 @@ namespace LibraryInfoSystem.Components
         {
             mongoHandler.RemoveUser(User);
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            User.FirstName = fn.Text; User.LastName = ln.Text; User.Email = em.Text; User.UserId = ui.Text; User.Password = pas.Text; User.PhoneNumber = ph.Text; User.IsAdmin = ad.IsChecked;
+            mongoHandler.EditUser(User);
+            build();
+        }
+
     }
 }
