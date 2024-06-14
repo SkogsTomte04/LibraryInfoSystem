@@ -106,13 +106,19 @@ namespace LibraryInfoSystem.Components
         public static readonly DependencyProperty isadminProperty =
             DependencyProperty.Register("isadmin", typeof(bool?), typeof(UserComponent), new PropertyMetadata(false));
 
-
-
-
-
-
-
-
-
+        private void EditUser_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(EditUser_Stack.Visibility == Visibility.Collapsed)
+            {
+                EditUser_Stack.Visibility = Visibility.Visible;
+                UserInfo_Stack.Visibility = Visibility.Collapsed;
+                ButtonControls_Grid.Visibility = Visibility.Visible;
+            } else if(UserInfo_Stack.Visibility == Visibility.Collapsed)
+            {
+                UserInfo_Stack.Visibility = Visibility.Visible;
+                EditUser_Stack.Visibility = Visibility.Collapsed;
+                ButtonControls_Grid.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

@@ -3,22 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LibraryInfoSystem.Components"
-             xmlns:n="clr-namespace:LibraryInfoSystem"
+             xmlns:local="clr-namespace:LibraryInfoSystem.Components" xmlns:n="clr-namespace:LibraryInfoSystem"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
+             d:DesignHeight="220" d:DesignWidth="220">
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="16"/>
+        </Style>
     </UserControl.Resources>
-    <Grid Background="White" Width="200" Height="200">
+    
+    <Grid Background="White" Width="220" Height="220">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
+        
         <Border BorderBrush="Gray" Grid.ColumnSpan="2" BorderThickness="2" Panel.ZIndex="1"/>
+        
         <StackPanel Margin="5" >
             <TextBlock Text="FirstName: "/>
             <TextBlock Text="LastName: "/>
@@ -27,8 +35,10 @@
             <TextBlock Text="Email: "/>
             <TextBlock Text="PhoneNumber: "/>
             <TextBlock Text="Admin:"/>
+            
         </StackPanel>
-        <StackPanel Margin="5" Grid.Column="1">
+        
+        <StackPanel x:Name="UserInfo_Stack" Margin="5" Grid.Column="1">
             <TextBlock Text="{Binding firstname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding lastname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding userid, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -37,7 +47,26 @@
             <TextBlock Text="{Binding phonenumber, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             <TextBlock Text="{Binding isadmin, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
         </StackPanel>
-        
+        <StackPanel x:Name="EditUser_Stack" Margin="5" Grid.Column="1" Visibility="Collapsed">
+            <TextBox Name="fn" Text="{Binding firstname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="ln" Text="{Binding lastname, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="ui" Text="{Binding userid, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="pas" Text="{Binding email, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="em" Text="{Binding password, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBox Name="ph" Text="{Binding phonenumber, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <CheckBox Name="ad" IsChecked="{Binding isadmin, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="5"/>
+            
+        </StackPanel>
+
+        <Button x:Name="EditUser_Button" Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1" Click="EditUser_Button_Click">
+            <Image Source="/Components/GearSVG.png"/>
+        </Button>
+
+        <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2"  Height="30" Visibility="Collapsed">
+            <Button x:Name="RemoveUser_Button" Content="REMOVE" FontWeight="Bold" Width="70" HorizontalAlignment="Left" Background="#FFD13434"/>
+            <Button x:Name="Save" Content="Save" Width="70" HorizontalAlignment="Right"/>
+        </Grid>
+
 
     </Grid>
 </UserControl>
