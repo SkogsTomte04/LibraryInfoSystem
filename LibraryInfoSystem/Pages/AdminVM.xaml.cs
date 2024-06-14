@@ -27,6 +27,7 @@ namespace LibraryInfoSystem.Pages
         public AdminVM()
         {
             InitializeComponent();
+            UpdateGamesWrap();
         }
         private void PopulateStack()
         {
@@ -39,7 +40,7 @@ namespace LibraryInfoSystem.Pages
         }
         private UserComponent CreateComponent(DataBaseUser baseUser)
         {
-            UserComponent userComponent = new UserComponent();
+            UserComponent userComponent = new UserComponent(baseUser);
             userComponent.firstname = baseUser.FirstName;
             userComponent.lastname = baseUser.LastName;
             userComponent.userid = baseUser.UserId;
@@ -47,6 +48,8 @@ namespace LibraryInfoSystem.Pages
             userComponent.email = baseUser.Email;
             userComponent.phonenumber = baseUser.PhoneNumber;
             userComponent.isadmin = baseUser.IsAdmin;
+
+            userComponent.RemoveUser_Button.Click += RemoveUser; 
 
             return userComponent;
         }
@@ -65,6 +68,13 @@ namespace LibraryInfoSystem.Pages
         {
             CreateNewUser createNewUser = new CreateNewUser();
             createNewUser.Show();
+        }
+
+
+        //Admin Controls
+        private void RemoveUser(object sender, RoutedEventArgs e)
+        {
+            var Event = sender as Button;
         }
     }
 }

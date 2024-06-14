@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryInfoSystem.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace LibraryInfoSystem.Components
     /// </summary>
     public partial class UserComponent : UserControl
     {
-        public UserComponent()
+        public DataBaseUser User;
+        MongoHandler mongoHandler = new MongoHandler(DataType.Users);
+        public UserComponent(DataBaseUser user)
         {
             InitializeComponent();
+            User = user;
         }
 
 
@@ -119,6 +123,11 @@ namespace LibraryInfoSystem.Components
                 EditUser_Stack.Visibility = Visibility.Collapsed;
                 ButtonControls_Grid.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void RemoveUser_Button_Click(object sender, RoutedEventArgs e)
+        {
+            mongoHandler.RemoveUser(User);
         }
     }
 }

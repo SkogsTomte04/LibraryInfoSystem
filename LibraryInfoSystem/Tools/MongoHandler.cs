@@ -1,5 +1,6 @@
 ﻿using DnsClient;
 using LibraryInfoSystem.Pages;
+using Microsoft.Win32;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,15 @@ namespace LibraryInfoSystem.Tools
                 default:
                     throw new ArgumentException("Invalid data type specified.");
             }
+        }
+        public void RemoveUser(DataBaseUser user)
+        {
+            var collection = GetCollection<DataBaseUser>("users");
+            var filter = Builders<DataBaseUser>.Filter.Eq("_id", user.GetMongoId());
+            //var item = await collection.Find(Builders<DataBaseUser>.Filter.Eq("_id", user.GetMongoId())).FirstOrDefaultAsync();
+
+            collection.DeleteOne(filter);
+            MessageBox.Show($"Deleted {user.FirstName}");
         }
 
         public IMongoCollection<T> GetCollection<T>(string collection)

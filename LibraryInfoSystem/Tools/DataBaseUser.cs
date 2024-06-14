@@ -49,5 +49,9 @@ namespace LibraryInfoSystem.Tools
             IsAdmin = isAdmin;
         }
 
+        public ObjectId GetMongoId()
+        {
+            return Id;
+        }
     }
 }

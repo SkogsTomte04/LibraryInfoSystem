@@ -62,9 +62,9 @@
             <Image Source="/Components/GearSVG.png"/>
         </Button>
 
-        <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2"  Height="30" Visibility="Collapsed">
-            <Button x:Name="RemoveUser_Button" Content="REMOVE" FontWeight="Bold" Width="70" HorizontalAlignment="Left" Background="#FFD13434"/>
-            <Button x:Name="Save" Content="Save" Width="70" HorizontalAlignment="Right"/>
+        <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2"  Height="30" >
+            <Button x:Name="RemoveUser_Button" Content="REMOVE" Click="RemoveUser_Button_Click" FontWeight="Bold" Width="70" HorizontalAlignment="Left" Background="#FFD13434" Command=""/>
+            <Button x:Name="Save" Content="Save" Width="70" HorizontalAlignment="Right" />
         </Grid>
 
 
