@@ -129,10 +129,11 @@ namespace LibraryInfoSystem.Components
                 ButtonControls_Grid.Visibility = Visibility.Visible;
             } else if(UserInfo_Stack.Visibility == Visibility.Collapsed)
             {
-                build();
                 UserInfo_Stack.Visibility = Visibility.Visible;
                 EditUser_Stack.Visibility = Visibility.Collapsed;
                 ButtonControls_Grid.Visibility = Visibility.Collapsed;
+
+                build();
             }
         }
 
