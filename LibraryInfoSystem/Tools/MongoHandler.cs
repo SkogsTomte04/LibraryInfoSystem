@@ -130,6 +130,44 @@ namespace LibraryInfoSystem.Tools
             }
         }
 
+        public bool AdminValidation(string username)
+        {
+            foreach (var user in users)
+            {
+                if (user.UserId == username)
+                {
+                    if (user.IsAdmin == true) { return true; }
+                }
+            }
+            return false;
+        }
+
+        public bool Validation(string username, string password)
+        {
+            foreach (var user in users)
+            {
+                if (user.UserId == username)
+                {
+                    if (user.Password == password)
+                    {
+                        CurrentUser = user; //Set current user on successful log-in
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool IsLoggedIn()
+        {
+            return CurrentUser != null;
+        }
+
+        public bool LoggedOut()
+        {
+            return CurrentUser == null;
+        }
+
         public BitmapSource BitmapFromBase64(string? b64string)
 
         {

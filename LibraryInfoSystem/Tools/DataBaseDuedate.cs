@@ -20,7 +20,7 @@ namespace LibraryInfoSystem.Tools
         public double? _price { get; set; }
 
         [BsonElement("userId")]
-        public List<string>? _userId { get; set; }
+        public string? _userId { get; set; }
 
         [BsonElement("bookedDate")]
         public string? _bookedDate { get; set; }

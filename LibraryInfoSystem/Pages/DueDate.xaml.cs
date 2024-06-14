@@ -1,32 +1,56 @@
 ﻿using LibraryInfoSystem.Tools;
-using System.Collections.ObjectModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LibraryInfoSystem.Pages
 {
     public partial class DueDate : Page
     {
-        private MongoHandler mongoHandler = new MongoHandler(DataType.Duedate);
-
-        // Rename the property to reflect the MongoDB collection name
-        public ObservableCollection<DataBaseDuedate> DuedateGames { get; set; }
+        private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
+        private List<DataBaseDuedate> duedateList;
 
         public DueDate()
         {
             InitializeComponent();
-            // Initialize the collection
-            DuedateGames = new ObservableCollection<DataBaseDuedate>();
-            DataContext = this;
+            duedateList = new List<DataBaseDuedate>();
             LoadDueDateData();
         }
 
         private void LoadDueDateData()
         {
-            // Retrieve due date data from MongoDB and add it to DuedateGames collection
-            DuedateGames.Clear();
-            foreach (var dueDate in mongoHandler.duedate)
+            try
             {
-                DuedateGames.Add(dueDate);
+                foreach (var dueDate in mongohandler.duedate)
+                {
+                    MessageBox.Show($"Title: {dueDate._title}\n" +
+                                    $"Price: {dueDate._price}\n" +
+                                    $"User ID: {dueDate._userId}\n" +
+                                    $"Booked Date: {dueDate._bookedDate}\n" +
+                                    $"Deadline Date: {dueDate._deadlineDate}\n" +
+                                    $"Payment Method: {dueDate._paymentMethod}\n" +
+                                    $"Admin: {dueDate._isAdmin}\n", "Due Date Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading due date data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PrintDueDates()
+        {
+            foreach (var dueDate in duedateList)
+            {
+                Console.WriteLine($"Title: {dueDate._title}");
+                Console.WriteLine($"Price: {dueDate._price}");
+                Console.WriteLine($"User ID: {string.Join(", ", dueDate._userId)}");
+                Console.WriteLine($"Booked Date: {dueDate._bookedDate}");
+                Console.WriteLine($"Deadline Date: {dueDate._deadlineDate}");
+                Console.WriteLine($"Payment Method: {dueDate._paymentMethod}");
+                Console.WriteLine($"Admin: {dueDate._isAdmin}\n");
             }
         }
     }

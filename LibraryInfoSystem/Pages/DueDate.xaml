@@ -12,13 +12,13 @@
         <ListView ItemsSource="{Binding DuedateGames}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="50"/>
-                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding UserID}" Width="100"/>
-                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding BookedDate}" Width="100"/>
-                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding DeadlineDate}" Width="100"/>
-                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding PaymentMethod}" Width="100"/>
-                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding IsAdmin}" Width="50"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding title}" Width="150"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding price}" Width="50"/>
+                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding userId}" Width="100"/>
+                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding bookedDate}" Width="100"/>
+                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding deadlineDate}" Width="100"/>
+                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding paymentMethod}" Width="100"/>
+                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding isAdmin}" Width="50"/>
                 </GridView>
             </ListView.View>
         </ListView>
