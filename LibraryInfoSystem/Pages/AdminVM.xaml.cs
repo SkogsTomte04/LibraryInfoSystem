@@ -49,6 +49,7 @@ namespace LibraryInfoSystem.Pages
         private void UpdateGamesWrap()
         {
             GamesWrap.Children.Clear();
+            mongohandler.UpdateDataBase();
             PopulateStack();
         }
 
@@ -61,13 +62,14 @@ namespace LibraryInfoSystem.Pages
         {
             CreateNewUser createNewUser = new CreateNewUser();
             createNewUser.Show();
+            UpdateGamesWrap();
         }
 
 
         //Admin Controls
         private void RemoveUser(object sender, RoutedEventArgs e)
         {
-            var Event = sender as Button;
+            UpdateGamesWrap();
         }
     }
 }

@@ -55,6 +55,10 @@ namespace LibraryInfoSystem.Tools
                     throw new ArgumentException("Invalid data type specified.");
             }
         }
+        public void UpdateDataBase()
+        {
+            ConnectToDatabase();
+        }
         public void RemoveUser(DataBaseUser user)
         {
             MessageBoxResult result = MessageBox.Show($"Are you sure you want to permanently delete user: {user.UserId} \nNote: This action can not be undone", "Deleting User From Database", MessageBoxButton.YesNo, MessageBoxImage.Warning);
