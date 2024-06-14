@@ -62,7 +62,6 @@ namespace LibraryInfoSystem.Pages
         {
             CreateNewUser createNewUser = new CreateNewUser();
             createNewUser.Show();
-            UpdateGamesWrap();
         }
 
 
