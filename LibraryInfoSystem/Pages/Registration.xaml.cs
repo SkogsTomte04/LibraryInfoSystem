@@ -25,7 +25,6 @@ namespace LibraryInfoSystem.Pages
     {
         private MongoHandler register = new MongoHandler(DataType.Users);
         private IMongoCollection<DataBaseUser> _usersCollection;
-        private List<DataBaseUser> _usersList;
 
         public Registration()
         {
@@ -37,8 +36,7 @@ namespace LibraryInfoSystem.Pages
         {
             try
             {
-                _usersCollection = register.GetUsersCollection();
-                _usersList = register.users;
+                _usersCollection = register.GetCollection<DataBaseUser>("users");
             }
             catch (Exception ex)
             {
@@ -84,7 +82,20 @@ namespace LibraryInfoSystem.Pages
 
                 //if no user exists with the same email
                 _usersCollection.InsertOne(newUser);
-                MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                var confirmFilter = Builders<DataBaseUser>.Filter.Eq(x => x.Email, newUser.Email);
+
+                var confirm = _usersCollection.Find(confirmFilter).FirstOrDefault();
+
+                //confirm whether the userId has been injected into the collection or not.
+                if (confirm != null)
+                {
+                    MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }                
+                else
+                {
+                    MessageBox.Show("Failed to upload to the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
             catch (Exception ex)

@@ -30,6 +30,9 @@ namespace LibraryInfoSystem.Tools
 
         [BsonElement("image")]
         public string? _image { get; set; }
+
+        [BsonElement("demoimg")]
+        public List<string>? _demoimg { get; set; }
     }
 
 }

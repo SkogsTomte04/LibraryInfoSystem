@@ -1,0 +1,23 @@
+﻿<Page x:Class="LibraryInfoSystem.Pages.AdminMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryInfoSystem.Pages" xmlns:n="clr-namespace:LibraryInfoSystem"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminMenu">
+
+    <Grid Background="#FF9E8383">
+        <StackPanel VerticalAlignment="Center">
+        <n:NavButton x:Name="ViewBookBtn" Text="View Games" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="ViewGameBtn_Click"
+                     NavUri="/Pages/AdminVG.xaml"/>
+        <n:NavButton x:Name="ViewMemBtn" Text="View Members" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"/>
+        <n:NavButton x:Name="LogOutBtn"  Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px"
+                     NavUri="/Pages/Welcome.xaml" Click="LogOutBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

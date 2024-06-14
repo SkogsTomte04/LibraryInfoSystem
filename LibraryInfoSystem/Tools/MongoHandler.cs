@@ -1,4 +1,5 @@
-﻿using LibraryInfoSystem.Pages;
+﻿using DnsClient;
+using LibraryInfoSystem.Pages;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace LibraryInfoSystem.Tools
         private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
         private IMongoDatabase database;
         public List<DataBaseUser> users;
+        public DataBaseUser CurrentUser { get; set; }
         public List<DataBaseItem> items;
         public List<DataBaseDuedate> duedate;
         public List<DataBaseOverdue> overdue;
@@ -58,14 +60,9 @@ namespace LibraryInfoSystem.Tools
             database = client.GetDatabase("GameDataBase");
         }
 
-        public IMongoCollection<DataBaseUser> GetUsersCollection()
+        public IMongoCollection<T> GetCollection<T>(string collection)
         {
-            return database.GetCollection<DataBaseUser>("users");
-        }
-
-        public IMongoCollection<DataBaseItem> GetItemsCollection()
-        {
-            return database.GetCollection<DataBaseItem>("games");
+            return database.GetCollection<T>(collection);
         }
 
         public IMongoCollection<DataBaseDuedate> GetDuedateCollection()
@@ -82,7 +79,7 @@ namespace LibraryInfoSystem.Tools
         {
             try
             {
-                var usersCollection = GetUsersCollection();
+                var usersCollection = GetCollection<DataBaseUser>("users");
                 users = usersCollection.AsQueryable().ToList();
             }
             catch (Exception ex)
@@ -95,7 +92,7 @@ namespace LibraryInfoSystem.Tools
         {
             try
             {
-                var itemsCollection = GetItemsCollection();
+                var itemsCollection = GetCollection<DataBaseItem>("games");
                 items = itemsCollection.AsQueryable().ToList();
             }
 

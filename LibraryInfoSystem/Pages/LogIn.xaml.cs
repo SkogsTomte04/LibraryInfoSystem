@@ -23,12 +23,13 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class LogIn : Page
     {
+
+        private MongoHandler logIn = new MongoHandler(DataType.Users); 
+
         public LogIn()
         {
             InitializeComponent();
         }
-
-        private MongoHandler logIn = new MongoHandler(DataType.Users);
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
@@ -38,27 +39,28 @@ namespace LibraryInfoSystem.Pages
 
         private void logInBtn_Click(object sender, RoutedEventArgs e)
         {
-            logIn.GetUsersCollection();
-
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;
 
-            if (Validation(username, password)) { MessageBox.Show("Login Successful!", "Success"); }
-            else { MessageBox.Show("Failure.", "Error"); }
-        }
+            if (logIn.Validation(username, password)) { MessageBox.Show("Login Successful!", "Success"); }
+            else { MessageBox.Show("Failure.", "Error"); return; }
 
-        private bool Validation(string username, string password)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("Username", username);
-
-            foreach(var user in logIn.users)
-            {
-                if (user.UserId == username)
-                {
-                   if (user.Password == password) { return true; }
-                }
+            if (logIn.AdminValidation(username)) 
+            { 
+                MessageBox.Show("Welcome, Admin.", "admin");
+                var ClickedButton = e.OriginalSource as NavButton;
+                NavigationService.Navigate(ClickedButton.NavUri);
             }
-            return false;               
-        }        
+            else
+            { 
+                MessageBox.Show("Welcome.", "user");
+                var ClickedButton = e.OriginalSource as NavButton;
+                if (ClickedButton != null) { MessageBox.Show("Not null."); } else { MessageBox.Show("Null."); }
+                ClickedButton.NavUri = new Uri("/Pages/CustomerMenu.xaml", UriKind.Relative);
+                NavigationService.Navigate(ClickedButton.NavUri);
+            }
+
+            logIn.IsLoggedIn();
+        }
     }
 }

@@ -12,7 +12,7 @@
         <StackPanel Width="400" Height="200" Orientation="Vertical" VerticalAlignment="Center">
         <UserControl:txtBox x:Name="usernameTxt" Margin="5" Width="Auto" Height="Auto" Placeholder="Username"/>
         <UserControl:txtBox x:Name="passwordTxt" Margin="5" Width="Auto" Height="Auto" Placeholder="Password"/>
-            <Button x:Name="logInBtn" Margin="5" Height="Auto" Width="Auto" Content="Log In" Background="Transparent" BorderBrush="Transparent" Click="logInBtn_Click"/>
+            <n:NavButton x:Name="logInBtn" Text="Log In" Margin="5" Height="Auto" Width="Auto" Background="Transparent" BorderBrush="Transparent" Click="logInBtn_Click" NavUri="/Pages/AdminMenu.xaml"/>
             <TextBlock HorizontalAlignment="Center"
           TextWrapping="Wrap" 
           Text="Don't have an account?" VerticalAlignment="Top"/>

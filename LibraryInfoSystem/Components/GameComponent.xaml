@@ -4,28 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryInfoSystem.Components"
+             xmlns:n="clr-namespace:LibraryInfoSystem"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="100">
     <UserControl.Resources>
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" x:Key="Textstyle1">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Textstyle2">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        
+        
+        
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FFBBBBBB" Opacity="0.2"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         
     </UserControl.Resources>
-    
-    <Grid Background="White" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="0"/>
-        <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="1"/>
-        <TextBlock Text="{Binding platform, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Column="2"/>
-        <Image x:Name="image_cover" Grid.Column="3" Width="50" Height="50"/>
+
+    <Grid Background="White" Width="100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="button" Grid.RowSpan="2" Panel.ZIndex="1"/>
+
+        <StackPanel Grid.Row="0">
+            <Image x:Name="image_cover"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" >
+            <TextBlock Text="{Binding title, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding price, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource Textstyle1}"/>
+            
+            <WrapPanel x:Name="platform_stack" Orientation="Horizontal" >
+                
+            </WrapPanel>
+        </StackPanel>
 
     </Grid>
 </UserControl>

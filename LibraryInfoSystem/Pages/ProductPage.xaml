@@ -1,0 +1,63 @@
+﻿<Page x:Class="LibraryInfoSystem.Pages.ProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryInfoSystem.Pages"
+      xmlns:n="clr-namespace:LibraryInfoSystem.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductPage">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style TargetType="n:ImageButton">
+            <Setter Property="Height" Value="60"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="WhiteSmoke">
+        
+        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Grid Background="SlateGray" Width="650" Height="300">
+            <DockPanel Width="400" HorizontalAlignment="Left">
+                <Grid Margin="10" DockPanel.Dock="Left" Width="60">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img1" Grid.Row="0"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img2" Grid.Row="1"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img3" Grid.Row="2"/>
+                    <n:ImageButton ButtonBase.Click="Grid_Click" x:Name="Img4" Grid.Row="3"/>
+                </Grid>
+                <Grid Margin="50,10,0,10">
+                    <Image x:Name="Cover_img" Stretch="Uniform"/>
+                </Grid>
+            </DockPanel>
+
+            <Grid Width="200" Background="Gainsboro" Margin="10" HorizontalAlignment="Right">
+                <StackPanel >
+                    <TextBlock x:Name="Title" Text=".{Template}" FontSize="30" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="price" Text=".{Template}" FontSize="15"/>
+                    <WrapPanel x:Name="platform_stack" Orientation="Horizontal">
+                        <TextBlock Text=".{Template}"/>
+                        <TextBlock Text=".{Template}"/>
+
+                    </WrapPanel>
+
+
+                </StackPanel>
+                <Button Content="Add To Cart" Click="Button_Click"  Width="70" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            
+        </Grid>
+
+        
+
+    </Grid>
+</Page>
