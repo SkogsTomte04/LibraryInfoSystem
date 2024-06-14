@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LibraryInfoSystem.Components" xmlns:n="clr-namespace:LibraryInfoSystem"
+             xmlns:local="clr-namespace:LibraryInfoSystem.Components"
+             xmlns:n="clr-namespace:LibraryInfoSystem"
              mc:Ignorable="d" 
              d:DesignHeight="220" d:DesignWidth="220">
 
@@ -62,7 +63,7 @@
             <Image Source="/Components/GearSVG.png"/>
         </Button>
 
-        <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2"  Height="30" >
+        <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Visibility="Collapsed" Height="30" >
             <Button x:Name="RemoveUser_Button" Content="REMOVE" Click="RemoveUser_Button_Click" FontWeight="Bold" Width="70" HorizontalAlignment="Left" Background="#FFD13434" Command=""/>
             <Button x:Name="Save" Content="Save" Width="70" HorizontalAlignment="Right" />
         </Grid>

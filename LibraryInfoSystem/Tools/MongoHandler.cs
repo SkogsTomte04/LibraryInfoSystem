@@ -56,12 +56,18 @@ namespace LibraryInfoSystem.Tools
         }
         public void RemoveUser(DataBaseUser user)
         {
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to permanently delete user: {user.UserId} \nNote: This action can not be undone", "Deleting User From Database", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) { return; }
+
             var collection = GetCollection<DataBaseUser>("users");
             var filter = Builders<DataBaseUser>.Filter.Eq("_id", user.GetMongoId());
             //var item = await collection.Find(Builders<DataBaseUser>.Filter.Eq("_id", user.GetMongoId())).FirstOrDefaultAsync();
 
             collection.DeleteOne(filter);
             MessageBox.Show($"Deleted {user.FirstName}");
+            
+            
         }
 
         public IMongoCollection<T> GetCollection<T>(string collection)

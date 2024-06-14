@@ -43,7 +43,6 @@ namespace LibraryInfoSystem.Windows
         private async void registerBtn_Click(object sender, RoutedEventArgs e)
         {
             bool isChecked = isAdmin.IsChecked == true;
-            MessageBox.Show(isChecked.ToString());
 
             var firstNameValue = firstName.Text;
             var lastNameValue = lastName.Text;
