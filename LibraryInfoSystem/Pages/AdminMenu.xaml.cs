@@ -26,8 +26,7 @@ namespace LibraryInfoSystem.Pages
         {
             InitializeComponent();
         }
-
-        private void ViewGameBtn_Click(object sender, RoutedEventArgs e)
+        private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
@@ -41,7 +40,5 @@ namespace LibraryInfoSystem.Pages
             NavigationService.Navigate(ClickedButton.NavUri);
             MessageBox.Show("You have been logged out.", "Success");
         }
-
-
     }
 }
