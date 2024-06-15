@@ -3,13 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryInfoSystem.Pages" xmlns:n="clr-namespace:LibraryInfoSystem"
+      xmlns:local="clr-namespace:LibraryInfoSystem.Pages" xmlns:c="clr-namespace:LibraryInfoSystem.Components"
+      xmlns:n="clr-namespace:LibraryInfoSystem"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminMenu">
 
     <Grid Background="White">
-        <Grid Width="300" VerticalAlignment="Center">
+        <Grid Width="300" VerticalAlignment="Top" Margin="30">
             <Border BorderThickness="2" BorderBrush="Gray"/>
             <StackPanel VerticalAlignment="Top">
 
@@ -25,8 +27,13 @@
                 <n:NavButton x:Name="ViewBookBtn" Text="View Games" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVG.xaml"/>
                 <n:NavButton x:Name="ViewMembersBtn" Text="View Members" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVM.xaml"/>
                 <n:NavButton x:Name="LogOutBtn" Text="Log Out" FontSize="20" Click="LogOutBtn_Click" NavUri="/Pages/Welcome.xaml"/>
+                
             </StackPanel>
+            
         </Grid>
         
+        <!--Gonna Put a Graph or sum in here-->
+        <c:CustomGraph GraphMax="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Height="150"/>
+
     </Grid>
 </Page>
