@@ -83,7 +83,8 @@ namespace LibraryInfoSystem.Pages
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateNewGame createNewGame = new CreateNewGame();
+            createNewGame.Show();
         }
         private void EditGame_Click(object sender, RoutedEventArgs e)
         {

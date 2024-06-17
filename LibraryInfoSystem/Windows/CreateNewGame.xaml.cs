@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LibraryInfoSystem.Windows
 {
@@ -22,6 +23,19 @@ namespace LibraryInfoSystem.Windows
         public CreateNewGame()
         {
             InitializeComponent();
+        }
+
+        private void DropImgGrid_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                Uri uri = new Uri(files[0], UriKind.Absolute);
+                ImageSource imgSource = new BitmapImage(uri);
+                image_drop.Source = imgSource;
+               
+            }
         }
     }
 }

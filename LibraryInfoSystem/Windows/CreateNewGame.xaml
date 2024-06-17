@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="CreateNewGame" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Width="300">
+            <Grid x:Name="DropImgGrid" Height="200" AllowDrop="True" Drop="DropImgGrid_Drop" Background="LightGray">
+                <Image x:Name="image_drop"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
