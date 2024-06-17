@@ -1,17 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LibraryInfoSystem.Tools
 {
     public class DataBaseDuedate
     {
         [BsonId]
-        protected ObjectId Id { get; set; }
+        public ObjectId Id { get; set; }  // Changed to public
 
         [BsonElement("title")]
         public string? _title { get; set; }
@@ -20,7 +15,7 @@ namespace LibraryInfoSystem.Tools
         public double? _price { get; set; }
 
         [BsonElement("userId")]
-        public string? _userId { get; set; }
+        public string? _userId { get; set; }  // Changed to string
 
         [BsonElement("bookedDate")]
         public string? _bookedDate { get; set; }

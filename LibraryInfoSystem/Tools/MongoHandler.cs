@@ -1,13 +1,8 @@
-﻿using DnsClient;
-using LibraryInfoSystem.Pages;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -20,6 +15,7 @@ namespace LibraryInfoSystem.Tools
         Duedate,
         Overdue
     }
+
     class MongoHandler
     {
         private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -95,7 +91,6 @@ namespace LibraryInfoSystem.Tools
                 var itemsCollection = GetCollection<DataBaseItem>("games");
                 items = itemsCollection.AsQueryable().ToList();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -109,7 +104,6 @@ namespace LibraryInfoSystem.Tools
                 var DuedateCollection = GetDuedateCollection();
                 duedate = DuedateCollection.AsQueryable().ToList();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -123,7 +117,6 @@ namespace LibraryInfoSystem.Tools
                 var OverdueCollection = GetOverdueCollection();
                 overdue = OverdueCollection.AsQueryable().ToList();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -169,21 +162,12 @@ namespace LibraryInfoSystem.Tools
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)
-
         {
-
             var bytes = Convert.FromBase64String(b64string);
-
             using (var stream = new MemoryStream(bytes))
-
             {
-
-                return BitmapFrame.Create(stream,
-
-                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-
+                return BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             }
         }
     }
 }
-        

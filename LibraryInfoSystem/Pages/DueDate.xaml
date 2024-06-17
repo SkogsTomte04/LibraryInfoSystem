@@ -1,26 +1,37 @@
 ﻿<Page x:Class="LibraryInfoSystem.Pages.DueDate"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryInfoSystem.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
       Title="DueDate">
 
     <Grid>
-        <ListView ItemsSource="{Binding DuedateGames}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding title}" Width="150"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding price}" Width="50"/>
-                    <GridViewColumn Header="User ID" DisplayMemberBinding="{Binding userId}" Width="100"/>
-                    <GridViewColumn Header="Booked Date" DisplayMemberBinding="{Binding bookedDate}" Width="100"/>
-                    <GridViewColumn Header="Deadline Date" DisplayMemberBinding="{Binding deadlineDate}" Width="100"/>
-                    <GridViewColumn Header="Payment Method" DisplayMemberBinding="{Binding paymentMethod}" Width="100"/>
-                    <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding isAdmin}" Width="50"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,10">
+            <Button Content="Sort Alphabetically" Click="SortAlphabetically_Click" Margin="5"/>
+            <Button Content="Sort by Lowest Price" Click="SortByLowestPrice_Click" Margin="5"/>
+            <Button Content="Sort by Highest Price" Click="SortByHighestPrice_Click" Margin="5"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DueDateDataGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=_price}"/>
+                <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}"/>
+                <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}"/>
+                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}"/>
+                <DataGridTextColumn Header="Payment Method" Binding="{Binding Path=_paymentMethod}"/>
+                <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2" Content="Save Changes" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="SaveChangesButton_Click"/>
     </Grid>
 </Page>
