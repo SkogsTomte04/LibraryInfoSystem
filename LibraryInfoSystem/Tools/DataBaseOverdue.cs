@@ -1,15 +1,35 @@
 ﻿using MongoDB.Bson;
-using System;
+using MongoDB.Bson.Serialization.Attributes;
 
-public class DataBaseOverdue
+namespace LibraryInfoSystem.Tools
 {
-    public ObjectId Id { get; set; }
-    public string _title { get; set; }
-    public double _price { get; set; }
-    public string _userId { get; set; }
-    public string _bookedDate { get; set; }
-    public string _deadlineDate { get; set; }
-    public string _paymentMethod { get; set; }
-    public bool _isAdmin { get; set; }
-    public string _status { get; set; }
+    public class DataBaseOverdue
+    {
+        [BsonId]
+        public ObjectId Id { get; set; }
+
+        [BsonElement("title")]
+        public string? _title { get; set; }
+
+        [BsonElement("price")]
+        public double? _price { get; set; }
+
+        [BsonElement("userId")]
+        public string? _userId { get; set; }
+
+        [BsonElement("bookedDate")]
+        public string? _bookedDate { get; set; }
+
+        [BsonElement("deadlineDate")]
+        public string? _deadlineDate { get; set; }
+
+        [BsonElement("paymentMethod")]
+        public string? _paymentMethod { get; set; }
+
+        [BsonElement("isAdmin")]
+        public bool? _isAdmin { get; set; }
+
+        [BsonElement("status")]
+        public string? _status { get; set; }
+    }
 }
