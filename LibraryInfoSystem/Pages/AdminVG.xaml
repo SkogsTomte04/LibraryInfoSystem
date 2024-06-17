@@ -18,12 +18,23 @@
     </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid x:Name="Main" Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Button Height="30" Width="100" Content="Update List" Name="UpdateDataGrid" VerticalAlignment="Bottom"/>
-            <StackPanel CanVerticallyScroll="True">
-                <StackPanel x:Name="GamesStack">
+            <Grid Height="200" VerticalAlignment="Top">
+                <StackPanel VerticalAlignment="Center">
+                    <Button x:Name="AddGame" Content="Add New Game" Width="100" VerticalAlignment="Center" Click="AddGame_Click" />
 
                 </StackPanel>
+            </Grid>
+            <Button Click="UpdateDataGrid_Click" Height="30" Width="100" Content="Update List" Name="UpdateDataGrid" VerticalAlignment="Bottom"/>
+            <StackPanel Grid.Row="1" CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <WrapPanel Width="auto" MaxWidth="700" x:Name="GamesWrap" HorizontalAlignment="Center" Margin="10,0,0,0">
+
+
+                </WrapPanel>
             </StackPanel>
         </Grid>
     </ScrollViewer>
