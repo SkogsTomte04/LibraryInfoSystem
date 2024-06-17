@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static MongoDB.Driver.WriteConcern;
 
@@ -150,6 +151,16 @@ namespace LibraryInfoSystem.Tools
         public bool LoggedOut()
         {
             return CurrentUser == null;
+        }
+
+        public ImageSource convertbitmap(string bit)
+        {
+            if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
+            {
+                BitmapSource convertedImage = BitmapFromBase64(bit);
+                return convertedImage;
+            }
+            else { MessageBox.Show("Bitmapconversion error"); return null; }
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)
