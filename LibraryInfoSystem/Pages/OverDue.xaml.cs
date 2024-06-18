@@ -19,6 +19,12 @@ namespace LibraryInfoSystem.Pages
             LoadOverDueData();
         }
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Uri("Pages/Welcome.xaml", UriKind.Relative));
+        }
+
+
         private void LoadOverDueData()
         {
             try
