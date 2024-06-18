@@ -44,7 +44,7 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
-        private async void registerBtn_Click(object sender, RoutedEventArgs e)
+        private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstNameValue = firstName.Text;
             var lastNameValue = lastName.Text;

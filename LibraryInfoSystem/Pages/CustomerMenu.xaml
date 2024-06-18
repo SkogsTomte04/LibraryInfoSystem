@@ -15,8 +15,12 @@
             <n:NavButton x:Name="GamesLib" Text="Games Library" HorizontalAlignment="Center" VerticalAlignment="Top"
                          Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="GamesLib_Click"
                          NavUri="/Pages/DataPage.xaml"/>
+            <n:NavButton x:Name="ViewCart" Text="View My Cart" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="ViewCart_Click"
+                         NavUri="/Pages/CartPage.xaml"/>
             <n:NavButton x:Name="ViewGames" Text="View My Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px"/>
+                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="ViewGames_Click" 
+                         NavUri="/Pages/CustomerGames.xaml"/>
             <n:NavButton x:Name="ViewOverdue" Text="View Overdue Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
                          Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px"/>
             <n:NavButton x:Name="LogOut" Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" 
