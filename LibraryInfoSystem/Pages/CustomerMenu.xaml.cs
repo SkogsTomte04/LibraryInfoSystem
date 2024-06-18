@@ -39,6 +39,24 @@ namespace LibraryInfoSystem.Pages
             NavigationService.Navigate(ClickedButton.NavUri);
         }
 
+        private void ViewGames_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
+        private void ViewDue_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
+        private void ViewOverdue_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             Customer.LoggedOut();
@@ -47,10 +65,6 @@ namespace LibraryInfoSystem.Pages
             MessageBox.Show("You have been logged out.", "Success");
         }
 
-        private void ViewGames_Click(object sender, RoutedEventArgs e)
-        {
-            var ClickedButton = e.OriginalSource as NavButton;
-            NavigationService.Navigate(ClickedButton.NavUri);
-        }
     }
+          
 }

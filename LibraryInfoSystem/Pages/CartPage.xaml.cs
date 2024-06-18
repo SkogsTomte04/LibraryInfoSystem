@@ -87,6 +87,8 @@ namespace LibraryInfoSystem.Pages
             MessageBox.Show("Your booking has been confirmed. Taking you to the 'View Games' section.");
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
+
+
         }
     }
 }
