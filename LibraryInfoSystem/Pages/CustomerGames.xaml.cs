@@ -35,13 +35,7 @@ namespace LibraryInfoSystem.Pages
             {
                 foreach (GameComponent custGame in SessionManager.ShoppingCart) //Populate Grid with Shopping Cart Items
                 {
-                    GameComponent gameComponent = new GameComponent();
-                    {
-                        gameComponent.title = custGame.title;
-                        gameComponent.price = custGame.price;
-                        gameComponent.platform = custGame.platform;
-                        gameComponent.image_cover = custGame.image_cover;
-                    }
+                    GameComponent gameComponent = new GameComponent(custGame.dataitem);
                     GamesWrap.Children.Add(gameComponent);
                 }
             }
