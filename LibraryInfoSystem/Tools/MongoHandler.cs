@@ -1,14 +1,11 @@
-﻿using DnsClient;
+using DnsClient;
 using LibraryInfoSystem.Pages;
 using Microsoft.Win32;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using static MongoDB.Driver.WriteConcern;
@@ -18,8 +15,11 @@ namespace LibraryInfoSystem.Tools
     public enum DataType
     {
         Users,
-        Games
+        Games,
+        Duedate,
+        Overdue
     }
+
     class MongoHandler
     {
         private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -28,6 +28,8 @@ namespace LibraryInfoSystem.Tools
         public List<DataBaseUser> users;
         public DataBaseUser CurrentUser { get; set; }
         public List<DataBaseItem> items;
+        public List<DataBaseDuedate> duedate;
+        public List<DataBaseOverdue> overdue;
 
         public MongoHandler(DataType dt)
         {
@@ -50,6 +52,12 @@ namespace LibraryInfoSystem.Tools
                     break;
                 case DataType.Games:
                     LoadItems();
+                    break;
+                case DataType.Duedate:
+                    LoadDuedate();
+                    break;
+                case DataType.Overdue:
+                    LoadOverdue();
                     break;
                 default:
                     throw new ArgumentException("Invalid data type specified.");
@@ -86,6 +94,16 @@ namespace LibraryInfoSystem.Tools
             return database.GetCollection<T>(collection);
         }
 
+        public IMongoCollection<DataBaseDuedate> GetDuedateCollection()
+        {
+            return database.GetCollection<DataBaseDuedate>("duedate_games");
+        }
+
+        public IMongoCollection<DataBaseOverdue> GetOverdueCollection()
+        {
+            return database.GetCollection<DataBaseOverdue>("overdue_games");
+        }
+
         private void LoadUsers()
         {
             try
@@ -106,13 +124,37 @@ namespace LibraryInfoSystem.Tools
                 var itemsCollection = GetCollection<DataBaseItem>("games");
                 items = itemsCollection.AsQueryable().ToList();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
 
+        private void LoadDuedate()
+        {
+            try
+            {
+                var DuedateCollection = GetDuedateCollection();
+                duedate = DuedateCollection.AsQueryable().ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void LoadOverdue()
+        {
+            try
+            {
+                var OverdueCollection = GetOverdueCollection();
+                overdue = OverdueCollection.AsQueryable().ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         public bool AdminValidation(string username)
         {
@@ -153,21 +195,12 @@ namespace LibraryInfoSystem.Tools
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)
-
         {
-
             var bytes = Convert.FromBase64String(b64string);
-
             using (var stream = new MemoryStream(bytes))
-
             {
-
-                return BitmapFrame.Create(stream,
-
-                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-
+                return BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             }
         }
     }
 }
-        
