@@ -1,5 +1,6 @@
 ﻿using LibraryInfoSystem.Components;
 using LibraryInfoSystem.Tools;
+using LibraryInfoSystem.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,60 +24,72 @@ namespace LibraryInfoSystem.Pages
     public partial class AdminVG : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Games);
-        private MongoHandler admin = new MongoHandler(DataType.Users);
         public AdminVG()
         {
             InitializeComponent();
-            build();
+            UpdateGamesWrap();
         }
-
-        public void build()
+        private void PopulateStack()
         {
-            foreach (DataBaseItem baseItem in mongohandler.items)
+            foreach (DataBaseItem baseGame in mongohandler.items) //Populate Grid with GameDataBase.games
             {
-                GameComponent gameComponent = new GameComponent();
-                gameComponent.title = baseItem._title;
-                gameComponent.price = baseItem._price;
-                gameComponent.platform = baseItem._platform;
+                GameComponent gameComponent = CreateComponent(baseGame);
 
-                if (string.IsNullOrWhiteSpace(baseItem._image) == false)
-                {
-                    BitmapSource convertedImage = mongohandler.BitmapFromBase64(baseItem._image);
-                    gameComponent.image_cover.Source = convertedImage;
-                }
-                else { MessageBox.Show("Bitmapconversion error"); }
-
-                GamesStack.Children.Add(gameComponent);
+                GamesWrap.Children.Add(gameComponent);
             }
         }
-
-       /* private void CoolButton_Click(object sender, RoutedEventArgs e)
+        private GameComponent CreateComponent(DataBaseItem baseItem)
         {
-            // CoolButton Clicked! Let's show our InputBox.
-            InputBox.Visibility = System.Windows.Visibility.Visible;
+            GameComponent gameComponent = new GameComponent(baseItem);
+            /*gameComponent.title = baseItem._title;
+            gameComponent.price = baseItem._price;
+            gameComponent.platform = baseItem._platform;
+
+            gameComponent.image_cover.Source = mongohandler.convertbitmap(baseItem._image);
+
+            if (baseItem._demoimg != null)
+            {
+                List<ImageSource> convertedlist = new List<ImageSource>();
+                foreach (string img in baseItem._demoimg)
+                {
+                    convertedlist.Add(mongohandler.convertbitmap(img));
+                }
+
+                gameComponent.demoImg = convertedlist;
+            }*/
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
+            
+            return gameComponent;
+        }
+        private void UpdateGamesWrap()
+        {
+            GamesWrap.Children.Clear();
+            mongohandler.UpdateDataBase();
+            PopulateStack();
         }
 
-        private void YesButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)
         {
-            // YesButton Clicked! Let's hide our InputBox and handle the input text.
-            InputBox.Visibility = System.Windows.Visibility.Collapsed;
-
-            // Do something with the Input
-            String input = InputTextBox.Text;
-            MyListBox.Items.Add(input); // Add Input to our ListBox.
-
-            // Clear InputBox.
-            InputTextBox.Text = String.Empty;
+            UpdateGamesWrap();
         }
 
-        private void NoButton_Click(object sender, RoutedEventArgs e)
+        private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            // NoButton Clicked! Let's hide our InputBox.
-            InputBox.Visibility = System.Windows.Visibility.Collapsed;
+            CreateNewUser createNewUser = new CreateNewUser();
+            createNewUser.Show();
+        }
 
-            // Clear InputBox.
-            InputTextBox.Text = String.Empty;
-        } */
 
+        //Admin Controls
+
+        private void AddGame_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewGame createNewGame = new CreateNewGame();
+            createNewGame.Show();
+        }
+        private void EditGame_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
