@@ -2,6 +2,7 @@
 using LibraryInfoSystem.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,54 +28,24 @@ namespace LibraryInfoSystem.Pages
         {
 
             InitializeComponent();
-            build();
         }
         public void build()
         {
-
             foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
-
-
                 GameComponent gameComponent = createcomponent(baseItem);
 
                 GamesWrap.Children.Add(gameComponent);
             }
+
         }
 
         private GameComponent createcomponent(DataBaseItem baseItem)
         {
-            GameComponent gameComponent = new GameComponent();
-            gameComponent.title = baseItem._title;
-            gameComponent.price = baseItem._price;
-            gameComponent.platform = baseItem._platform;
-
-            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
-            gameComponent.image_cover.Source = convertbitmap(baseItem._image);
-
-            if (baseItem._demoimg != null)
-            {
-                List<ImageSource> convertedlist = new List<ImageSource>();
-                foreach (string img in baseItem._demoimg)
-                {
-                    convertedlist.Add(convertbitmap(img));
-                }
-
-                gameComponent.demoImg = convertedlist;
-            }
             
-
+            GameComponent gameComponent = new GameComponent(baseItem);
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
             return gameComponent;
-        }
-
-        public ImageSource convertbitmap(string bit)
-        {
-            if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
-            {
-                BitmapSource convertedImage = mongohandler.BitmapFromBase64(bit);
-                return convertedImage;
-            }
-            else { MessageBox.Show("Bitmapconversion error"); return null; }
         }
 
         private MongoHandler mongohandler = new MongoHandler(DataType.Games);
@@ -95,5 +66,14 @@ namespace LibraryInfoSystem.Pages
 
         }
 
+        private void Grid_Initialized(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            build();
+        }
     }
 }

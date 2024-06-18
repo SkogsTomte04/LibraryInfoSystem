@@ -3,21 +3,76 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryInfoSystem.Pages" xmlns:UserControl="clr-namespace:LibraryInfoSystem.Components" xmlns:n="clr-namespace:LibraryInfoSystem"
+      xmlns:local="clr-namespace:LibraryInfoSystem.Pages" xmlns:UserControl="clr-namespace:LibraryInfoSystem.Components" xmlns:n="clr-namespace:LibraryInfoSystem" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LogIn">
 
-    <Grid Background="#FFF0A3A3">
-        <StackPanel Width="400" Height="200" Orientation="Vertical" VerticalAlignment="Center">
-        <UserControl:txtBox x:Name="usernameTxt" Margin="5" Width="Auto" Height="Auto" Placeholder="Username"/>
-        <UserControl:txtBox x:Name="passwordTxt" Margin="5" Width="Auto" Height="Auto" Placeholder="Password"/>
-            <n:NavButton x:Name="logInBtn" Text="Log In" Margin="5" Height="Auto" Width="Auto" Background="Transparent" BorderBrush="Transparent" Click="logInBtn_Click" NavUri="/Pages/AdminMenu.xaml"/>
-            <TextBlock HorizontalAlignment="Center"
-          TextWrapping="Wrap" 
-          Text="Don't have an account?" VerticalAlignment="Top"/>
-        <n:NavButton Text="Register here." NavUri="/Pages/Registration.xaml" Margin="5" Width="Auto" Height="Auto" BorderBrush="Transparent" BorderThickness="0" Click="register_Click"/>
-        </StackPanel>
-        
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="TextStyle1">
+            <Setter Property="FontWeight" Value="Normal" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextStyle2">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="TextStyle3">
+            <Setter Property="FontWeight" Value="Light" />
+        </Style>
+
+
+        <Style TargetType="UserControl:txtBox">
+            <Setter Property="Margin" Value="0,0,0,9"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF4456C3"/>
+                <GradientStop Color="#FF0B1556" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Border Width="700" Height="350" BorderThickness="2" Background="AliceBlue" BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="15" Direction="300"/>
+            </Border.Effect>
+        </Border>
+        <Grid Width="700" Height="350" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="20"  Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock Text="Welcome!" Style="{StaticResource TextStyle2}" FontSize="25"/>
+                <TextBlock Text="Please enter your details" Style="{StaticResource TextStyle3}" FontSize="15" Margin="0,0,0,15"/>
+                <TextBlock Style="{StaticResource TextStyle2}" Text="Username"/>
+                <UserControl:txtBox x:Name="usernameTxt" Width="Auto" Height="Auto" Placeholder="Enter your username"/>
+                <TextBlock Style="{StaticResource TextStyle2}" Text="Password"/>
+                <UserControl:txtBox x:Name="passwordTxt" Width="Auto" Height="Auto" Placeholder="Enter your password"/>
+
+                <Grid>
+                    <CheckBox Content="Remember" IsChecked="False" VerticalAlignment="Center" ToolTip="Remember login information for next time" FontSize="10" HorizontalAlignment="Left"></CheckBox>
+                    <n:NavButton Text="Forgot Password?" HorizontalAlignment="Right" FontSize="10">
+                        <n:NavButton.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                        </n:NavButton.Foreground>
+                    </n:NavButton>
+                </Grid>
+                
+
+                <n:NavButton x:Name="logInBtn" Text="Log In" Height="30" Width="200" BorderBrush="Transparent" Click="logInBtn_Click" NavUri="/Pages/AdminMenu.xaml" Background="DarkBlue" FontSize="15" FontWeight="Bold" Foreground="WhiteSmoke" Margin="0,20,0,20"/>
+                
+                <TextBlock Style="{StaticResource TextStyle2}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Don't have an account?" VerticalAlignment="Top"/>
+                <n:NavButton Text="Register here" NavUri="/Pages/Registration.xaml" Margin="5" Width="100" Height="Auto" BorderBrush="Transparent" BorderThickness="0" Click="register_Click"/>
+                
+            </StackPanel>
+            <Grid Grid.Column="1" Panel.ZIndex="2">
+                <Image Source="/Assets/images/Persona-3.jpg" Stretch="UniformToFill"/>
+            </Grid>
+        </Grid>
+
+
     </Grid>
 </Page>
