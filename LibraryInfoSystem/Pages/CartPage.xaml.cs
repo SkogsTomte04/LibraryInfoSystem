@@ -30,11 +30,11 @@ namespace LibraryInfoSystem.Pages
 
         private void DisplayCart()
         {
-            if (ProductPage.ShoppingCart != null && ProductPage.ShoppingCart.Any())
+            if (SessionManager.ShoppingCart != null && SessionManager.ShoppingCart.Any())
             {
                 ItemsContainer.Children.Clear(); // Clear any existing items
 
-                foreach (var item in ProductPage.ShoppingCart)
+                foreach (var item in SessionManager.ShoppingCart)
                 {
                     var itemPanel = new StackPanel
                     {
@@ -71,7 +71,7 @@ namespace LibraryInfoSystem.Pages
                     ItemsContainer.Children.Add(itemPanel);
                 }
 
-                double totalPrice = (double)ProductPage.ShoppingCart.Sum(item => item.price);
+                double totalPrice = (double)SessionManager.ShoppingCart.Sum(item => item.price);
                 TotalPriceTextBlock.Text = $"Total Price: {totalPrice:C}";
             }
             else
@@ -82,6 +82,11 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
-
+        private void CustGamesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Your booking has been confirmed. Taking you to the 'View Games' section.");
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
     }
 }

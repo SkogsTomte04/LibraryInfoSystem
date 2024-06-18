@@ -47,5 +47,10 @@ namespace LibraryInfoSystem.Pages
             MessageBox.Show("You have been logged out.", "Success");
         }
 
+        private void ViewGames_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
     }
 }

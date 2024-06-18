@@ -67,7 +67,7 @@ namespace LibraryInfoSystem.Pages
             return gameComponent;
         }
 
-        private ImageSource convertbitmap(string bit)
+        public ImageSource convertbitmap(string bit)
         {
             if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
             {

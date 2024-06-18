@@ -24,7 +24,6 @@ namespace LibraryInfoSystem.Pages
     public partial class ProductPage : Page
     {
         GameComponent? GameItem;
-        public static List<GameComponent>? ShoppingCart { get; set; } = new List<GameComponent>();
         public ProductPage()
         {
             
@@ -90,13 +89,8 @@ namespace LibraryInfoSystem.Pages
                 MessageBox.Show("Game item is null. Cannot add to cart.");
                 return;
             }
-
-            if (ShoppingCart == null)
-            {
-                ShoppingCart = new List<GameComponent>();
-            }
-
-            ShoppingCart.Add(obj);
+            
+            SessionManager.ShoppingCart.Add(obj);
 
             MessageBox.Show("Added to Cart.");
         }
