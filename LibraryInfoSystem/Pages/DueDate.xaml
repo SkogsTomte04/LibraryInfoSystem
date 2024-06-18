@@ -31,7 +31,7 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=_price}"/>
                 <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}"/>
                 <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}"/>
-                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDatea}"/>
+                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}"/>
                 <DataGridTextColumn Header="Payment Method" Binding="{Binding Path=_paymentMethod}"/>
                 <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}"/>
             </DataGrid.Columns>
