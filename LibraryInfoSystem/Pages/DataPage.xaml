@@ -17,8 +17,9 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <Grid Background="AliceBlue">
+        <Grid Initialized="Grid_Initialized" Background="AliceBlue">
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Content="start" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Button_Click"/>
 
             <Grid x:Name="GamesStack">
                 <Grid.ColumnDefinitions>
