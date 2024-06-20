@@ -155,12 +155,15 @@ namespace LibraryInfoSystem.Tools
 
         public ImageSource convertbitmap(string bit)
         {
+            BitmapSource convertedImage = null;
             if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
             {
-                BitmapSource convertedImage = BitmapFromBase64(bit);
+                convertedImage = BitmapFromBase64(bit);
                 return convertedImage;
             }
             else { MessageBox.Show("Bitmapconversion error"); return null; }
+
+            
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)

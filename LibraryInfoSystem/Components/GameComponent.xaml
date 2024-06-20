@@ -42,7 +42,7 @@
         
     </UserControl.Resources>
 
-    <Grid Background="White" Width="100">
+    <Grid Background="White" Width="100" Loaded="Grid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
