@@ -38,6 +38,9 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("isAdmin")]
         public Boolean? IsAdmin { get; set; }
 
+        [BsonElement("games")]
+        public List<string> Games { get; set; }
+
         public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin)
         {
             FirstName = firstName;
