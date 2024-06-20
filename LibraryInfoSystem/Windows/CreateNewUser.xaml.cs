@@ -1,5 +1,6 @@
 ﻿using LibraryInfoSystem.Tools;
 using Microsoft.Win32;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -42,8 +43,7 @@ namespace LibraryInfoSystem.Windows
         }
         private async void registerBtn_Click(object sender, RoutedEventArgs e)
         {
-            bool isChecked = isAdmin.IsChecked == true;
-
+            var userId = new ObjectId();
             var firstNameValue = firstName.Text;
             var lastNameValue = lastName.Text;
             var usernameValue = username.Text;
@@ -63,7 +63,7 @@ namespace LibraryInfoSystem.Windows
                 return;
             }
 
-            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, isChecked, arrayValue);
+            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
 
             try
             {

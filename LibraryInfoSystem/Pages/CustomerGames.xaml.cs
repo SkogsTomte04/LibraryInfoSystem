@@ -38,24 +38,6 @@ namespace LibraryInfoSystem.Pages
 
         private async void build()
         {
-            /*if (SessionManager.ShoppingCart != null)
-            {
-                foreach (GameComponent custGame in SessionManager.ShoppingCart) //Populate Grid with Shopping Cart Items
-                {
-                    GameComponent gameComponent = new GameComponent(custGame.dataitem);
-                    GamesWrap.Children.Add(gameComponent);
-                }
-            }
-
-            else
-            {
-                MessageBox.Show("You currently have no books. Returning to Customer Menu.");
-                NavigateToCustomerMenu();
-            }*/
-
-           // ObjectId userId = SessionManager.CurrentUser.GetMongoId();
-            //var filterUsers = Builders<DataBaseUser>.Filter.Eq("_id", userId);
-            //var userDocument = _userCollection.Find(filterUsers).FirstOrDefaultAsync();
 
             if (SessionManager.CurrentUser != null)
             {

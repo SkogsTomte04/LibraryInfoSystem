@@ -41,7 +41,7 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("games")]
         public List<string> Games { get; set; }
 
-        public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin)
+        public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin, List<string> games)
         {
             FirstName = firstName;
             LastName = lastName;
