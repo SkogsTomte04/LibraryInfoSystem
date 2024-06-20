@@ -24,6 +24,8 @@
                 </Border>
                 <n:NavButton x:Name="ViewBookBtn" Text="View Games" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVG.xaml"/>
                 <n:NavButton x:Name="ViewMembersBtn" Text="View Members" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVM.xaml"/>
+                <n:NavButton x:Name="ViewDue" Text="View Due Games" FontSize="20" Click="ViewDue_Click" NavUri="/Pages/DueDate.xaml" />
+                <n:NavButton x:Name="ViewOverdue" Text="View Overdue Games" FontSize="20" Click="ViewOverdue_Click" NavUri="/Pages/OverDue.xaml" />
                 <n:NavButton x:Name="LogOutBtn" Text="Log Out" FontSize="20" Click="LogOutBtn_Click" NavUri="/Pages/Welcome.xaml"/>
             </StackPanel>
         </Grid>

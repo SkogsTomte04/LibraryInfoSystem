@@ -28,17 +28,14 @@
                          Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px" Click="ViewGames_Click" 
                          NavUri="/Pages/CustomerGames.xaml"/>
 
-            <n:NavButton x:Name="ViewDue" Text="View Due Games" HorizontalAlignment="Center" VerticalAlignment="Top"
-                         Height="Auto" Width="150" BorderBrush="Black" BorderThickness="1px"
-                         NavUri="/Pages/DueDate.xaml" Click="ViewDue_Click"/>
-
-            <n:NavButton x:Name="ViewOverdue" Text="View Overdue Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px"
-                         NavUri="/Pages/OverDue.xaml" Click="ViewOverdue_Click"/>
+            <n:NavButton x:Name="ViewDue" Text="View Due Games" FontSize="20" Click="ViewDue_Click" NavUri="/Pages/DueDate.xaml" />
 
             <n:NavButton x:Name="LogOut" Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" 
                          Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px" Click="LogOut_Click"
                          NavUri="/Pages/LogIn.xaml"/>
         </StackPanel>
+        <Grid Grid.Column="1" Panel.ZIndex="2">
+            <Image Source="/Assets/images/syp.jpg" Stretch="UniformToFill"/>
+        </Grid>
     </Grid>
 </Page>

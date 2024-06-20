@@ -1,5 +1,9 @@
-﻿using LibraryInfoSystem.Components;
+﻿using DnsClient;
+using LibraryInfoSystem.Components;
 using LibraryInfoSystem.Tools;
+using Microsoft.Win32;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +26,15 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class CartPage : Page
     {
+        private MongoHandler customer = new MongoHandler(DataType.Users);
+        private MongoHandler customerDue = new MongoHandler(DataType.Duedate);
+        private IMongoCollection<DataBaseUser> _userCollection;
+        private IMongoCollection<DataBaseItem>? _gameCollection;
+
         public CartPage()
         {
+            _userCollection = customer.GetCollection<DataBaseUser>("users");
+            _gameCollection = customer.GetCollection<DataBaseItem>("games");
             InitializeComponent();
             DisplayCart();
         }
@@ -82,11 +93,38 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
-        private void CustGamesBtn_Click(object sender, RoutedEventArgs e)
+        private async void CustGamesBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (GameComponent item in SessionManager.ShoppingCart)
+            {
+
+                string name = item.dataitem._title;
+
+                var filterGames = Builders<DataBaseItem>.Filter.Eq("title", name);
+                var gamesDocument = await _gameCollection.Find(filterGames).FirstOrDefaultAsync();
+
+                ObjectId userId = SessionManager.CurrentUser.GetMongoId();
+                var filterUsers = Builders<DataBaseUser>.Filter.Eq("_id", userId);
+                var userDocument = await _userCollection.Find(filterUsers).FirstOrDefaultAsync();
+                var update = Builders<DataBaseUser>.Update.Push("games", name);
+
+                var updateResult = await _userCollection.UpdateOneAsync(filterUsers, update);
+
+                if (updateResult.ModifiedCount > 0)
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("Error.");
+                }
+
+            }
+
             MessageBox.Show("Your booking has been confirmed. Taking you to the 'View Games' section.");
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
+
 
 
         }

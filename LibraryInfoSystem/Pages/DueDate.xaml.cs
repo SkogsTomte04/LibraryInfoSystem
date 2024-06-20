@@ -12,6 +12,7 @@ namespace LibraryInfoSystem.Pages
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
         private List<DataBaseDuedate> dueDates;
+        private MongoHandler user = new MongoHandler(DataType.Users);
 
         public DueDate()
         {
@@ -34,6 +35,11 @@ namespace LibraryInfoSystem.Pages
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
+            if (user.CurrentUser != null)
+            {
+
+            }
+            
             try
             {
                 var dueDates = (List<DataBaseDuedate>)DueDateDataGrid.ItemsSource;

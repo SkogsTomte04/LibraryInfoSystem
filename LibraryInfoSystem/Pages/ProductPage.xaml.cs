@@ -49,7 +49,7 @@ namespace LibraryInfoSystem.Pages
         }
 
         private void Cart_Click(object sender, RoutedEventArgs e)
-        { // for Shan: element to put in cart = GameItem
+        { 
             AddToCart(GameItem);
         }
 
