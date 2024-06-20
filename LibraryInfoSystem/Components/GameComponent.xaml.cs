@@ -35,7 +35,7 @@ namespace LibraryInfoSystem.Components
             price = dataitem._price;
             platform= dataitem._platform;
             image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
-            demoImg = await Task.Run(() => convertlist());
+            //demoImg = await Task.Run(() => convertlist()); slowing down loading
 
         }
 
@@ -69,7 +69,7 @@ namespace LibraryInfoSystem.Components
             }
         }
 
-        private async Task<List<ImageSource>> convertlist()
+        public async Task GetDemoImages()
         {
             List<ImageSource> convertedlist = new List<ImageSource>();
             List<Task<ImageSource>> tasks = new List<Task<ImageSource>>();
@@ -93,7 +93,7 @@ namespace LibraryInfoSystem.Components
                     convertedlist.Add(result);
                 }
             }
-            return convertedlist;
+            demoImg = convertedlist;
         }
 
 
