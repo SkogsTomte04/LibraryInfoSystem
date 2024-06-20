@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoDB.Bson;
 
 namespace LibraryInfoSystem.Components
 {
@@ -24,6 +25,7 @@ namespace LibraryInfoSystem.Components
     {
         public DataBaseItem dataitem;
         private MongoHandler mongoHandler = new MongoHandler(DataType.Games);
+        private MongoHandler user = new MongoHandler(DataType.Users);
         public GameComponent(DataBaseItem item)
         {
             InitializeComponent();
@@ -37,10 +39,10 @@ namespace LibraryInfoSystem.Components
             price = dataitem._price;
             platform= dataitem._platform;
             image_cover.Source = mongoHandler.convertbitmap(dataitem._image);
+            
             convertlist();
 
         }
-
         
         public string? title
         {

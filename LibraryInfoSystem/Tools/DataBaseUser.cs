@@ -50,6 +50,7 @@ namespace LibraryInfoSystem.Tools
             Email = email;
             PhoneNumber = phoneNumber;
             IsAdmin = isAdmin;
+            Games = games;
         }
 
         public ObjectId GetMongoId()

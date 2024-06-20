@@ -1,5 +1,7 @@
 ﻿using LibraryInfoSystem.Components;
 using LibraryInfoSystem.Tools;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +24,21 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class CustomerGames : Page
     {
+        private MongoHandler customer = new MongoHandler(DataType.Users);
+        private MongoHandler games = new MongoHandler(DataType.Games);
+        private IMongoCollection<DataBaseUser> _userCollection;
+        private IMongoCollection<DataBaseItem> _gameCollection;
         public CustomerGames()
         {
+            _gameCollection = games.GetCollection<DataBaseItem>("games");
+            _userCollection = customer.GetCollection<DataBaseUser>("users");
             InitializeComponent();
             build();
         }
 
-        private void build()
+        private async void build()
         {
-
-            if (SessionManager.ShoppingCart != null) 
+            /*if (SessionManager.ShoppingCart != null)
             {
                 foreach (GameComponent custGame in SessionManager.ShoppingCart) //Populate Grid with Shopping Cart Items
                 {
@@ -44,7 +51,34 @@ namespace LibraryInfoSystem.Pages
             {
                 MessageBox.Show("You currently have no books. Returning to Customer Menu.");
                 NavigateToCustomerMenu();
-            }           
+            }*/
+
+           // ObjectId userId = SessionManager.CurrentUser.GetMongoId();
+            //var filterUsers = Builders<DataBaseUser>.Filter.Eq("_id", userId);
+            //var userDocument = _userCollection.Find(filterUsers).FirstOrDefaultAsync();
+
+            if (SessionManager.CurrentUser != null)
+            {
+                var games = SessionManager.CurrentUser.Games;
+                var gameNames = new List<DataBaseItem>();
+
+                foreach (var game in games)
+                {
+                    var gameFilter = Builders<DataBaseItem>.Filter.Eq("title", game);
+                    var gameDocument = await _gameCollection.Find(gameFilter).FirstOrDefaultAsync();
+
+                    if (gameDocument != null)
+                    {
+                        gameNames.Add(gameDocument);
+                    }
+                }
+
+                foreach (DataBaseItem game in gameNames)
+                {
+                    GameComponent gameComponent = new GameComponent(game);
+                    GamesWrap.Children.Add(gameComponent);
+                }
+            }     
         }
 
 
@@ -59,28 +93,5 @@ namespace LibraryInfoSystem.Pages
                 MessageBox.Show("NavigationService is null. Cannot navigate to Customer Menu.");
             }
         }
-
-        /*private GameComponent customerGame(DataBaseItem custGame)
-        {
-            GameComponent item = new GameComponent();
-            item.title = custGame._title;
-            item.price = custGame._price;
-            item.platform = custGame._platform;
-
-            
-
-            if (custGame._demoimg != null)
-            {
-                List<ImageSource> convertedlist = new List<ImageSource>();
-                foreach (string img in custGame._demoimg)
-                {
-                    convertedlist.Add(page.convertbitmap(img));
-                }
-
-                item.demoImg = convertedlist;
-            }
-
-            return item;
-        } */
     }
 }

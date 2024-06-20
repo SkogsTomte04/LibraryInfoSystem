@@ -33,6 +33,10 @@ namespace LibraryInfoSystem.Tools
 
         [BsonElement("demoimg")]
         public List<string>? _demoimg { get; set; }
-    }
 
+        public ObjectId GetMongoId()
+        {
+            return Id;
+        }
+    }
 }

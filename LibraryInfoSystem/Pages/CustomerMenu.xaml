@@ -11,22 +11,31 @@
       Title="CustomerMenu">
 
     <Grid Background="#FFF3B8B8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center">
             <n:NavButton x:Name="GamesLib" Text="Games Library" HorizontalAlignment="Center" VerticalAlignment="Top"
-                         Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="GamesLib_Click"
+                         Margin="5" Height="Auto" Width="150" BorderBrush="Black" BorderThickness="1px" Click="GamesLib_Click"
                          NavUri="/Pages/DataPage.xaml"/>
+
             <n:NavButton x:Name="ViewCart" Text="View My Cart" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="ViewCart_Click"
+                         Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px" Click="ViewCart_Click"
                          NavUri="/Pages/CartPage.xaml"/>
+
             <n:NavButton x:Name="ViewGames" Text="View My Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="ViewGames_Click" 
+                         Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px" Click="ViewGames_Click" 
                          NavUri="/Pages/CustomerGames.xaml"/>
-            <n:NavButton x:Name="ViewOverdue" Text="View Overdue Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px"/>
+
+            <n:NavButton x:Name="ViewDue" Text="View Due Games" FontSize="20" Click="ViewDue_Click" NavUri="/Pages/DueDate.xaml" />
+
             <n:NavButton x:Name="LogOut" Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="LogOut_Click"
+                         Margin="5" Height="Auto" Width="150"  BorderBrush="Black" BorderThickness="1px" Click="LogOut_Click"
                          NavUri="/Pages/LogIn.xaml"/>
         </StackPanel>
-
+        <Grid Grid.Column="1" Panel.ZIndex="2">
+            <Image Source="/Assets/images/syp.jpg" Stretch="UniformToFill"/>
+        </Grid>
     </Grid>
 </Page>

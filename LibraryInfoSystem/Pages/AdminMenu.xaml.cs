@@ -33,6 +33,18 @@ namespace LibraryInfoSystem.Pages
 
         }
 
+        private void ViewDue_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
+        private void ViewOverdue_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
         {
             Admin.LoggedOut();

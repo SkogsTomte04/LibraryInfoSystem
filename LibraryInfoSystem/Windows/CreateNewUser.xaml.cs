@@ -50,6 +50,7 @@ namespace LibraryInfoSystem.Windows
             var passwordValue = password.Text;
             var emailValue = email.Text;
             var phoneNumberValue = phoneNumber.Text;
+            var arrayValue = new List<string>();
 
             if (string.IsNullOrEmpty(firstNameValue) ||
                 string.IsNullOrEmpty(lastNameValue) ||
@@ -62,7 +63,7 @@ namespace LibraryInfoSystem.Windows
                 return;
             }
 
-            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, isChecked);
+            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, isChecked, arrayValue);
 
             try
             {

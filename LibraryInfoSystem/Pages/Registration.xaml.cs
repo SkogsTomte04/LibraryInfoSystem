@@ -24,24 +24,12 @@ namespace LibraryInfoSystem.Pages
     public partial class Registration : Page
     {
         private MongoHandler register = new MongoHandler(DataType.Users);
-        private IMongoCollection<DataBaseUser> _usersCollection;
+        private IMongoCollection<DataBaseUser>? _usersCollection;
 
         public Registration()
         {
+            _usersCollection = register.GetCollection<DataBaseUser>("users");
             InitializeComponent();     
-            ConnectToUsers();
-        }
-
-        private void ConnectToUsers()
-        {
-            try
-            {
-                _usersCollection = register.GetCollection<DataBaseUser>("users");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         private void registerBtn_Click(object sender, RoutedEventArgs e)
@@ -52,6 +40,7 @@ namespace LibraryInfoSystem.Pages
             var passwordValue = password.Text;
             var emailValue = email.Text;
             var phoneNumberValue = phoneNumber.Text;
+            var arrayValue = new List<string>();
 
             if (string.IsNullOrEmpty(firstNameValue) ||
                 string.IsNullOrEmpty(lastNameValue) ||
@@ -64,7 +53,7 @@ namespace LibraryInfoSystem.Pages
                 return;
             }
 
-            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false);
+            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
 
             try
             {
