@@ -36,6 +36,7 @@
                 <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}" Width="*"/>
                 <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}" Width="*"/>
                 <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}" Width="*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=_status}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
