@@ -10,34 +10,28 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button Content="Back" Click="BackButton_Click" Margin="0"/>
-            <!-- Back Button at the very edge -->
-        </StackPanel>
-
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-            <Button Content="Sort A to Z" Click="SortAZ_Click" Margin="5"/>
-            <Button Content="Sort Z to A" Click="SortZA_Click" Margin="5"/>
-            <Button Content="Default Sort" Click="DefaultSort_Click" Margin="5"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,10">
+            <Button Content="Sort Alphabetically" Click="SortAlphabetically_Click" Margin="5"/>
+            <Button Content="Sort by Lowest Price" Click="SortByLowestPrice_Click" Margin="5"/>
+            <Button Content="Sort by Highest Price" Click="SortByHighestPrice_Click" Margin="5"/>
         </StackPanel>
 
         <DataGrid x:Name="DueDateDataGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                  HeadersVisibility="Column"
-                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
-                  RowHeaderWidth="0"
-                  SelectionMode="Single"
-                  RowHeight="30">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Path=_price}" Width="*"/>
-                <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}" Width="*"/>
-                <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}" Width="*"/>
-                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}" Width="*"/>
-                <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}" Width="*"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=_price}"/>
+                <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}"/>
+                <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}"/>
+                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}"/>
+                <DataGridTextColumn Header="Payment Method" Binding="{Binding Path=_paymentMethod}"/>
+                <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Grid.Row="2" Content="Save Changes" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="SaveChangesButton_Click"/>
     </Grid>
 </Page>
