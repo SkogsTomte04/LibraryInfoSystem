@@ -11,12 +11,13 @@ namespace LibraryInfoSystem.Pages
     public partial class OverDue : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Overdue);
-        private List<DataBaseOverdue> overdues;
+        private List<DataBaseOverdue> overdue = new List<DataBaseOverdue>();
+        private List<DataBaseOverdue> originalOverdue = new List<DataBaseOverdue>();
 
         public OverDue()
         {
             InitializeComponent();
-            LoadOverDueData();
+            LoadOverdueData();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -24,12 +25,13 @@ namespace LibraryInfoSystem.Pages
             NavigationService?.Navigate(new Uri("Pages/Welcome.xaml", UriKind.Relative));
         }
 
-        private void LoadOverDueData()
+        private void LoadOverdueData()
         {
             try
             {
-                overdues = mongohandler.overdue;
-                OverDueDataGrid.ItemsSource = overdues;
+                overdue = mongohandler.overdue;
+                originalOverdue = new List<DataBaseOverdue>(overdue);
+                OverDueDataGrid.ItemsSource = overdue;
             }
             catch (Exception ex)
             {
@@ -39,21 +41,20 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAZ_Click(object sender, RoutedEventArgs e)
         {
-            overdues = overdues.OrderBy(d => d._title).ToList();
-            OverDueDataGrid.ItemsSource = null;
-            OverDueDataGrid.ItemsSource = overdues;
+            overdue = overdue.OrderBy(d => d._title[0]).ToList();
+            OverDueDataGrid.ItemsSource = overdue;
         }
 
         private void SortZA_Click(object sender, RoutedEventArgs e)
         {
-            overdues = overdues.OrderByDescending(d => d._title).ToList();
-            OverDueDataGrid.ItemsSource = null;
-            OverDueDataGrid.ItemsSource = overdues;
+            overdue = overdue.OrderByDescending(d => d._title[0]).ToList();
+            OverDueDataGrid.ItemsSource = overdue;
         }
 
         private void DefaultSort_Click(object sender, RoutedEventArgs e)
         {
-            LoadOverDueData();
+            // Reload the original data to reset the sorting
+            LoadOverdueData();
         }
     }
 }

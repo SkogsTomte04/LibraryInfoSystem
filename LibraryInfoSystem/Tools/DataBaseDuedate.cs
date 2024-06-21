@@ -6,16 +6,16 @@ namespace LibraryInfoSystem.Tools
     public class DataBaseDuedate
     {
         [BsonId]
-        public ObjectId Id { get; set; }  // Changed to public
+        public ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public string? _title { get; set; }
+        public string[] _title { get; set; }
 
         [BsonElement("price")]
         public double? _price { get; set; }
 
         [BsonElement("userId")]
-        public string? _userId { get; set; }  // Changed to string
+        public string? _userId { get; set; }
 
         [BsonElement("bookedDate")]
         public string? _bookedDate { get; set; }

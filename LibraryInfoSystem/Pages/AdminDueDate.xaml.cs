@@ -1,10 +1,10 @@
 ﻿using LibraryInfoSystem.Tools;
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Windows.Controls;
-using System.Windows;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace LibraryInfoSystem.Pages
 {
@@ -31,7 +31,7 @@ namespace LibraryInfoSystem.Pages
             {
                 dueDates = mongohandler.duedate;
                 originalDueDates = new List<DataBaseDuedate>(dueDates);
-                AdminDueDateDataGrid.ItemsSource = dueDates;
+                DueDateDataGrid.ItemsSource = dueDates;
             }
             catch (Exception ex)
             {
@@ -41,18 +41,19 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAZ_Click(object sender, RoutedEventArgs e)
         {
-            dueDates = dueDates.AsEnumerable().OrderBy(d => d._title).ToList();
-            AdminDueDateDataGrid.ItemsSource = dueDates;
+            dueDates = dueDates.OrderBy(d => d._title[0]).ToList();
+            DueDateDataGrid.ItemsSource = dueDates;
         }
 
         private void SortZA_Click(object sender, RoutedEventArgs e)
         {
-            dueDates = dueDates.AsEnumerable().OrderByDescending(d => d._title).ToList();
-            AdminDueDateDataGrid.ItemsSource = dueDates;
+            dueDates = dueDates.OrderByDescending(d => d._title[0]).ToList();
+            DueDateDataGrid.ItemsSource = dueDates;
         }
 
         private void DefaultSort_Click(object sender, RoutedEventArgs e)
         {
+            // Reload the original data to reset the sorting
             LoadDueDateData();
         }
 
@@ -60,7 +61,7 @@ namespace LibraryInfoSystem.Pages
         {
             try
             {
-                var dueDates = (List<DataBaseDuedate>)AdminDueDateDataGrid.ItemsSource;
+                var dueDates = (List<DataBaseDuedate>)DueDateDataGrid.ItemsSource;
 
                 foreach (var dueDate in dueDates)
                 {

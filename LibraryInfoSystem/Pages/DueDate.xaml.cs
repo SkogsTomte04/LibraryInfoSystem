@@ -41,13 +41,13 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAZ_Click(object sender, RoutedEventArgs e)
         {
-            dueDates = dueDates.OrderBy(d => d._title).ToList();
+            dueDates = dueDates.OrderBy(d => d._title[0]).ToList();
             DueDateDataGrid.ItemsSource = dueDates;
         }
 
         private void SortZA_Click(object sender, RoutedEventArgs e)
         {
-            dueDates = dueDates.OrderByDescending(d => d._title).ToList();
+            dueDates = dueDates.OrderByDescending(d => d._title[0]).ToList();
             DueDateDataGrid.ItemsSource = dueDates;
         }
 

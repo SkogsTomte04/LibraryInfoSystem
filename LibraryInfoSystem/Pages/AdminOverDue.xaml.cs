@@ -11,13 +11,13 @@ namespace LibraryInfoSystem.Pages
     public partial class AdminOverDue : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Overdue);
-        private List<DataBaseOverdue> overdueItems = new List<DataBaseOverdue>();
-        private List<DataBaseOverdue> originalOverdueItems = new List<DataBaseOverdue>();
+        private List<DataBaseOverdue> overDueList = new List<DataBaseOverdue>();
+        private List<DataBaseOverdue> originalOverDueList = new List<DataBaseOverdue>();
 
         public AdminOverDue()
         {
             InitializeComponent();
-            LoadOverdueData();
+            LoadOverDueData();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -25,13 +25,13 @@ namespace LibraryInfoSystem.Pages
             NavigationService?.Navigate(new Uri("Pages/AdminMenu.xaml", UriKind.Relative));
         }
 
-        private void LoadOverdueData()
+        private void LoadOverDueData()
         {
             try
             {
-                overdueItems = mongohandler.overdue;
-                originalOverdueItems = new List<DataBaseOverdue>(overdueItems);
-                OverdueDataGrid.ItemsSource = overdueItems;
+                overDueList = mongohandler.overdue;
+                originalOverDueList = new List<DataBaseOverdue>(overDueList);
+                AdminOverDueDataGrid.ItemsSource = overDueList;
             }
             catch (Exception ex)
             {
@@ -41,38 +41,36 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAZ_Click(object sender, RoutedEventArgs e)
         {
-            overdueItems = overdueItems.OrderBy(d => d._userId).ToList();
-            OverdueDataGrid.ItemsSource = overdueItems;
+            overDueList = overDueList.OrderBy(d => d._title[0]).ToList();
+            AdminOverDueDataGrid.ItemsSource = overDueList;
         }
 
         private void SortZA_Click(object sender, RoutedEventArgs e)
         {
-            overdueItems = overdueItems.OrderByDescending(d => d._userId).ToList();
-            OverdueDataGrid.ItemsSource = overdueItems;
+            overDueList = overDueList.OrderByDescending(d => d._title[0]).ToList();
+            AdminOverDueDataGrid.ItemsSource = overDueList;
         }
 
         private void DefaultSort_Click(object sender, RoutedEventArgs e)
         {
             // Reload the original data to reset the sorting
-            LoadOverdueData();
+            LoadOverDueData();
         }
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var items = (List<DataBaseOverdue>)OverdueDataGrid.ItemsSource;
-
-                foreach (var item in items)
+                foreach (var overdue in overDueList)
                 {
-                    var filter = Builders<DataBaseOverdue>.Filter.Eq(d => d.Id, item.Id);
+                    var filter = Builders<DataBaseOverdue>.Filter.Eq(d => d.Id, overdue.Id);
                     var update = Builders<DataBaseOverdue>.Update
-                        .Set(d => d._title, item._title)
-                        .Set(d => d._userId, item._userId)
-                        .Set(d => d._bookedDate, item._bookedDate)
-                        .Set(d => d._deadlineDate, item._deadlineDate)
-                        .Set(d => d._isAdmin, item._isAdmin)
-                        .Set(d => d._status, item._status);
+                        .Set(d => d._title, overdue._title)
+                        .Set(d => d._userId, overdue._userId)
+                        .Set(d => d._bookedDate, overdue._bookedDate)
+                        .Set(d => d._deadlineDate, overdue._deadlineDate)
+                        .Set(d => d._status, overdue._status)
+                        .Set(d => d._isAdmin, overdue._isAdmin);
 
                     mongohandler.GetOverdueCollection().UpdateOne(filter, update);
                 }
@@ -84,6 +82,5 @@ namespace LibraryInfoSystem.Pages
                 MessageBox.Show($"An error occurred while saving changes: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }
