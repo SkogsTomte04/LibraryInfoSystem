@@ -34,7 +34,13 @@ namespace LibraryInfoSystem.Components
             title = dataitem._title;
             price = dataitem._price;
             platform= dataitem._platform;
-            image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
+
+            if(dataitem._image != null)
+            {
+                image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
+
+            }
+            
             //demoImg = await Task.Run(() => convertlist()); slowing down loading
 
         }
@@ -92,8 +98,10 @@ namespace LibraryInfoSystem.Components
                 {
                     convertedlist.Add(result);
                 }
+                demoImg = convertedlist;
             }
-            demoImg = convertedlist;
+            return;
+            
         }
 
 

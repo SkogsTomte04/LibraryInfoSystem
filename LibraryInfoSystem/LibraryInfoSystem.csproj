@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Assets\Images\DropHere.jpg" />
     <None Remove="Assets\Images\Persona-3.jpg" />
+    <None Remove="Assets\Images\placeholder.png" />
     <None Remove="Components\GearSVG.png" />
   </ItemGroup>
 
@@ -24,6 +25,7 @@
   <ItemGroup>
     <Resource Include="Assets\Images\DropHere.jpg" />
     <Resource Include="Assets\Images\Persona-3.jpg" />
+    <Resource Include="Assets\Images\placeholder.png" />
     <Resource Include="Components\GearSVG.png" />
   </ItemGroup>
 
