@@ -30,17 +30,21 @@ namespace LibraryInfoSystem.Components
         {
             InitializeComponent();
             dataitem = item;
-            build();
         }
 
-        public void build()
+        public async Task build()
         {
             title = dataitem._title;
             price = dataitem._price;
             platform= dataitem._platform;
-            image_cover.Source = mongoHandler.convertbitmap(dataitem._image);
+
+            if(dataitem._image != null)
+            {
+                image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
+
+            }
             
-            convertlist();
+            //demoImg = await Task.Run(() => convertlist()); slowing down loading
 
         }
         
@@ -82,18 +86,33 @@ namespace LibraryInfoSystem.Components
             set { }
         }
 
-        private void convertlist()
+        public async Task GetDemoImages()
         {
+            List<ImageSource> convertedlist = new List<ImageSource>();
+            List<Task<ImageSource>> tasks = new List<Task<ImageSource>>();
+
             if (dataitem._demoimg != null)
             {
-                List<ImageSource> convertedlist = new List<ImageSource>();
+
                 foreach (string img in dataitem._demoimg)
                 {
-                    convertedlist.Add(mongoHandler.convertbitmap(img));
+                    tasks.Add(Task.Run(() => mongoHandler.convertbitmap(img)));
+
+                    //ImageSource image = mongoHandler.convertbitmap(img);
+
+                    //convertedlist.Add(image);
                 }
 
+                var results = await Task.WhenAll(tasks);
+
+                foreach(var result in results)
+                {
+                    convertedlist.Add(result);
+                }
                 demoImg = convertedlist;
             }
+            return;
+            
         }
 
 
@@ -111,6 +130,9 @@ namespace LibraryInfoSystem.Components
         public static readonly DependencyProperty platformProperty = DependencyProperty.Register("platform", typeof(List<string>), typeof(GameComponent), new PropertyMetadata(null));
         public static readonly DependencyProperty demoImgProperty = DependencyProperty.Register("demoImg", typeof(List<ImageSource>), typeof(GameComponent), new PropertyMetadata(null));
 
-
+        private async void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            await build();
+        }
     }
 }

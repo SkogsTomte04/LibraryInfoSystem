@@ -24,32 +24,63 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class DataPage : Page
     {
+        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
+
         public DataPage()
         {
 
             InitializeComponent();
         }
-        public void build()
+        private async Task buildasync()
         {
+            List<GameComponent> dataBaseContainer = new List<GameComponent>();
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+
+            int i = 0, maxwidth = 3;
             foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
+                i++;
                 GameComponent gameComponent = createcomponent(baseItem);
-
-                GamesWrap.Children.Add(gameComponent);
+                
+                dataBaseContainer.Add(gameComponent);
+                if (i == maxwidth)
+                {
+                    i = 0;
+                    await addComponentsasync(dataBaseContainer);
+                    dataBaseContainer.Clear();
+                }
+                
             }
 
+            watch.Stop();
+            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
+
+        }
+        public async Task addComponentsasync(List<GameComponent> list)
+        {
+            
+            await Task.Run(() =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    foreach (GameComponent gameComponent in list)
+                    {
+                        GamesWrap.Children.Add(gameComponent);
+                    }
+                    
+                });
+            });
+             
         }
 
         private GameComponent createcomponent(DataBaseItem baseItem)
         {
-            
             GameComponent gameComponent = new GameComponent(baseItem);
             gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
             return gameComponent;
+
         }
-
-        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
-
         private void Game_Click(object sender, RoutedEventArgs e)
         {
             GameComponent ClickedButton = sender as GameComponent;
@@ -66,14 +97,15 @@ namespace LibraryInfoSystem.Pages
 
         }
 
-        private void Grid_Initialized(object sender, EventArgs e)
+        private async void Grid_Loaded(object sender, EventArgs e)
         {
-            
+            await buildasync();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            build();
+            GamesWrap.Children.Clear();
+            await buildasync();
         }
     }
 }
