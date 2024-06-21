@@ -40,11 +40,12 @@ namespace LibraryInfoSystem.Pages
         }
         private GameComponent CreateComponent(DataBaseItem baseItem)
         {
-            GameComponent gameComponent = new GameComponent(baseItem);
-            /*gameComponent.title = baseItem._title;
+            GameComponent gameComponent = new GameComponent();
+            gameComponent.title = baseItem._title;
             gameComponent.price = baseItem._price;
             gameComponent.platform = baseItem._platform;
 
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
             gameComponent.image_cover.Source = mongohandler.convertbitmap(baseItem._image);
 
             if (baseItem._demoimg != null)
@@ -56,9 +57,7 @@ namespace LibraryInfoSystem.Pages
                 }
 
                 gameComponent.demoImg = convertedlist;
-            }*/
-            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
-            
+            }
             return gameComponent;
         }
         private void UpdateGamesWrap()

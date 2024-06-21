@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace LibraryInfoSystem.Tools
 {
-    public class DataBaseItem
+    class DataBaseItem
     {
         [BsonId]
         protected ObjectId Id { get; set; }

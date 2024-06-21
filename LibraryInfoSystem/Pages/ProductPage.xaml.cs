@@ -50,9 +50,8 @@ namespace LibraryInfoSystem.Pages
                 platform_stack.Children.Add(textBlock);
             }
         }
-        private async void LoadImages()
+        private void LoadImages()
         {
-            await GameItem.GetDemoImages();
             Cover_img.Source = GameItem.image_cover.Source;
             Img1.SourceImage = Cover_img.Source;
             if (GameItem.demoImg != null)

@@ -102,23 +102,16 @@ namespace LibraryInfoSystem.Tools
 
         private void LoadItems()
         {
-            var watch = new Stopwatch();
-
-            //watch.Start();
             try
             {
-                var filter = Builders<DataBaseItem>.Filter.Empty;
                 var itemsCollection = GetCollection<DataBaseItem>("games");
-                
-                items = itemsCollection.Find(filter).ToList();
+                items = itemsCollection.AsQueryable().ToList();
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            //watch.Stop();
-            //MessageBox.Show($"Load Items elapsed seconds: {watch.Elapsed}");
         }
 
 
@@ -162,15 +155,12 @@ namespace LibraryInfoSystem.Tools
 
         public ImageSource convertbitmap(string bit)
         {
-            BitmapSource convertedImage = null;
             if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
             {
-                convertedImage = BitmapFromBase64(bit);
+                BitmapSource convertedImage = BitmapFromBase64(bit);
                 return convertedImage;
             }
             else { MessageBox.Show("Bitmapconversion error"); return null; }
-
-            
         }
 
         public BitmapSource BitmapFromBase64(string? b64string)

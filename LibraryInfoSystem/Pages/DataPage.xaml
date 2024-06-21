@@ -17,13 +17,8 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <Grid Loaded="Grid_Loaded" Background="AliceBlue">
+        <Grid Background="AliceBlue">
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <StackPanel>
-                <Button Content="Async Generation" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Button_Click"/>
-                <Button Content="Paralel Async Generation" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Button_Click_1"/>
-            </StackPanel>
-            
 
             <Grid x:Name="GamesStack">
                 <Grid.ColumnDefinitions>

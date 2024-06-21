@@ -2,7 +2,6 @@
 using LibraryInfoSystem.Tools;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,94 +23,66 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class DataPage : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
-        private List<DataBaseItem> data = new List<DataBaseItem>();
-
         public DataPage()
         {
+
             InitializeComponent();
-            data = mongohandler.items;
+            build();
         }
-        private async Task buildasync()
+        public void build()
         {
-            List<GameComponent> dataBaseContainer = new List<GameComponent>();
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
+            int columncount = 0;
+            int rowcount = 0;
 
-            int i = 0, maxwidth = 3;
-            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
+            foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
             {
-                i++;
+
+
                 GameComponent gameComponent = createcomponent(baseItem);
-                
-                dataBaseContainer.Add(gameComponent);
-                if (i == maxwidth)
-                {
-                    i = 0;
-                    await addComponentsasync(dataBaseContainer);
-                    dataBaseContainer.Clear();
-                }
-                
+
+                GamesWrap.Children.Add(gameComponent);
+
+                columncount++;
             }
-
-            watch.Stop();
-            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
-
-        }
-        private async Task buildparalelasync()
-        {
-            List<Task> tasks = new List<Task>();
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
-
-            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
-            {
-                GameComponent gameComponent = createcomponent(baseItem);
-                tasks.Add(Task.Run(() => AddComponentParalelAsync(gameComponent)));
-            }
-            await Task.WhenAll(tasks);
-
-            watch.Stop();
-            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
-
-        }
-        public async Task AddComponentParalelAsync(GameComponent component)
-        {
-            await Task.Run(() =>
-            {
-                this.Dispatcher.Invoke(() =>
-                {
-                    GamesWrap.Children.Add(component);
-
-                });
-            });
-            
-
-        }
-        public async Task addComponentsasync(List<GameComponent> list)
-        {
-            
-            await Task.Run(() =>
-            {
-                this.Dispatcher.Invoke(() =>
-                {
-                    foreach (GameComponent gameComponent in list)
-                    {
-                        GamesWrap.Children.Add(gameComponent);
-                    }
-                    
-                });
-            });
-             
         }
 
         private GameComponent createcomponent(DataBaseItem baseItem)
         {
-            GameComponent gameComponent = new GameComponent(baseItem);
-            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
-            return gameComponent;
+            GameComponent gameComponent = new GameComponent();
+            gameComponent.title = baseItem._title;
+            gameComponent.price = baseItem._price;
+            gameComponent.platform = baseItem._platform;
 
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
+            gameComponent.image_cover.Source = convertbitmap(baseItem._image);
+
+            if (baseItem._demoimg != null)
+            {
+                List<ImageSource> convertedlist = new List<ImageSource>();
+                foreach (string img in baseItem._demoimg)
+                {
+                    convertedlist.Add(convertbitmap(img));
+                }
+
+                gameComponent.demoImg = convertedlist;
+            }
+            
+
+            return gameComponent;
         }
+
+        private ImageSource convertbitmap(string bit)
+        {
+            if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
+            {
+                BitmapSource convertedImage = mongohandler.BitmapFromBase64(bit);
+                return convertedImage;
+            }
+            else { MessageBox.Show("Bitmapconversion error"); return null; }
+        }
+
+        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
+
         private void Game_Click(object sender, RoutedEventArgs e)
         {
             GameComponent ClickedButton = sender as GameComponent;
@@ -128,21 +99,5 @@ namespace LibraryInfoSystem.Pages
 
         }
 
-        private async void Grid_Loaded(object sender, EventArgs e)
-        {
-            //await buildasync();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
-            await buildasync();
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
-            await buildparalelasync();
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using LibraryInfoSystem.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,28 +20,9 @@ namespace LibraryInfoSystem.Components
     /// </summary>
     public partial class GameComponent : UserControl
     {
-        public DataBaseItem dataitem;
-        private MongoHandler mongoHandler = new MongoHandler(DataType.Games);
-        public GameComponent(DataBaseItem item)
+        public GameComponent()
         {
             InitializeComponent();
-            dataitem = item;
-        }
-
-        public async Task build()
-        {
-            title = dataitem._title;
-            price = dataitem._price;
-            platform= dataitem._platform;
-
-            if(dataitem._image != null)
-            {
-                image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
-
-            }
-            
-            //demoImg = await Task.Run(() => convertlist()); slowing down loading
-
         }
 
         
@@ -75,34 +55,6 @@ namespace LibraryInfoSystem.Components
             }
         }
 
-        public async Task GetDemoImages()
-        {
-            List<ImageSource> convertedlist = new List<ImageSource>();
-            List<Task<ImageSource>> tasks = new List<Task<ImageSource>>();
-
-            if (dataitem._demoimg != null)
-            {
-
-                foreach (string img in dataitem._demoimg)
-                {
-                    tasks.Add(Task.Run(() => mongoHandler.convertbitmap(img)));
-
-                    //ImageSource image = mongoHandler.convertbitmap(img);
-
-                    //convertedlist.Add(image);
-                }
-
-                var results = await Task.WhenAll(tasks);
-
-                foreach(var result in results)
-                {
-                    convertedlist.Add(result);
-                }
-                demoImg = convertedlist;
-            }
-            return;
-            
-        }
 
 
         public List<ImageSource> demoImg
@@ -111,17 +63,15 @@ namespace LibraryInfoSystem.Components
             set { SetValue(demoImgProperty, value); }
         }
 
-
         // Using a DependencyProperty as the backing store for demoImg.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty demoImgProperty =
+            DependencyProperty.Register("demoImg", typeof(List<ImageSource>), typeof(GameComponent), new PropertyMetadata(null));
+
+
 
         public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(GameComponent), new PropertyMetadata(null));
         public static readonly DependencyProperty priceProperty = DependencyProperty.Register("price", typeof(double), typeof(GameComponent), new PropertyMetadata(null));
         public static readonly DependencyProperty platformProperty = DependencyProperty.Register("platform", typeof(List<string>), typeof(GameComponent), new PropertyMetadata(null));
-        public static readonly DependencyProperty demoImgProperty = DependencyProperty.Register("demoImg", typeof(List<ImageSource>), typeof(GameComponent), new PropertyMetadata(null));
 
-        private async void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            await build();
-        }
     }
 }
