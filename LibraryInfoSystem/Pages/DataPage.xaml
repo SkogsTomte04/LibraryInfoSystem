@@ -17,7 +17,7 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <Grid Initialized="Grid_Initialized" Background="AliceBlue">
+        <Grid Loaded="Grid_Loaded" Background="AliceBlue">
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <Button Content="start" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Button_Click"/>
 
