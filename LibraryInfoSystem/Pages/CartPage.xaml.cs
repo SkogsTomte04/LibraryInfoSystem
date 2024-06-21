@@ -30,11 +30,13 @@ namespace LibraryInfoSystem.Pages
         private MongoHandler customerDue = new MongoHandler(DataType.Duedate);
         private IMongoCollection<DataBaseUser> _userCollection;
         private IMongoCollection<DataBaseItem>? _gameCollection;
+        private IMongoCollection<DataBaseDuedate> _duedateCollection;
 
         public CartPage()
         {
             _userCollection = customer.GetCollection<DataBaseUser>("users");
             _gameCollection = customer.GetCollection<DataBaseItem>("games");
+            _duedateCollection = customer.GetCollection<DataBaseDuedate>("duedate_games");
             InitializeComponent();
             DisplayCart();
         }
@@ -98,15 +100,15 @@ namespace LibraryInfoSystem.Pages
             foreach (GameComponent item in SessionManager.ShoppingCart)
             {
 
-                string name = item.dataitem._title;
+                string gameName = item.dataitem._title;
 
-                var filterGames = Builders<DataBaseItem>.Filter.Eq("title", name);
+                var filterGames = Builders<DataBaseItem>.Filter.Eq("title", gameName);
                 var gamesDocument = await _gameCollection.Find(filterGames).FirstOrDefaultAsync();
 
                 ObjectId userId = SessionManager.CurrentUser.GetMongoId();
                 var filterUsers = Builders<DataBaseUser>.Filter.Eq("_id", userId);
                 var userDocument = await _userCollection.Find(filterUsers).FirstOrDefaultAsync();
-                var update = Builders<DataBaseUser>.Update.Push("games", name);
+                var update = Builders<DataBaseUser>.Update.Push("games", gameName);
 
                 var updateResult = await _userCollection.UpdateOneAsync(filterUsers, update);
 
@@ -119,13 +121,40 @@ namespace LibraryInfoSystem.Pages
                     Console.WriteLine("Error.");
                 }
 
+                string name = SessionManager.CurrentUser.UserId;
+                var filterDue = Builders<DataBaseDuedate>.Filter.Eq("UserId", name);
+                var dueAccount = _duedateCollection.Find(filterDue).FirstOrDefault();
+
+                DateTime bookedDateTime = DateTime.Today;
+                string bookedDate = bookedDateTime.ToString("dd-MM-yyyy");
+                DateTime dueDateTime = bookedDateTime.AddDays(30);
+                string dueDate = dueDateTime.ToString("dd-MM-yyyy");
+
+                if (dueAccount != null)
+                {
+                    var updateDue = Builders<DataBaseDuedate>.Update.Push("title", gameName);
+                }
+
+                if (dueAccount == null)
+                {
+                    List<string> gameTitle = new List<string>();
+                    gameTitle.Add(gameName);
+                    var uId = name;
+                    var booked = bookedDate;
+                    var deadline = dueDate;
+                    bool isAdmin = false;
+
+                    DataBaseDuedate newCustomerDue = new DataBaseDuedate(gameTitle, uId, booked, deadline, isAdmin);
+                    _duedateCollection.InsertOne(newCustomerDue);
+                }
+
+
             }
 
-            MessageBox.Show("Your booking has been confirmed. Taking you to the 'View Games' section.");
+            MessageBox.Show("Your booking has been confirmed. You have 30 days to return the game/games. Taking you to the 'View Your Games' section.");
+            SessionManager.ShoppingCart.Clear();
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
-
-
 
         }
     }

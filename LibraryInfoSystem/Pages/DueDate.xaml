@@ -23,8 +23,6 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,10,0,10">
 
             <Button Content="Sort Alphabetically" Click="SortAlphabetically_Click" Margin="5"/>
-            <Button Content="Sort by Lowest Price" Click="SortByLowestPrice_Click" Margin="5"/>
-            <Button Content="Sort by Highest Price" Click="SortByHighestPrice_Click" Margin="5"/>
         </StackPanel>
 
         <DataGrid x:Name="DueDateDataGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10"

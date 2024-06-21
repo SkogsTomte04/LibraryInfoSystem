@@ -72,7 +72,7 @@ namespace LibraryInfoSystem.Pages
                         .Set(d => d._deadlineDate, dueDate._deadlineDate)
                         .Set(d => d._isAdmin, dueDate._isAdmin);
 
-                    mongohandler.GetDuedateCollection().UpdateOne(filter, update);
+                    mongohandler.GetCollection<DataBaseDuedate>("duedate_games").UpdateOne(filter, update);
                 }
 
                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);

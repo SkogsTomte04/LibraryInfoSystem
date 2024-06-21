@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
+using System;
 
 namespace LibraryInfoSystem.Tools
 {
@@ -9,10 +11,7 @@ namespace LibraryInfoSystem.Tools
         public ObjectId Id { get; set; }  // Changed to public
 
         [BsonElement("title")]
-        public string? _title { get; set; }
-
-        [BsonElement("price")]
-        public double? _price { get; set; }
+        public List<string>? _title { get; set; }
 
         [BsonElement("userId")]
         public string? _userId { get; set; }  // Changed to string
@@ -23,10 +22,21 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("deadlineDate")]
         public string? _deadlineDate { get; set; }
 
-        [BsonElement("paymentMethod")]
-        public string? _paymentMethod { get; set; }
-
         [BsonElement("isAdmin")]
         public bool? _isAdmin { get; set; }
+
+        public DataBaseDuedate(List<string>? title, string? userId, string? bookedDate, string? deadlineDate, bool? isAdmin)
+        {
+            _title = title;
+            _userId = userId;
+            _bookedDate = bookedDate;
+            _deadlineDate = deadlineDate;
+            _isAdmin = isAdmin;
+        }
+
+        public List<string> GetTitle()
+        {
+            return _title;
+        }
     }
 }

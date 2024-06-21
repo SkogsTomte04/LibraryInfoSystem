@@ -94,17 +94,6 @@ namespace LibraryInfoSystem.Tools
         {
             return database.GetCollection<T>(collection);
         }
-
-        public IMongoCollection<DataBaseDuedate> GetDuedateCollection()
-        {
-            return database.GetCollection<DataBaseDuedate>("duedate_games");
-        }
-
-        public IMongoCollection<DataBaseOverdue> GetOverdueCollection()
-        {
-            return database.GetCollection<DataBaseOverdue>("overdue_games");
-        }
-
         private void LoadUsers()
         {
             try
@@ -135,7 +124,7 @@ namespace LibraryInfoSystem.Tools
         {
             try
             {
-                var DuedateCollection = GetDuedateCollection();
+                var DuedateCollection = GetCollection<DataBaseDuedate>("duedate_games");
                 duedate = DuedateCollection.AsQueryable().ToList();
             }
             catch (Exception ex)
@@ -148,7 +137,7 @@ namespace LibraryInfoSystem.Tools
         {
             try
             {
-                var OverdueCollection = GetOverdueCollection();
+                var OverdueCollection = GetCollection<DataBaseOverdue>("overdue_games");
                 overdue = OverdueCollection.AsQueryable().ToList();
             }
             catch (Exception ex)

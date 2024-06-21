@@ -49,14 +49,12 @@ namespace LibraryInfoSystem.Pages
                     var filter = Builders<DataBaseDuedate>.Filter.Eq(d => d.Id, dueDate.Id);
                     var update = Builders<DataBaseDuedate>.Update
                         .Set(d => d._title, dueDate._title)
-                        .Set(d => d._price, dueDate._price)
                         .Set(d => d._userId, dueDate._userId)
                         .Set(d => d._bookedDate, dueDate._bookedDate)
                         .Set(d => d._deadlineDate, dueDate._deadlineDate)
-                        .Set(d => d._paymentMethod, dueDate._paymentMethod)
                         .Set(d => d._isAdmin, dueDate._isAdmin);
 
-                    mongohandler.GetDuedateCollection().UpdateOne(filter, update);
+                    mongohandler.GetCollection<DataBaseDuedate>("duedate_games").UpdateOne(filter, update);
                 }
 
                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -70,20 +68,6 @@ namespace LibraryInfoSystem.Pages
         private void SortAlphabetically_Click(object sender, RoutedEventArgs e)
         {
             dueDates = dueDates.OrderBy(d => d._title).ToList();
-            DueDateDataGrid.ItemsSource = null;
-            DueDateDataGrid.ItemsSource = dueDates;
-        }
-
-        private void SortByLowestPrice_Click(object sender, RoutedEventArgs e)
-        {
-            dueDates = dueDates.OrderBy(d => d._price).ToList();
-            DueDateDataGrid.ItemsSource = null;
-            DueDateDataGrid.ItemsSource = dueDates;
-        }
-
-        private void SortByHighestPrice_Click(object sender, RoutedEventArgs e)
-        {
-            dueDates = dueDates.OrderByDescending(d => d._price).ToList();
             DueDateDataGrid.ItemsSource = null;
             DueDateDataGrid.ItemsSource = dueDates;
         }

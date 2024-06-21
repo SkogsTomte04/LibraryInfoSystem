@@ -38,7 +38,7 @@ namespace LibraryInfoSystem.Components
             title = dataitem._title;
             price = dataitem._price;
             platform= dataitem._platform;
-            image_cover.Source = mongoHandler.convertbitmap(dataitem._image);
+           // image_cover.Source = mongoHandler.convertbitmap(dataitem._image);
             
             convertlist();
 

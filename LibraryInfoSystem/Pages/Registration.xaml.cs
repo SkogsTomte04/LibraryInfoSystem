@@ -69,7 +69,7 @@ namespace LibraryInfoSystem.Pages
                     return;
                 }
 
-                //if no user exists with the same email
+                //insert new user
                 _usersCollection.InsertOne(newUser);
 
                 var confirmFilter = Builders<DataBaseUser>.Filter.Eq(x => x.Email, newUser.Email);

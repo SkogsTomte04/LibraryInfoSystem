@@ -74,7 +74,7 @@ namespace LibraryInfoSystem.Pages
                         .Set(d => d._isAdmin, item._isAdmin)
                         .Set(d => d._status, item._status);
 
-                    mongohandler.GetOverdueCollection().UpdateOne(filter, update);
+                    mongohandler.GetCollection<DataBaseOverdue>("overdue_games").UpdateOne(filter, update);
                 }
 
                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
