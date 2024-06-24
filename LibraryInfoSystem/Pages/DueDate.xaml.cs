@@ -67,9 +67,20 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAlphabetically_Click(object sender, RoutedEventArgs e)
         {
-            dueDates = dueDates.OrderBy(d => d._title).ToList();
-            DueDateDataGrid.ItemsSource = null;
+            dueDates = dueDates.OrderBy(d => d._title[0]).ToList();
             DueDateDataGrid.ItemsSource = dueDates;
+        }
+
+        private void SortZA_Click(object sender, RoutedEventArgs e)
+        {
+            dueDates = dueDates.OrderByDescending(d => d._title[0]).ToList();
+            DueDateDataGrid.ItemsSource = dueDates;
+        }
+
+        private void DefaultSort_Click(object sender, RoutedEventArgs e)
+        {
+            // Reload the original data to reset the sorting
+            LoadDueDateData();
         }
     }
 }
