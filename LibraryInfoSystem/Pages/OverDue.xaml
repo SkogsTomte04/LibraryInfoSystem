@@ -3,8 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:LibraryInfoSystem.Tools"
       mc:Ignorable="d"
       Title="OverDue">
+
+    <Page.Resources>
+        <local:ArrayConverter x:Key="ArrayConverter"/>
+    </Page.Resources>
 
     <Grid>
         
@@ -19,7 +24,6 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Button Content="Back" Click="BackButton_Click" Margin="0"/>
-            <!-- Back Button at the very edge -->
         </StackPanel>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,10,0,10">
@@ -30,20 +34,24 @@
         </StackPanel>
 
         <DataGrid x:Name="OverDueDataGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+          HeadersVisibility="Column"
+          CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
+          RowHeaderWidth="0"
+          SelectionMode="Single"
+          IsReadOnly="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Path=_price}"/>
-                <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}"/>
-                <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}"/>
-                <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}"/>
-                <DataGridTextColumn Header="Payment Method" Binding="{Binding Path=_paymentMethod}"/>
-                <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Path=_status}"/>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title}" Width="*"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title, Converter={StaticResource ArrayConverter}}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}" Width="*"/>
                 <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}" Width="*"/>
                 <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}" Width="*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=_status}" Width="*"/>
                 <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
