@@ -11,7 +11,7 @@ namespace LibraryInfoSystem.Tools
         public ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public string[] _title { get; set; }
+        public List<string> _title { get; set; }
 
         [BsonElement("price")]
         public double? _price { get; set; }

@@ -49,11 +49,9 @@ namespace LibraryInfoSystem.Pages
                     var filter = Builders<DataBaseOverdue>.Filter.Eq(d => d.Id, overdue.Id);
                     var update = Builders<DataBaseOverdue>.Update
                         .Set(d => d._title, overdue._title)
-                        .Set(d => d._price, overdue._price)
                         .Set(d => d._userId, overdue._userId)
                         .Set(d => d._bookedDate, overdue._bookedDate)
                         .Set(d => d._deadlineDate, overdue._deadlineDate)
-                        .Set(d => d._paymentMethod, overdue._paymentMethod)
                         .Set(d => d._isAdmin, overdue._isAdmin)
                         .Set(d => d._status, overdue._status);
 

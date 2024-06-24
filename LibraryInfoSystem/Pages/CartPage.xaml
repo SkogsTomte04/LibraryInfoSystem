@@ -35,8 +35,8 @@
                     <StackPanel x:Name="ItemsContainer" />
                     <TextBlock x:Name="TotalPriceTextBlock" FontSize="16" FontWeight="Bold" Margin="0,10,0,0"/>
                 </StackPanel>
-                <n:NavButton x:Name="CustGamesBtn" Text="Confirm Booking" VerticalAlignment="Top" HorizontalAlignment="Right"
-                             NavUri="/Pages/CustomerGames.xaml" Margin="0,374,0,0" Click="CustGamesBtn_Click"/>
+                <n:NavButton x:Name="CustGamesBtn" Text="Confirm Booking" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                             NavUri="/Pages/CustomerGames.xaml" Click="CustGamesBtn_Click"/>
             </Grid>
         </Grid>
     </ScrollViewer>

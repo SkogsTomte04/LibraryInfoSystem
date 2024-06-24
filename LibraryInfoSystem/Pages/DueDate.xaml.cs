@@ -12,6 +12,7 @@ namespace LibraryInfoSystem.Pages
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
         private MongoHandler user = new MongoHandler(DataType.Users);
+        new List<DataBaseDuedate> dueDates;
         private IMongoCollection<DataBaseDuedate> _duedateCollection;
 
         public DueDate()
@@ -24,12 +25,10 @@ namespace LibraryInfoSystem.Pages
         private async void LoadDueDateData()
         {
             try
-            {    
-               //dueDates = mongohandler.duedate;
-               //DueDateDataGrid.ItemsSource = dueDates;
+            {   
                 var user = SessionManager.CurrentUser.UserId;
                 var userFilter = Builders<DataBaseDuedate>.Filter.Eq("userId", user);
-                var userDocument = await _duedateCollection.Find(userFilter).FirstOrDefaultAsync();
+                //var userDocument = await _duedateCollection.Find(userFilter).FirstOrDefaultAsync();
                 var listDocument = await _duedateCollection.Find(userFilter).ToListAsync();
 
                 foreach (var dueDate in listDocument)
@@ -37,6 +36,7 @@ namespace LibraryInfoSystem.Pages
                     var row = new
                     {
                         TitlesString = string.Join(", ", dueDate._title),
+                        dueDate._userId,
                         dueDate._bookedDate,
                         dueDate._deadlineDate
                     };
@@ -47,24 +47,6 @@ namespace LibraryInfoSystem.Pages
             {
                 MessageBox.Show($"An error occurred while loading due date data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void SortAlphabetically_Click(object sender, RoutedEventArgs e)
-        {
-            dueDates = dueDates.OrderBy(d => d._title[0]).ToList();
-            DueDateDataGrid.ItemsSource = dueDates;
-        }
-
-        private void SortZA_Click(object sender, RoutedEventArgs e)
-        {
-            dueDates = dueDates.OrderByDescending(d => d._title[0]).ToList();
-            DueDateDataGrid.ItemsSource = dueDates;
-        }
-
-        private void DefaultSort_Click(object sender, RoutedEventArgs e)
-        {
-            // Reload the original data to reset the sorting
-            LoadDueDateData();
         }
     }
 }
