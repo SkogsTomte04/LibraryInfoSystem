@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,19 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();     
         }
 
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var mailDress = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
         private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstNameValue = firstName.Text;
@@ -42,6 +56,7 @@ namespace LibraryInfoSystem.Pages
             var phoneNumberValue = phoneNumber.Text;
             var arrayValue = new List<string>();
 
+            //make sure all fields are filled in
             if (string.IsNullOrEmpty(firstNameValue) ||
                 string.IsNullOrEmpty(lastNameValue) ||
                 string.IsNullOrEmpty(usernameValue) ||
@@ -52,6 +67,13 @@ namespace LibraryInfoSystem.Pages
                 MessageBox.Show("All fields are required", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            if (IsValidEmail(emailValue) == false)
+            {
+                MessageBox.Show("Your email is invalid. Please try again.");
+                return;
+            } 
+            
 
             DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
 
@@ -91,6 +113,9 @@ namespace LibraryInfoSystem.Pages
             {
                 MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

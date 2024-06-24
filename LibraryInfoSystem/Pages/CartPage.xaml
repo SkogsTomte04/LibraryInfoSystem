@@ -17,8 +17,19 @@
     
     <ScrollViewer>
     <Grid>
-        <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Grid Width="650" Height="400" Background="#FFEE9F9F">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                    <GradientStop Color="#FF45477C"/>
+                    <GradientStop Color="#FF060B28" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Border Width="700" Height="350" BorderThickness="2" Background="Black" BorderBrush="Black">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="15" Direction="300"/>
+                </Border.Effect>
+            </Border>
+            <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Grid Width="700" Height="350" Background="WhiteSmoke">
                 <StackPanel Margin="10" x:Name="CartStackPanel">
                     <TextBlock Text="Shopping Cart" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center" />
                     <StackPanel x:Name="ItemsContainer" />
