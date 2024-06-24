@@ -1,4 +1,4 @@
-using LibraryInfoSystem.Tools;
+﻿using LibraryInfoSystem.Tools;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -11,26 +11,23 @@ namespace LibraryInfoSystem.Pages
     public partial class OverDue : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Overdue);
-        private List<DataBaseOverdue> overdue = new List<DataBaseOverdue>();
-        private List<DataBaseOverdue> originalOverdue = new List<DataBaseOverdue>();
+        private List<DataBaseOverdue> overdues;
 
         public OverDue()
         {
             InitializeComponent();
-            LoadOverdueData();
+            LoadOverDueData();
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new Uri("Pages/Welcome.xaml", UriKind.Relative));
         }
-
-        private void LoadOverdueData()
+        private void LoadOverDueData()
         {
             try
             {
-                overdue = mongohandler.overdue;
-                originalOverdue = new List<DataBaseOverdue>(overdue);
-                OverDueDataGrid.ItemsSource = overdue;
+                overdues = mongohandler.overdue;
+                OverDueDataGrid.ItemsSource = overdues;
             }
             catch (Exception ex)
             {
@@ -70,20 +67,23 @@ namespace LibraryInfoSystem.Pages
 
         private void SortAlphabetically_Click(object sender, RoutedEventArgs e)
         {
-            overdue = overdue.OrderBy(d => d._title[0]).ToList();
-            OverDueDataGrid.ItemsSource = overdue;
+            overdues = overdues.OrderBy(d => d._title).ToList();
+            OverDueDataGrid.ItemsSource = null;
+            OverDueDataGrid.ItemsSource = overdues;
         }
 
         private void SortByLowestPrice_Click(object sender, RoutedEventArgs e)
         {
-            overdue = overdue.OrderByDescending(d => d._title[0]).ToList();
-            OverDueDataGrid.ItemsSource = overdue;
+            overdues = overdues.OrderBy(d => d._price).ToList();
+            OverDueDataGrid.ItemsSource = null;
+            OverDueDataGrid.ItemsSource = overdues;
         }
 
         private void SortByHighestPrice_Click(object sender, RoutedEventArgs e)
         {
-            // Reload the original data to reset the sorting
-            LoadOverdueData();
+            overdues = overdues.OrderByDescending(d => d._price).ToList();
+            OverDueDataGrid.ItemsSource = null;
+            OverDueDataGrid.ItemsSource = overdues;
         }
     }
 }
