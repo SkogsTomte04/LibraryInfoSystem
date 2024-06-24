@@ -101,7 +101,6 @@ namespace LibraryInfoSystem.Pages
             {
 
                 string gameName = item.dataitem._title;
-
                 var filterGames = Builders<DataBaseItem>.Filter.Eq("title", gameName);
                 var gamesDocument = await _gameCollection.Find(filterGames).FirstOrDefaultAsync();
 
@@ -132,7 +131,7 @@ namespace LibraryInfoSystem.Pages
 
                 if (dueAccount != null)
                 {
-                    var updateDue = Builders<DataBaseDuedate>.Update.Push("title", gameName);
+                    Builders<DataBaseDuedate>.Update.Push("title", gameName);
                 }
 
                 if (dueAccount == null)

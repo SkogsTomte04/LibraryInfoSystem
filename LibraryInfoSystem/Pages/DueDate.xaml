@@ -21,7 +21,8 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,10"/>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button Content="Back" Click="BackButton_Click" Margin="0"/>
+            <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <!-- Back Button at the very edge -->
         </StackPanel>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,10,0,10">
@@ -46,10 +47,7 @@
                 <DataGridTextColumn Header="User ID" Binding="{Binding Path=_userId}" Width="*"/>
                 <DataGridTextColumn Header="Booked Date" Binding="{Binding Path=_bookedDate}" Width="*"/>
                 <DataGridTextColumn Header="Deadline Date" Binding="{Binding Path=_deadlineDate}" Width="*"/>
-                <DataGridTextColumn Header="Admin" Binding="{Binding Path=_isAdmin}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button Grid.Row="2" Content="Save Changes" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="SaveChangesButton_Click"/>
     </Grid>
 </Page>
