@@ -25,6 +25,8 @@
                     <TextBlock Text="Admin Control Menu" FontSize="30" HorizontalAlignment="Center"/>
                 </Border>
                 <n:NavButton x:Name="ViewBookBtn" Text="View Games" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVG.xaml"/>
+                <n:NavButton x:Name="ViewDueDateBtn" Text="Due Date" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminDueDate.xaml"/>
+                <n:NavButton x:Name="ViewOverDueBtn" Text="Over Due" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminOverDue.xaml"/>
                 <n:NavButton x:Name="ViewMembersBtn" Text="View Members" FontSize="20" Click="NavButton_Click" NavUri="/Pages/AdminVM.xaml"/>
                 <n:NavButton x:Name="LogOutBtn" Text="Log Out" FontSize="20" Click="LogOutBtn_Click" NavUri="/Pages/Welcome.xaml"/>
                 

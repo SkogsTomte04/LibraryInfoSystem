@@ -9,20 +9,61 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerMenu">
+    
+    <Page.Resources>
+        <Style TargetType="n:NavButton">
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1px"/>
+            <Setter Property="Background" Value="#FFE9BE6D"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                <GradientStop Color="#FF5E1919"/>
+                <GradientStop Color="#FF303554" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-    <Grid Background="#FFF3B8B8">
-        <StackPanel VerticalAlignment="Center">
-            <n:NavButton x:Name="GamesLib" Text="Games Library" HorizontalAlignment="Center" VerticalAlignment="Top"
-                         Margin="5" Height="Auto" Width="Auto" BorderBrush="Black" BorderThickness="1px" Click="GamesLib_Click"
+        <Border Width="700" Height="350" BorderThickness="2" Background="AliceBlue" BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="15" Direction="230"/>
+            </Border.Effect>
+        </Border>
+
+        <Grid Width="700" Height="350" Background="#FF784F4F">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <n:NavButton x:Name="GamesLib" Text="Games Library"
+                         Click="GamesLib_Click"
                          NavUri="/Pages/DataPage.xaml"/>
-            <n:NavButton x:Name="ViewGames" Text="View My Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px"/>
-            <n:NavButton x:Name="ViewOverdue" Text="View Overdue Games" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px"/>
-            <n:NavButton x:Name="LogOut" Text="Log Out" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                         Margin="5" Height="Auto" Width="Auto"  BorderBrush="Black" BorderThickness="1px" Click="LogOut_Click"
-                         NavUri="/Pages/LogIn.xaml"/>
-        </StackPanel>
 
+                <n:NavButton x:Name="ViewCart" Text="View My Cart"
+                         Click="ViewCart_Click"
+                         NavUri="/Pages/CartPage.xaml"/>
+
+                <n:NavButton x:Name="ViewGames" Text="View My Games"
+                         Click="ViewGames_Click" 
+                         NavUri="/Pages/CustomerGames.xaml"/>
+
+                <n:NavButton x:Name="ViewDue" Text="View Due Games" 
+                         Click="ViewDue_Click"
+                         NavUri="/Pages/DueDate.xaml" />
+
+                <n:NavButton x:Name="LogOut" Text="Log Out"
+                         Click="LogOut_Click"
+                         NavUri="/Pages/LogIn.xaml"/>
+            </StackPanel>
+            <Grid Grid.Column="0" Panel.ZIndex="2">
+                <Image Source="/Assets/images/syp.jpg" Stretch="UniformToFill"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

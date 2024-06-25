@@ -38,7 +38,10 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("isAdmin")]
         public Boolean? IsAdmin { get; set; }
 
-        public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin)
+        [BsonElement("games")]
+        public List<string> Games { get; set; }
+
+        public DataBaseUser(string? firstName, string? lastName, string? userId, string? password, string? email, string? phoneNumber, Boolean? isAdmin, List<string> games)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -47,6 +50,7 @@ namespace LibraryInfoSystem.Tools
             Email = email;
             PhoneNumber = phoneNumber;
             IsAdmin = isAdmin;
+            Games = games;
         }
 
         public ObjectId GetMongoId()

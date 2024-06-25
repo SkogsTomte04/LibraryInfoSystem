@@ -42,7 +42,7 @@ namespace LibraryInfoSystem.Pages
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;
 
-            if (logIn.Validation(username, password)) { MessageBox.Show("Login Successful!", "Success"); }
+            if (logIn.Validation(username, password)) {  }
             else { MessageBox.Show("Failure.", "Error"); return; }
 
             if (logIn.AdminValidation(username)) 
@@ -52,10 +52,10 @@ namespace LibraryInfoSystem.Pages
                 NavigationService.Navigate(ClickedButton.NavUri);
             }
             else
-            { 
+            {
+                SessionManager.InitializeSession(logIn.CurrentUser);
                 MessageBox.Show("Welcome.", "user");
                 var ClickedButton = e.OriginalSource as NavButton;
-                if (ClickedButton != null) { MessageBox.Show("Not null."); } else { MessageBox.Show("Null."); }
                 ClickedButton.NavUri = new Uri("/Pages/CustomerMenu.xaml", UriKind.Relative);
                 NavigationService.Navigate(ClickedButton.NavUri);
             }

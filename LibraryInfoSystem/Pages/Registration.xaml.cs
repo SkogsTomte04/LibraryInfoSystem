@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,27 +25,28 @@ namespace LibraryInfoSystem.Pages
     public partial class Registration : Page
     {
         private MongoHandler register = new MongoHandler(DataType.Users);
-        private IMongoCollection<DataBaseUser> _usersCollection;
+        private IMongoCollection<DataBaseUser>? _usersCollection;
 
         public Registration()
         {
+            _usersCollection = register.GetCollection<DataBaseUser>("users");
             InitializeComponent();     
-            ConnectToUsers();
         }
 
-        private void ConnectToUsers()
+        public static bool IsValidEmail(string email)
         {
             try
             {
-                _usersCollection = register.GetCollection<DataBaseUser>("users");
+                var mailDress = new MailAddress(email);
+                return true;
             }
-            catch (Exception ex)
+            catch (FormatException)
             {
-                MessageBox.Show(ex.ToString());
+                return false;
             }
         }
 
-        private async void registerBtn_Click(object sender, RoutedEventArgs e)
+        private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
             var firstNameValue = firstName.Text;
             var lastNameValue = lastName.Text;
@@ -52,7 +54,9 @@ namespace LibraryInfoSystem.Pages
             var passwordValue = password.Text;
             var emailValue = email.Text;
             var phoneNumberValue = phoneNumber.Text;
+            var arrayValue = new List<string>();
 
+            //make sure all fields are filled in
             if (string.IsNullOrEmpty(firstNameValue) ||
                 string.IsNullOrEmpty(lastNameValue) ||
                 string.IsNullOrEmpty(usernameValue) ||
@@ -64,7 +68,14 @@ namespace LibraryInfoSystem.Pages
                 return;
             }
 
-            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false);
+            if (IsValidEmail(emailValue) == false)
+            {
+                MessageBox.Show("Your email is invalid. Please try again.");
+                return;
+            } 
+            
+
+            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
 
             try
             {
@@ -80,7 +91,7 @@ namespace LibraryInfoSystem.Pages
                     return;
                 }
 
-                //if no user exists with the same email
+                //insert new user
                 _usersCollection.InsertOne(newUser);
 
                 var confirmFilter = Builders<DataBaseUser>.Filter.Eq(x => x.Email, newUser.Email);
@@ -102,6 +113,9 @@ namespace LibraryInfoSystem.Pages
             {
                 MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

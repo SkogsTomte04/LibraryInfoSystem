@@ -17,8 +17,8 @@
             <n:NavButton Text="ADMIN BYPASS" NavUri="/Pages/AdminMenu.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
         </StackPanel>
 
-        
 
-        
+
+
     </Grid>
 </Page>

@@ -1,4 +1,6 @@
-﻿using System;
+using MongoDB.Bson.Serialization.Attributes;
+﻿using LibraryInfoSystem.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoDB.Bson;
 
 namespace LibraryInfoSystem.Components
 {
@@ -20,11 +23,13 @@ namespace LibraryInfoSystem.Components
     /// </summary>
     public partial class GameComponent : UserControl
     {
-        public GameComponent()
+        public DataBaseItem dataitem;
+        private MongoHandler mongoHandler = new MongoHandler(DataType.Games);
+        private MongoHandler user = new MongoHandler(DataType.Users);
+        public GameComponent(DataBaseItem item)
         {
             InitializeComponent();
         }
-
         
         public string? title
         {
@@ -55,6 +60,43 @@ namespace LibraryInfoSystem.Components
             }
         }
 
+        [BsonIgnore] public string PlatformAsString
+        {
+            get
+            {
+                return string.Join(", ", platform);
+            }
+            set { }
+        }
+
+        public async Task GetDemoImages()
+        {
+            List<ImageSource> convertedlist = new List<ImageSource>();
+            List<Task<ImageSource>> tasks = new List<Task<ImageSource>>();
+
+            if (dataitem._demoimg != null)
+            {
+
+                foreach (string img in dataitem._demoimg)
+                {
+                    tasks.Add(Task.Run(() => mongoHandler.convertbitmap(img)));
+
+                    //ImageSource image = mongoHandler.convertbitmap(img);
+
+                    //convertedlist.Add(image);
+                }
+
+                var results = await Task.WhenAll(tasks);
+
+                foreach(var result in results)
+                {
+                    convertedlist.Add(result);
+                }
+                demoImg = convertedlist;
+            }
+            return;
+            
+        }
 
 
         public List<ImageSource> demoImg
