@@ -21,14 +21,7 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("deadlineDate")]
         public string? _deadlineDate { get; set; }
 
-        [BsonElement("payment")]
-
-        public string? _dueDate { get; set; }
-
         [BsonElement("isAdmin")]
         public bool? _isAdmin { get; set; }
-
-        [BsonElement("status")]
-        public string? _status { get; set; }
     }
 }

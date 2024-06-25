@@ -52,8 +52,7 @@ namespace LibraryInfoSystem.Pages
                         .Set(d => d._userId, overdue._userId)
                         .Set(d => d._bookedDate, overdue._bookedDate)
                         .Set(d => d._deadlineDate, overdue._deadlineDate)
-                        .Set(d => d._isAdmin, overdue._isAdmin)
-                        .Set(d => d._status, overdue._status);
+                        .Set(d => d._isAdmin, overdue._isAdmin);
 
                     mongohandler.GetCollection<DataBaseOverdue>("overdue_games").UpdateOne(filter, update);
                 }

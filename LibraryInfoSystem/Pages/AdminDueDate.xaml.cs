@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,6 +82,40 @@ namespace LibraryInfoSystem.Pages
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while saving changes: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CheckDatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var collection = mongohandler.GetCollection<DataBaseDuedate>("duedate_games");
+                var filter = Builders<DataBaseDuedate>.Filter.Empty; // Empty filter to match all documents
+                var duedates = collection.Find(filter).ToList(); // Get all documents in the collection
+
+                foreach (var duedate in duedates)
+                {
+                    // Convert the deadlineDate string to a DateTime object
+                    if (DateTime.TryParseExact(duedate._deadlineDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime deadline))
+                    {
+                        // Compare the deadline date with the current system date
+                        if (deadline.Date <= DateTime.Now.Date)
+                        {
+                            // Move the document to the overdue_games collection
+                            mongohandler.GetCollection<DataBaseDuedate>("overdue_games").InsertOne(duedate);
+
+                            // Remove the document from the duedate_games collection
+                            var deleteFilter = Builders<DataBaseDuedate>.Filter.Eq("_id", duedate.Id);
+                            collection.DeleteOne(deleteFilter);
+                        }
+                    }
+                }
+
+                MessageBox.Show("Dates checked successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while checking dates: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
