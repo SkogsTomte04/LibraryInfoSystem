@@ -109,6 +109,11 @@ namespace LibraryInfoSystem.Tools
 
         private void LoadItems()
         {
+<<<<<<< Updated upstream
+=======
+
+            //watch.Start();
+>>>>>>> Stashed changes
             try
             {
                 var itemsCollection = GetCollection<DataBaseItem>("games");

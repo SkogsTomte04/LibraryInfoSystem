@@ -19,6 +19,7 @@
     <ScrollViewer>
         <Grid Background="AliceBlue">
             <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+<<<<<<< Updated upstream
 
             <Grid x:Name="GamesStack">
                 <Grid.ColumnDefinitions>
@@ -31,6 +32,16 @@
             <WrapPanel x:Name="GamesWrap" Width="500">
                 
             </WrapPanel>
+=======
+            <StackPanel>
+
+                <WrapPanel x:Name="GamesWrap" Width="500">
+
+                </WrapPanel>
+            </StackPanel>
+            
+            
+>>>>>>> Stashed changes
             
         </Grid>
     </ScrollViewer>

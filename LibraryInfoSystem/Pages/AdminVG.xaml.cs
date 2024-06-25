@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -38,6 +39,37 @@ namespace LibraryInfoSystem.Pages
                 GamesWrap.Children.Add(gameComponent);
             }
         }
+        private async Task buildparalelasync()
+        {
+            List<Task> tasks = new List<Task>();
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+
+            foreach (DataBaseItem baseItem in mongohandler.items) //Populate Grid with GameDataBase.games
+            {
+                GameComponent gameComponent = CreateComponent(baseItem);
+                tasks.Add(Task.Run(() => AddComponentParalelAsync(gameComponent)));
+            }
+            await Task.WhenAll(tasks);
+
+            watch.Stop();
+            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
+
+        }
+        public async Task AddComponentParalelAsync(GameComponent component)
+        {
+            await Task.Run(() =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    component.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
+                    GamesWrap.Children.Add(component);
+
+                });
+            });
+
+
+        }
         private GameComponent CreateComponent(DataBaseItem baseItem)
         {
             GameComponent gameComponent = new GameComponent();
@@ -57,14 +89,21 @@ namespace LibraryInfoSystem.Pages
                 }
 
                 gameComponent.demoImg = convertedlist;
+<<<<<<< Updated upstream
             }
+=======
+            }*/
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
+
+>>>>>>> Stashed changes
             return gameComponent;
         }
-        private void UpdateGamesWrap()
+        private async void UpdateGamesWrap()
         {
             GamesWrap.Children.Clear();
             mongohandler.UpdateDataBase();
-            PopulateStack();
+            //PopulateStack();
+            await buildparalelasync();
         }
 
         private void UpdateDataGrid_Click(object sender, RoutedEventArgs e)

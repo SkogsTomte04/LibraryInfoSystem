@@ -14,7 +14,11 @@
         <StackPanel ButtonBase.Click="NavButton_Click" Orientation="Horizontal" HorizontalAlignment="Center">
             <n:NavButton Text="DataBase" NavUri="/Pages/DataPage.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
             <n:NavButton Text="Log In" NavUri="/Pages/LogIn.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
+<<<<<<< Updated upstream
             <n:NavButton Text="ADMIN BYPASS" NavUri="/Pages/AdminMenu.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
+=======
+            <n:NavButton Text="Admin View Games" NavUri="/Pages/AdminVG.xaml" Background="LightGray" Height="50" BorderBrush="Gray" BorderThickness="2"/>
+>>>>>>> Stashed changes
         </StackPanel>
 
 

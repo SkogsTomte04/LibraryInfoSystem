@@ -29,6 +29,7 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
             build();
         }
+<<<<<<< Updated upstream
         public void build()
         {
             int columncount = 0;
@@ -83,11 +84,57 @@ namespace LibraryInfoSystem.Pages
 
         private MongoHandler mongohandler = new MongoHandler(DataType.Games);
 
+=======
+        
+        private async Task buildparalelasync()
+        {
+            List<Task> tasks = new List<Task>();
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+
+            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
+            {
+                GameComponent gameComponent = createcomponent(baseItem);
+                tasks.Add(Task.Run(() => AddComponentParalelAsync(gameComponent)));
+            }
+            await Task.WhenAll(tasks);
+
+            watch.Stop();
+            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
+
+        }
+        public async Task AddComponentParalelAsync(GameComponent component)
+        {
+            await Task.Run(() =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    GamesWrap.Children.Add(component);
+
+                });
+            });
+
+
+        }
+
+
+        private GameComponent createcomponent(DataBaseItem baseItem)
+        {
+            GameComponent gameComponent = new GameComponent(baseItem);
+            gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));
+            return gameComponent;
+
+        }
+>>>>>>> Stashed changes
         private void Game_Click(object sender, RoutedEventArgs e)
         {
             GameComponent ClickedButton = sender as GameComponent;
 
+<<<<<<< Updated upstream
             if(ClickedButton != null)
+=======
+            if (ClickedButton != null)
+>>>>>>> Stashed changes
             {
                 ProductPage page = new ProductPage(ClickedButton);
                 this.NavigationService.Navigate(page);
@@ -99,5 +146,62 @@ namespace LibraryInfoSystem.Pages
 
         }
 
+<<<<<<< Updated upstream
+=======
+        private async void Grid_Loaded(object sender, EventArgs e)
+        {
+            await buildparalelasync();
+        }
+
+
+
+
+
+        //////////////
+
+        /*private async Task buildasync()
+        {
+            List<GameComponent> dataBaseContainer = new List<GameComponent>();
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
+
+            int i = 0, maxwidth = 3;
+            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
+            {
+                i++;
+                GameComponent gameComponent = createcomponent(baseItem);
+                
+                dataBaseContainer.Add(gameComponent);
+                if (i == maxwidth)
+                {
+                    i = 0;
+                    await addComponentsasync(dataBaseContainer);
+                    dataBaseContainer.Clear();
+                }
+                
+            }
+
+            watch.Stop();
+            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
+
+        }*/
+
+        /*public async Task addComponentsasync(List<GameComponent> list)
+        {
+            
+            await Task.Run(() =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    foreach (GameComponent gameComponent in list)
+                    {
+                        GamesWrap.Children.Add(gameComponent);
+                    }
+                    
+                });
+            });
+             
+        }*/
+>>>>>>> Stashed changes
     }
 }
