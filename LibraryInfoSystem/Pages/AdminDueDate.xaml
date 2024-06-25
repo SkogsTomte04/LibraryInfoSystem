@@ -27,6 +27,7 @@
             <Button Content="Sort A to Z" Click="SortAZ_Click" Margin="5"/>
             <Button Content="Sort Z to A" Click="SortZA_Click" Margin="5"/>
             <Button Content="Default Sort" Click="DefaultSort_Click" Margin="5"/>
+            <Button Content="Check Dates" Click="CheckDatesButton_Click" Margin="5"/>
         </StackPanel>
 
         <DataGrid x:Name="DueDateDataGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10"
