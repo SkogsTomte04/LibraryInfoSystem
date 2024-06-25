@@ -121,7 +121,7 @@ namespace LibraryInfoSystem.Pages
                 }
 
                 string name = SessionManager.CurrentUser.UserId;
-                var filterDue = Builders<DataBaseDuedate>.Filter.Eq("UserId", name);
+                var filterDue = Builders<DataBaseDuedate>.Filter.Eq("userId", name);
                 var dueAccount = _duedateCollection.Find(filterDue).FirstOrDefault();
 
                 DateTime bookedDateTime = DateTime.Today;
@@ -131,13 +131,13 @@ namespace LibraryInfoSystem.Pages
 
                 if (dueAccount != null)
                 {
-                    Builders<DataBaseDuedate>.Update.Push("title", gameName);
+                    var updateDue = Builders<DataBaseDuedate>.Update.AddToSet("title", gameName);
+                    await _duedateCollection.UpdateOneAsync(filterDue, updateDue);
                 }
 
                 if (dueAccount == null)
                 {
-                    List<string> gameTitle = new List<string>();
-                    gameTitle.Add(gameName);
+                    string[] gameTitle = new string[] { gameName };
                     var uId = name;
                     var booked = bookedDate;
                     var deadline = dueDate;

@@ -11,7 +11,7 @@ namespace LibraryInfoSystem.Tools
         public ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public List<string> _title { get; set; }
+        public string[] _title { get; set; }
 
         [BsonElement("price")]
         public double? _price { get; set; }
@@ -28,18 +28,13 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("isAdmin")]
         public bool? _isAdmin { get; set; }
 
-        public DataBaseDuedate(List<string>? title, string? userId, string? bookedDate, string? deadlineDate, bool? isAdmin)
+        public DataBaseDuedate(string[] title, string? userId, string? bookedDate, string? deadlineDate, bool? isAdmin)
         {
             _title = title;
             _userId = userId;
             _bookedDate = bookedDate;
             _deadlineDate = deadlineDate;
             _isAdmin = isAdmin;
-        }
-
-        public List<string> GetTitle()
-        {
-            return _title;
         }
     }
 }

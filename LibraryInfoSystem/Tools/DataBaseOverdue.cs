@@ -10,7 +10,7 @@ namespace LibraryInfoSystem.Tools
         public ObjectId Id { get; set; }
 
         [BsonElement("title")]
-        public List<string> _title { get; set; }
+        public string[] _title { get; set; }
 
         [BsonElement("userId")]
         public string? _userId { get; set; }

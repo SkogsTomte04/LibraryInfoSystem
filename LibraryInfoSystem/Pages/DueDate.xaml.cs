@@ -11,8 +11,6 @@ namespace LibraryInfoSystem.Pages
     public partial class DueDate : Page
     {
         private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
-        private MongoHandler user = new MongoHandler(DataType.Users);
-        new List<DataBaseDuedate> dueDates;
         private IMongoCollection<DataBaseDuedate> _duedateCollection;
 
         public DueDate()

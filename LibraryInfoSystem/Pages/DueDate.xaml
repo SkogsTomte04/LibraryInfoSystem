@@ -34,7 +34,7 @@
           RowHeaderWidth="0"
           SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=_title, Converter={StaticResource ArrayConverter}}" Width="*" IsReadOnly="True">
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=TitlesString}" Width="*" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
