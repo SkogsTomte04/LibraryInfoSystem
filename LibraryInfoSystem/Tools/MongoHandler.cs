@@ -109,15 +109,22 @@ namespace LibraryInfoSystem.Tools
 
         private void LoadItems()
         {
+            var watch = new Stopwatch();
+
+            //watch.Start();
             try
             {
+                var filter = Builders<DataBaseItem>.Filter.Empty;
                 var itemsCollection = GetCollection<DataBaseItem>("games");
-                items = itemsCollection.AsQueryable().ToList();
+                
+                items = itemsCollection.Find(filter).ToList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            //watch.Stop();
+            //MessageBox.Show($"Load Items elapsed seconds: {watch.Elapsed}");
         }
 
         private void LoadDuedate()
