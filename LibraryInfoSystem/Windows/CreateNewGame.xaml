@@ -7,20 +7,41 @@
         mc:Ignorable="d"
         Title="CreateNewGame" Height="450" Width="800">
     <Grid>
-        <StackPanel Width="300">
-            <Grid x:Name="DropImgGrid" Height="200" AllowDrop="True" Drop="DropImgGrid_Drop" >
-                <Border BorderBrush="Gray" BorderThickness="2">
-                    <Image x:Name="image_drop" Source="/Assets/images/DropHere.jpg"/>
-                </Border>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Width="300" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center">
+                <Grid x:Name="DropImgGrid" Height="200" AllowDrop="True" Drop="DropImgGrid_Drop" >
+                    <Border BorderBrush="Gray" BorderThickness="2">
+                        <Image x:Name="image_drop" Source="/Assets/images/DropHere.jpg"/>
+                    </Border>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="AddCoverimage" Content="Assign Cover image" Height="40" Margin="10" Click="AddCoverimage_Click"/>
+                    <Button x:Name="AddDemoimage" Content="Add Demo image" Margin="10" Click="AddDemoimage_Click"/>
+                </StackPanel>
                 
-            </Grid>
-            <c:txtBox Placeholder="Title"/>
-            <c:txtBox Placeholder="Price"/>
+            </StackPanel>
+            
+
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="30" Background="Lavender">
+            <TextBlock Text="Cover image:"/>
+            <Image x:Name="CoverImage_image" Height="150" Stretch="Uniform"/>
+
+            <TextBlock Text="Demo images:"/>
+            <StackPanel x:Name="demoimage_Stack" Orientation="Horizontal" Height="50" Background="LightGray">
+
+            </StackPanel>
+            
+            <c:txtBox x:Name="title_txtbox" Placeholder="Title"/>
+            <c:txtBox x:Name="price_txtbox" Placeholder="Price"/>
             <StackPanel x:Name="Platform_Stack">
                 <c:txtBox Placeholder="Platform"/>
             </StackPanel>
-            <Button x:Name="Register_button" Content="Confirm" Width="200" HorizontalAlignment="Center" Margin="0,102,0,0"/>
-
+            <Button x:Name="Register_button" Content="Confirm" Width="200" HorizontalAlignment="Center" Margin="10" Click="Register_button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
