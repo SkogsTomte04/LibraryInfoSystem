@@ -109,7 +109,6 @@ namespace LibraryInfoSystem.Tools
 
         private void LoadItems()
         {
-            var watch = new Stopwatch();
 
             //watch.Start();
             try
