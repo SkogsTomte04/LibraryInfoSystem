@@ -16,6 +16,15 @@ namespace LibraryInfoSystem.Tools
 {
     public class DataBaseItem
     {
+        public DataBaseItem(string? title, double? price, List<string> platform, string? image, List<string>? demoimg)
+        {
+            _title = title;
+            _price = price;
+            _platform = platform;
+            _image = image;
+            _demoimg = demoimg;
+        }
+
         [BsonId]
         protected ObjectId Id { get; set; }
 

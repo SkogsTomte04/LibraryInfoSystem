@@ -1,4 +1,8 @@
 ﻿using LibraryInfoSystem.Components;
+using LibraryInfoSystem.Tools;
+using Microsoft.Win32;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +26,9 @@ namespace LibraryInfoSystem.Windows
     /// </summary>
     public partial class CreateNewGame : Window
     {
+        MongoHandler handler = new MongoHandler(DataType.Games);
+        private IMongoCollection<DataBaseItem> _gamesCollection;
+
         private Uri DropImagePath;
         private Uri DropImagePathAbsolute;
 
@@ -30,10 +37,12 @@ namespace LibraryInfoSystem.Windows
         private string title = "";
         private double price = 0;
         private List<string> platforms = new List<string>();
+        private List<string> demoimagesbase64 = new List<string>();
 
         public CreateNewGame()
         {
             InitializeComponent();
+            ConnectToGames();
         }
 
         private void DropImgGrid_Drop(object sender, DragEventArgs e)
@@ -53,23 +62,40 @@ namespace LibraryInfoSystem.Windows
         }
         private string ImagetoBase64(Uri path)
         {
+
             byte[] bytes = System.IO.File.ReadAllBytes(path.ToString());
             return Convert.ToBase64String(bytes);
           
         }
 
 
-        private void Register_button_Click(object sender, RoutedEventArgs e)
+        private async void Register_button_Click(object sender, RoutedEventArgs e)
         {
-            base64image = ImagetoBase64(coverimage_path);
+            if(coverimage_path !=  null)
+            {
+                base64image = ImagetoBase64(coverimage_path);
+            }
 
             title = title_txtbox.Text;
             price = txtboxtoDouble(price_txtbox.Text);
             platforms = getPlatforms();
+            demoimagesbase64 = getdemoImages();
 
-            MessageBox.Show($"Image Path: {DropImagePath}\nTitle: {title}\nPrice: ${price}\nPlatform 1: {platforms[0]}");
+            DataBaseItem game = new DataBaseItem(title, price, platforms, base64image, demoimagesbase64);
 
+            await registeruser(game);
 
+        }
+        private List<string> getdemoImages()
+        {
+            List<string> list = new List<string>();
+            Uri path;
+            foreach(System.Windows.Controls.Image img in demoimage_Stack.Children)
+            {
+                path = new Uri(img.Tag.ToString(), UriKind.Relative);
+                list.Add(ImagetoBase64(path));
+            }
+            return list;
         }
 
         private List<string> getPlatforms()
@@ -101,12 +127,13 @@ namespace LibraryInfoSystem.Windows
 
         private void AddDemoimage_Click(object sender, RoutedEventArgs e)
         {
-            if(demoimage_Stack.Children.Count < 4)
+            if(demoimage_Stack.Children.Count < 3)
             {
                 System.Windows.Controls.Image image = new System.Windows.Controls.Image();
 
                 ImageSource imgSource = new BitmapImage(DropImagePathAbsolute);
                 image.Source = imgSource;
+                image.Tag = DropImagePath.ToString();  //IMAGE NAME IS THE RELATIVE PATH TO ROOT IMAGE STORED LOCALY ON COMPUTER.
 
                 demoimage_Stack.Children.Add(image);
             }
@@ -115,6 +142,71 @@ namespace LibraryInfoSystem.Windows
                 MessageBox.Show("Only allowed 3 demo images");
             }
             
+        }
+
+
+
+
+        /// <summary>
+        /// Mongo handler stuff below
+        /// </summary>
+        private void ConnectToGames()
+        {
+            try
+            {
+                _gamesCollection = handler.GetCollection<DataBaseItem>("games");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private async Task registeruser(DataBaseItem game)
+        {
+            await Task.Run(() =>
+            {
+
+                try
+                {
+                    //define filter 
+                    var filter = Builders<DataBaseItem>.Filter.Eq(r => r._title, game._title);
+
+                    //check if a user with the same email already exists
+                    var existing = _gamesCollection.Find(filter).FirstOrDefault();
+
+                    if (existing != null)
+                    {
+                        MessageBox.Show("A game with this title already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    //if no user exists with the same email
+                    _gamesCollection.InsertOne(game);
+
+                    var confirmFilter = Builders<DataBaseItem>.Filter.Eq(x => x._title, game._title);
+
+                    var confirm = _gamesCollection.Find(confirmFilter).FirstOrDefault();
+
+                    //confirm whether the userId has been injected into the collection or not.
+                    if (confirm != null)
+                    {
+                        MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to upload to the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        this.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Close();
+                }
+            });
         }
     }
 }

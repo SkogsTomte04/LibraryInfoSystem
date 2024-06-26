@@ -77,9 +77,25 @@ namespace LibraryInfoSystem.Pages
             Img1.SourceImage = Cover_img.Source;
             if (GameItem.demoImg != null)
             {
-                Img2.SourceImage = GameItem.demoImg[0];
-                Img3.SourceImage = GameItem.demoImg[1];
-                Img4.SourceImage = GameItem.demoImg[2];
+                for(int i = 0; i < GameItem.demoImg.Count;  i++)
+                {
+                    if (GameItem.demoImg[i] != null)
+                    {
+                        switch(i)
+                        {
+                            case 0:
+                                Img2.SourceImage = GameItem.demoImg[i];
+                                break;
+                            case 1:
+                                Img3.SourceImage = GameItem.demoImg[i];
+                                break;
+                            case 2:
+                                Img4.SourceImage = GameItem.demoImg[i];
+                                break;
+                            default: break;
+                        }
+                    }
+                }
             }
         }
 
