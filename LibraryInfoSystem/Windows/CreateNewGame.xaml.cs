@@ -20,6 +20,8 @@ namespace LibraryInfoSystem.Windows
     /// </summary>
     public partial class CreateNewGame : Window
     {
+        private Uri ImagePath;
+
         public CreateNewGame()
         {
             InitializeComponent();
@@ -32,10 +34,16 @@ namespace LibraryInfoSystem.Windows
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 Uri uri = new Uri(files[0], UriKind.Absolute);
+                ImagePath = uri;
                 ImageSource imgSource = new BitmapImage(uri);
                 image_drop.Source = imgSource;
+
+                MessageBox.Show(ImagePath.ToString());
                
             }
         }
+
+
+
     }
 }

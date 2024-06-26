@@ -19,7 +19,8 @@
             <StackPanel x:Name="Platform_Stack">
                 <c:txtBox Placeholder="Platform"/>
             </StackPanel>
-            
+            <Button x:Name="Register_button" Content="Confirm" Width="200" HorizontalAlignment="Center" Margin="0,102,0,0"/>
+
         </StackPanel>
     </Grid>
 </Window>

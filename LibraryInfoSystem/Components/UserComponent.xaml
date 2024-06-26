@@ -60,7 +60,7 @@
         </StackPanel>
 
         <Button x:Name="EditUser_Button" Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1" Click="EditUser_Button_Click">
-            <Image Source="/Components/GearSVG.png"/>
+            <Image Source="/Assets/Icons/GearSVG.png" />
         </Button>
 
         <Grid x:Name="ButtonControls_Grid" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Visibility="Collapsed" Height="30" >
