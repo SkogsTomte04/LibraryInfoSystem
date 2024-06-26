@@ -33,13 +33,12 @@ namespace LibraryInfoSystem.Pages
             _gameCollection = games.GetCollection<DataBaseItem>("games");
             _userCollection = customer.GetCollection<DataBaseUser>("users");
             InitializeComponent();
-            build();
         }
 
-        private async void build()
+        private void build()
         {
             SessionManager.UpdateSession(customer.CurrentUser);
-
+            MessageBox.Show(customer.CurrentUser.FirstName);
             if (SessionManager.CurrentUser != null)
             {
                 var games = SessionManager.CurrentUser.Games;
@@ -48,11 +47,12 @@ namespace LibraryInfoSystem.Pages
                 foreach (var game in games)
                 {
                     var gameFilter = Builders<DataBaseItem>.Filter.Eq("title", game);
-                    var gameDocument = await _gameCollection.Find(gameFilter).FirstOrDefaultAsync();
+                    var gameDocument = _gameCollection.Find(gameFilter).FirstOrDefault(); ;
 
                     if (gameDocument != null)
                     {
                         gameNames.Add(gameDocument);
+                        MessageBox.Show(gameDocument._title);
                     }
                 }
 
@@ -62,6 +62,8 @@ namespace LibraryInfoSystem.Pages
                     GamesWrap.Children.Add(gameComponent);
                 }
             }
+
+
         }    
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -74,6 +76,11 @@ namespace LibraryInfoSystem.Pages
             {
                 MessageBox.Show("NavigationService is null. Cannot navigate to Customer Menu.");
             }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            build();
         }
     }
 }

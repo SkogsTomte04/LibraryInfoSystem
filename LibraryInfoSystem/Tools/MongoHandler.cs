@@ -173,6 +173,7 @@ namespace LibraryInfoSystem.Tools
                     if (user.Password == password)
                     {
                         CurrentUser = user; //Set current user on successful log-in
+                        MessageBox.Show(CurrentUser.FirstName);
                         return true;
                     }
                 }

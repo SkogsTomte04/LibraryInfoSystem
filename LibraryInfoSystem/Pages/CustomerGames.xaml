@@ -16,7 +16,7 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <Grid Background="AliceBlue">
+        <Grid Background="AliceBlue" Loaded="Grid_Loaded">
             <Button Content="Back" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_Click"/>
             <WrapPanel x:Name="GamesWrap" Width="500">
 
