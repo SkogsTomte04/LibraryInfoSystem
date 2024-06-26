@@ -17,7 +17,7 @@
 
     <ScrollViewer>
         <Grid Background="AliceBlue">
-            <Button Content="Back" Command="NavigationCommands.BrowseBack" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Button Content="Back" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_Click"/>
             <WrapPanel x:Name="GamesWrap" Width="500">
 
             </WrapPanel>

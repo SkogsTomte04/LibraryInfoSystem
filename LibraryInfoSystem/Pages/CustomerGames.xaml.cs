@@ -38,6 +38,7 @@ namespace LibraryInfoSystem.Pages
 
         private async void build()
         {
+            SessionManager.UpdateSession(customer.CurrentUser);
 
             if (SessionManager.CurrentUser != null)
             {
@@ -60,11 +61,10 @@ namespace LibraryInfoSystem.Pages
                     GameComponent gameComponent = new GameComponent(game);
                     GamesWrap.Children.Add(gameComponent);
                 }
-            }     
-        }
+            }
+        }    
 
-
-        private void NavigateToCustomerMenu()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {

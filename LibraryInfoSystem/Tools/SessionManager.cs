@@ -18,6 +18,11 @@ namespace LibraryInfoSystem.Tools
             ShoppingCart = new List<GameComponent>();
         }
 
+        public static void UpdateSession(DataBaseUser user)
+        {
+            CurrentUser = user;
+        }
+
         public static void ClearSession()
         {
             CurrentUser = null;

@@ -74,7 +74,7 @@ namespace LibraryInfoSystem.Pages
              
         }
 
-        private GameComponent createcomponent(DataBaseItem baseItem)
+        public GameComponent createcomponent(DataBaseItem baseItem)
         {
             GameComponent gameComponent = new GameComponent(baseItem);
             gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(Game_Click));

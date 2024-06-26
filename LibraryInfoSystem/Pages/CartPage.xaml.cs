@@ -77,9 +77,18 @@ namespace LibraryInfoSystem.Pages
                         Margin = new Thickness(5)
                     };
 
+                    var removeButton = new Button
+                    {
+                        Content = "Remove",
+                        Tag = item // Storing the game in the Tag property for easy reference
+                    };
+                    removeButton.Click += RemoveButton_Click;
+
                     itemPanel.Children.Add(titleTextBlock);
                     itemPanel.Children.Add(platformsTextBlock);
                     itemPanel.Children.Add(priceTextBlock);
+                    itemPanel.Children.Add(removeButton);
+
 
                     ItemsContainer.Children.Add(itemPanel);
                 }
@@ -95,6 +104,21 @@ namespace LibraryInfoSystem.Pages
             }
         }
 
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null && button.Tag is GameComponent game)
+            {
+                RemoveFromCart(game);
+                DisplayCart(); // Refresh the cart display
+            }
+        }
+
+        private void RemoveFromCart(GameComponent game)
+        {
+            SessionManager.ShoppingCart.Remove(game);
+        }
+
         private async void CustGamesBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (GameComponent item in SessionManager.ShoppingCart)
@@ -107,7 +131,7 @@ namespace LibraryInfoSystem.Pages
                 ObjectId userId = SessionManager.CurrentUser.GetMongoId();
                 var filterUsers = Builders<DataBaseUser>.Filter.Eq("_id", userId);
                 var userDocument = await _userCollection.Find(filterUsers).FirstOrDefaultAsync();
-                var update = Builders<DataBaseUser>.Update.Push("games", gameName);
+                var update = Builders<DataBaseUser>.Update.AddToSet("games", gameName);
 
                 var updateResult = await _userCollection.UpdateOneAsync(filterUsers, update);
 
@@ -145,6 +169,7 @@ namespace LibraryInfoSystem.Pages
 
                     DataBaseDuedate newCustomerDue = new DataBaseDuedate(gameTitle, uId, booked, deadline, isAdmin);
                     _duedateCollection.InsertOne(newCustomerDue);
+                    SessionManager.UpdateSession(customer.CurrentUser);
                 }
 
 

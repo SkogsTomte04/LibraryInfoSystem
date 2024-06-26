@@ -13,9 +13,6 @@ namespace LibraryInfoSystem.Tools
         [BsonElement("title")]
         public string[] _title { get; set; }
 
-        [BsonElement("price")]
-        public double? _price { get; set; }
-
         [BsonElement("userId")]
         public string? _userId { get; set; }
 
