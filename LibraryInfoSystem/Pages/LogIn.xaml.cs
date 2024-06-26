@@ -42,23 +42,26 @@ namespace LibraryInfoSystem.Pages
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;
 
-            if (logIn.Validation(username, password)) {  }
+            if (logIn.Validation(username, password))
+            {
+                if (logIn.AdminValidation(username))
+                {
+                    MessageBox.Show("Welcome, Admin.", "admin");
+                    var ClickedButton = e.OriginalSource as NavButton;
+                    NavigationService.Navigate(ClickedButton.NavUri);
+                }
+                else
+                {
+                    SessionManager.InitializeSession(logIn.CurrentUser);
+                    MessageBox.Show("Welcome.", "user");
+                    var ClickedButton = e.OriginalSource as NavButton;
+                    ClickedButton.NavUri = new Uri("/Pages/CustomerMenu.xaml", UriKind.Relative);
+                    NavigationService.Navigate(ClickedButton.NavUri);
+                }
+            }
             else { MessageBox.Show("Failure.", "Error"); return; }
 
-            if (logIn.AdminValidation(username)) 
-            { 
-                MessageBox.Show("Welcome, Admin.", "admin");
-                var ClickedButton = e.OriginalSource as NavButton;
-                NavigationService.Navigate(ClickedButton.NavUri);
-            }
-            else
-            {
-                SessionManager.InitializeSession(logIn.CurrentUser);
-                MessageBox.Show("Welcome.", "user");
-                var ClickedButton = e.OriginalSource as NavButton;
-                ClickedButton.NavUri = new Uri("/Pages/CustomerMenu.xaml", UriKind.Relative);
-                NavigationService.Navigate(ClickedButton.NavUri);
-            }
+            
 
             logIn.IsLoggedIn();
         }

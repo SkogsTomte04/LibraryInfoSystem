@@ -41,69 +41,76 @@ namespace LibraryInfoSystem.Windows
                 MessageBox.Show(ex.ToString());
             }
         }
-        private async void registerBtn_Click(object sender, RoutedEventArgs e)
+        private async Task registeruser()
         {
-            var userId = new ObjectId();
-            var firstNameValue = firstName.Text;
-            var lastNameValue = lastName.Text;
-            var usernameValue = username.Text;
-            var passwordValue = password.Text;
-            var emailValue = email.Text;
-            var phoneNumberValue = phoneNumber.Text;
-            var arrayValue = new List<string>();
-
-            if (string.IsNullOrEmpty(firstNameValue) ||
-                string.IsNullOrEmpty(lastNameValue) ||
-                string.IsNullOrEmpty(usernameValue) ||
-                string.IsNullOrEmpty(passwordValue) ||
-                string.IsNullOrEmpty(emailValue) ||
-                string.IsNullOrEmpty(phoneNumberValue))
+            await Task.Run(() =>
             {
-                MessageBox.Show("All fields are required", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                var userId = new ObjectId();
+                var firstNameValue = firstName.Text;
+                var lastNameValue = lastName.Text;
+                var usernameValue = username.Text;
+                var passwordValue = password.Text;
+                var emailValue = email.Text;
+                var phoneNumberValue = phoneNumber.Text;
+                var arrayValue = new List<string>();
 
-            DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
-
-            try
-            {
-                //define filter 
-                var filter = Builders<DataBaseUser>.Filter.Eq(r => r.Email, newUser.Email) | Builders<DataBaseUser>.Filter.Eq(r => r.UserId, newUser.UserId);
-
-                //check if a user with the same email already exists
-                var existing = _usersCollection.Find(filter).FirstOrDefault();
-
-                if (existing != null)
+                if (string.IsNullOrEmpty(firstNameValue) ||
+                    string.IsNullOrEmpty(lastNameValue) ||
+                    string.IsNullOrEmpty(usernameValue) ||
+                    string.IsNullOrEmpty(passwordValue) ||
+                    string.IsNullOrEmpty(emailValue) ||
+                    string.IsNullOrEmpty(phoneNumberValue))
                 {
-                    MessageBox.Show("A user with this email and/or username already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("All fields are required", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                //if no user exists with the same email
-                _usersCollection.InsertOne(newUser);
+                DataBaseUser newUser = new DataBaseUser(firstNameValue, lastNameValue, usernameValue, passwordValue, emailValue, phoneNumberValue, false, arrayValue);
 
-                var confirmFilter = Builders<DataBaseUser>.Filter.Eq(x => x.Email, newUser.Email);
-
-                var confirm = _usersCollection.Find(confirmFilter).FirstOrDefault();
-
-                //confirm whether the userId has been injected into the collection or not.
-                if (confirm != null)
+                try
                 {
-                    MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //define filter 
+                    var filter = Builders<DataBaseUser>.Filter.Eq(r => r.Email, newUser.Email) | Builders<DataBaseUser>.Filter.Eq(r => r.UserId, newUser.UserId);
+
+                    //check if a user with the same email already exists
+                    var existing = _usersCollection.Find(filter).FirstOrDefault();
+
+                    if (existing != null)
+                    {
+                        MessageBox.Show("A user with this email and/or username already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    //if no user exists with the same email
+                    _usersCollection.InsertOne(newUser);
+
+                    var confirmFilter = Builders<DataBaseUser>.Filter.Eq(x => x.Email, newUser.Email);
+
+                    var confirm = _usersCollection.Find(confirmFilter).FirstOrDefault();
+
+                    //confirm whether the userId has been injected into the collection or not.
+                    if (confirm != null)
+                    {
+                        MessageBox.Show("User registered successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to upload to the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        this.Close();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Failed to upload to the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    this.Close();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while registering the user: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-            }
+            });
+        }
+        private async void registerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await registeruser();
 
         }
 
