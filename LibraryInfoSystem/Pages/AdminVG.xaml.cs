@@ -41,22 +41,6 @@ namespace LibraryInfoSystem.Pages
         private GameComponent CreateComponent(DataBaseItem baseItem)
         {
             GameComponent gameComponent = new GameComponent(baseItem);
-            /*gameComponent.title = baseItem._title;
-            gameComponent.price = baseItem._price;
-            gameComponent.platform = baseItem._platform;
-
-            gameComponent.image_cover.Source = mongohandler.convertbitmap(baseItem._image);
-
-            if (baseItem._demoimg != null)
-            {
-                List<ImageSource> convertedlist = new List<ImageSource>();
-                foreach (string img in baseItem._demoimg)
-                {
-                    convertedlist.Add(mongohandler.convertbitmap(img));
-                }
-
-                gameComponent.demoImg = convertedlist;
-            }*/
             gameComponent.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditGame_Click));
             
             return gameComponent;
