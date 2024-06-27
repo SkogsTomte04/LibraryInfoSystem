@@ -24,13 +24,12 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class DataPage : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
         private List<DataBaseItem> data = new List<DataBaseItem>();
 
         public DataPage()
         {
             InitializeComponent();
-            data = mongohandler.items;
+            data = SessionManager.Items;
         }
         private void build()
         {

@@ -23,7 +23,6 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class AdminVG : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Games);
         public AdminVG()
         {
             InitializeComponent();
@@ -31,7 +30,7 @@ namespace LibraryInfoSystem.Pages
         }
         private void PopulateStack()
         {
-            foreach (DataBaseItem baseGame in mongohandler.items) //Populate Grid with GameDataBase.games
+            foreach (DataBaseItem baseGame in SessionManager.Items) //Populate Grid with GameDataBase.games
             {
                 GameComponent gameComponent = CreateComponent(baseGame);
 
@@ -48,7 +47,7 @@ namespace LibraryInfoSystem.Pages
         private void UpdateGamesWrap()
         {
             GamesWrap.Children.Clear();
-            mongohandler.UpdateDataBase();
+            SessionManager.updateHandler();
             PopulateStack();
         }
 

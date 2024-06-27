@@ -23,23 +23,15 @@ namespace LibraryInfoSystem.Tools
 
     class MongoHandler
     {
-        private readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-        private IMongoDatabase database;
-        private DataType dataType;
-        public List<DataBaseUser> users;
-        public DataBaseUser CurrentUser { get; set; }
-        public List<DataBaseItem> items;
-        public List<DataBaseDuedate> duedate;
-        public List<DataBaseOverdue> overdue;
+        private static readonly string connectionUri = "mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+        private static IMongoDatabase database;
+        public static List<DataBaseUser> users;
+        public static List<DataBaseItem> items;
+        public static List<DataBaseDuedate> duedate;
+        public static List<DataBaseOverdue> overdue;
 
-        public MongoHandler(DataType dt)
-        {
-            dataType = dt;
-            ConnectToDatabase();
-            
-        }
 
-        private void ConnectToDatabase()
+        public static void ConnectToDatabase(DataType dataType)
         {
             var settings = MongoClientSettings.FromConnectionString(connectionUri);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
@@ -64,11 +56,7 @@ namespace LibraryInfoSystem.Tools
                     throw new ArgumentException("Invalid data type specified.");
             }
         }
-        public void UpdateDataBase()
-        {
-            ConnectToDatabase();
-        }
-        public void RemoveUser(DataBaseUser user)
+        public static void RemoveUser(DataBaseUser user)
         {
             MessageBoxResult result = MessageBox.Show($"Are you sure you want to permanently delete user: {user.UserId} \nNote: This action can not be undone", "Deleting User From Database", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -83,18 +71,18 @@ namespace LibraryInfoSystem.Tools
             
             
         }
-        public void EditUser(DataBaseUser newUser)
+        public static void EditUser(DataBaseUser newUser)
         {
             var filter = Builders<DataBaseUser>.Filter.Eq("_id", newUser.GetMongoId());
             GetCollection<DataBaseUser>("users").ReplaceOne(filter, newUser);
 
         }
 
-        public IMongoCollection<T> GetCollection<T>(string collection)
+        public static IMongoCollection<T> GetCollection<T>(string collection)
         {
             return database.GetCollection<T>(collection);
         }
-        private void LoadUsers()
+        private static void LoadUsers()
         {
             try
             {
@@ -107,15 +95,16 @@ namespace LibraryInfoSystem.Tools
             }
         }
 
-        private void LoadItems()
+        private static void LoadItems()
         {
 
             //watch.Start();
             try
             {
+                var filter = Builders<DataBaseItem>.Filter.Empty;
                 var itemsCollection = GetCollection<DataBaseItem>("games");
                 
-                items = itemsCollection.AsQueryable().ToList();
+                items = itemsCollection.Find(filter).ToList();
             }
             catch (Exception ex)
             {
@@ -125,7 +114,7 @@ namespace LibraryInfoSystem.Tools
             //MessageBox.Show($"Load Items elapsed seconds: {watch.Elapsed}");
         }
 
-        private void LoadDuedate()
+        private static void LoadDuedate()
         {
             try
             {
@@ -138,7 +127,7 @@ namespace LibraryInfoSystem.Tools
             }
         }
 
-        private void LoadOverdue()
+        private static void LoadOverdue()
         {
             try
             {
@@ -151,8 +140,9 @@ namespace LibraryInfoSystem.Tools
             }
         }
 
-        public bool AdminValidation(string username)
+        public static bool AdminValidation(string username)
         {
+            LoadUsers();
             foreach (var user in users)
             {
                 if (user.UserId == username)
@@ -163,16 +153,16 @@ namespace LibraryInfoSystem.Tools
             return false;
         }
 
-        public bool Validation(string username, string password)
+        public static bool Validation(string username, string password)
         {
+            ConnectToDatabase(DataType.Users);
             foreach (var user in users)
             {
                 if (user.UserId == username)
                 {
                     if (user.Password == password)
                     {
-                        CurrentUser = user; //Set current user on successful log-in
-                        MessageBox.Show(CurrentUser.FirstName);
+                        SessionManager.InitializeSession(user); //Set current user on successful log-in
                         return true;
                     }
                 }
@@ -180,17 +170,17 @@ namespace LibraryInfoSystem.Tools
             return false;
         }
 
-        public bool IsLoggedIn()
+        public static bool IsLoggedIn()
         {
-            return CurrentUser != null;
+            return SessionManager.CurrentUser != null;
         }
 
-        public bool LoggedOut()
+        public static bool LoggedOut()
         {
-            return CurrentUser == null;
+            return SessionManager.CurrentUser == null;
         }
 
-        public ImageSource convertbitmap(string bit)
+        public static ImageSource convertbitmap(string bit)
         {
             BitmapSource convertedImage = null;
             if (string.IsNullOrWhiteSpace(bit) == false) //image conversion
@@ -203,7 +193,7 @@ namespace LibraryInfoSystem.Tools
             
         }
 
-        public BitmapSource BitmapFromBase64(string? b64string)
+        private static BitmapSource BitmapFromBase64(string? b64string)
         {
             var bytes = Convert.FromBase64String(b64string);
             using (var stream = new MemoryStream(bytes))

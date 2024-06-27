@@ -23,7 +23,6 @@ namespace LibraryInfoSystem.Windows
     /// </summary>
     public partial class CreateNewUser : Window
     {
-        private MongoHandler register = new MongoHandler(DataType.Users);
         private IMongoCollection<DataBaseUser> _usersCollection;
         public CreateNewUser()
         {
@@ -34,7 +33,7 @@ namespace LibraryInfoSystem.Windows
         {
             try
             {
-                _usersCollection = register.GetCollection<DataBaseUser>("users");
+                _usersCollection = MongoHandler.GetCollection<DataBaseUser>("users");
             }
             catch (Exception ex)
             {

@@ -24,15 +24,11 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class CustomerGames : Page
     {
-        private MongoHandler customer = new MongoHandler(DataType.Users);
-        private MongoHandler games = new MongoHandler(DataType.Games);
-        private IMongoCollection<DataBaseUser> _userCollection;
         private IMongoCollection<DataBaseItem> _gameCollection;
         public CustomerGames()
         {
-            customer.UpdateDataBase();
-            _gameCollection = games.GetCollection<DataBaseItem>("games");
-            _userCollection = customer.GetCollection<DataBaseUser>("users");
+            SessionManager.updateHandler();
+            _gameCollection = MongoHandler.GetCollection<DataBaseItem>("games");
             InitializeComponent();
         }
 
@@ -44,7 +40,7 @@ namespace LibraryInfoSystem.Pages
                 var games = SessionManager.CurrentUser.Games;
                 var gameNames = new List<DataBaseItem>();
 
-                foreach (var game in games)
+                foreach (var game in SessionManager.Items)
                 {
                     var gameFilter = Builders<DataBaseItem>.Filter.Eq("title", game);
                     var gameDocument = _gameCollection.Find(gameFilter).FirstOrDefault(); ;

@@ -10,12 +10,11 @@ namespace LibraryInfoSystem.Pages
 {
     public partial class DueDate : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
         private IMongoCollection<DataBaseDuedate> _duedateCollection;
 
         public DueDate()
         {
-            _duedateCollection = mongohandler.GetCollection<DataBaseDuedate>("duedate_games");
+            _duedateCollection = MongoHandler.GetCollection<DataBaseDuedate>("duedate_games");
             InitializeComponent();
             LoadDueDateData();
         }

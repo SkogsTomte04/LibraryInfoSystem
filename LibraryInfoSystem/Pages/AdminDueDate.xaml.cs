@@ -11,7 +11,6 @@ namespace LibraryInfoSystem.Pages
 {
     public partial class AdminDueDate : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Duedate);
         private List<DataBaseDuedate> dueDates = new List<DataBaseDuedate>();
         private List<DataBaseDuedate> originalDueDates = new List<DataBaseDuedate>();
 
@@ -30,7 +29,7 @@ namespace LibraryInfoSystem.Pages
         {
             try
             {
-                dueDates = mongohandler.duedate;
+                dueDates = SessionManager.ItemsDue;
                 originalDueDates = new List<DataBaseDuedate>(dueDates);
                 DueDateDataGrid.ItemsSource = dueDates;
             }
@@ -74,7 +73,7 @@ namespace LibraryInfoSystem.Pages
                         .Set(d => d._deadlineDate, dueDate._deadlineDate)
                         .Set(d => d._isAdmin, dueDate._isAdmin);
 
-                    mongohandler.GetCollection<DataBaseDuedate>("duedate_games").UpdateOne(filter, update);
+                    MongoHandler.GetCollection<DataBaseDuedate>("duedate_games").UpdateOne(filter, update);
                 }
 
                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -89,7 +88,7 @@ namespace LibraryInfoSystem.Pages
         {
             try
             {
-                var collection = mongohandler.GetCollection<DataBaseDuedate>("duedate_games");
+                var collection = MongoHandler.GetCollection<DataBaseDuedate>("duedate_games");
                 var filter = Builders<DataBaseDuedate>.Filter.Empty; // Empty filter to match all documents
                 var duedates = collection.Find(filter).ToList(); // Get all documents in the collection
 
@@ -102,7 +101,7 @@ namespace LibraryInfoSystem.Pages
                         if (deadline.Date <= DateTime.Now.Date)
                         {
                             // Move the document to the overdue_games collection
-                            mongohandler.GetCollection<DataBaseDuedate>("overdue_games").InsertOne(duedate);
+                            MongoHandler.GetCollection<DataBaseDuedate>("overdue_games").InsertOne(duedate);
 
                             // Remove the document from the duedate_games collection
                             var deleteFilter = Builders<DataBaseDuedate>.Filter.Eq("_id", duedate.Id);

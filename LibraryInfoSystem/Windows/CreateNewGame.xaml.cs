@@ -26,7 +26,6 @@ namespace LibraryInfoSystem.Windows
     /// </summary>
     public partial class CreateNewGame : Window
     {
-        MongoHandler handler = new MongoHandler(DataType.Games);
         private IMongoCollection<DataBaseItem> _gamesCollection;
 
         private Uri DropImagePath;
@@ -154,7 +153,7 @@ namespace LibraryInfoSystem.Windows
         {
             try
             {
-                _gamesCollection = handler.GetCollection<DataBaseItem>("games");
+                _gamesCollection = MongoHandler.GetCollection<DataBaseItem>("games");
             }
             catch (Exception ex)
             {

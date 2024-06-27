@@ -22,7 +22,6 @@ namespace LibraryInfoSystem.Components
     public partial class UserComponent : UserControl
     {
         public DataBaseUser User;
-        MongoHandler mongoHandler = new MongoHandler(DataType.Users);
         public UserComponent(DataBaseUser user)
         {
             InitializeComponent();
@@ -139,13 +138,13 @@ namespace LibraryInfoSystem.Components
 
         private void RemoveUser_Button_Click(object sender, RoutedEventArgs e)
         {
-            mongoHandler.RemoveUser(User);
+            MongoHandler.RemoveUser(User);
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             User.FirstName = fn.Text; User.LastName = ln.Text; User.Email = em.Text; User.UserId = ui.Text; User.Password = pas.Text; User.PhoneNumber = ph.Text; User.IsAdmin = ad.IsChecked;
-            mongoHandler.EditUser(User);
+            MongoHandler.EditUser(User);
             build();
         }
 

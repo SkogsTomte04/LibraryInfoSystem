@@ -24,12 +24,11 @@ namespace LibraryInfoSystem.Pages
     /// </summary> mongodb+srv://WilliamMoller:Jm7vEC6KYEVl3l6m@cluster0.ivwoew0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     public partial class Registration : Page
     {
-        private MongoHandler register = new MongoHandler(DataType.Users);
         private IMongoCollection<DataBaseUser>? _usersCollection;
 
         public Registration()
         {
-            _usersCollection = register.GetCollection<DataBaseUser>("users");
+            _usersCollection = MongoHandler.GetCollection<DataBaseUser>("users");
             InitializeComponent();     
         }
 

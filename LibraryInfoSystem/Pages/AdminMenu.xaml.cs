@@ -21,7 +21,6 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class AdminMenu : Page
     {
-        private MongoHandler Admin = new MongoHandler(DataType.Users);
         public AdminMenu()
         {
             InitializeComponent();
@@ -47,7 +46,7 @@ namespace LibraryInfoSystem.Pages
 
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
         {
-            Admin.LoggedOut();
+            MongoHandler.LoggedOut();
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
             MessageBox.Show("You have been logged out.", "Success");

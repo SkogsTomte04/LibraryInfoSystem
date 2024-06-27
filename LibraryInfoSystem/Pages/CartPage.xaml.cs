@@ -26,17 +26,15 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class CartPage : Page
     {
-        private MongoHandler customer = new MongoHandler(DataType.Users);
-        private MongoHandler customerDue = new MongoHandler(DataType.Duedate);
         private IMongoCollection<DataBaseUser> _userCollection;
         private IMongoCollection<DataBaseItem>? _gameCollection;
         private IMongoCollection<DataBaseDuedate> _duedateCollection;
 
         public CartPage()
         {
-            _userCollection = customer.GetCollection<DataBaseUser>("users");
-            _gameCollection = customer.GetCollection<DataBaseItem>("games");
-            _duedateCollection = customer.GetCollection<DataBaseDuedate>("duedate_games");
+            _userCollection = MongoHandler.GetCollection<DataBaseUser>("users");
+            _gameCollection = MongoHandler.GetCollection<DataBaseItem>("games");
+            _duedateCollection = MongoHandler.GetCollection<DataBaseDuedate>("duedate_games");
             InitializeComponent();
             DisplayCart();
         }
@@ -169,7 +167,7 @@ namespace LibraryInfoSystem.Pages
 
                     DataBaseDuedate newCustomerDue = new DataBaseDuedate(gameTitle, uId, booked, deadline, isAdmin);
                     _duedateCollection.InsertOne(newCustomerDue);
-                    SessionManager.UpdateSession(customer.CurrentUser);
+                    SessionManager.UpdateSession(SessionManager.CurrentUser);
                 }
 
 

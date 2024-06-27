@@ -24,8 +24,6 @@ namespace LibraryInfoSystem.Components
     public partial class GameComponent : UserControl
     {
         public DataBaseItem dataitem;
-        private MongoHandler mongoHandler = new MongoHandler(DataType.Games);
-        private MongoHandler user = new MongoHandler(DataType.Users);
         public GameComponent(DataBaseItem item)
         {
             InitializeComponent();
@@ -40,7 +38,7 @@ namespace LibraryInfoSystem.Components
 
             if(dataitem._image != null)
             {
-                image_cover.Source = await Task.Run(() => mongoHandler.convertbitmap(dataitem._image));
+                image_cover.Source = await Task.Run(() => MongoHandler.convertbitmap(dataitem._image));
 
             }
             
@@ -96,7 +94,7 @@ namespace LibraryInfoSystem.Components
 
                 foreach (string img in dataitem._demoimg)
                 {
-                    tasks.Add(Task.Run(() => mongoHandler.convertbitmap(img)));
+                    tasks.Add(Task.Run(() => MongoHandler.convertbitmap(img)));
 
                     //ImageSource image = mongoHandler.convertbitmap(img);
 

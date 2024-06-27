@@ -24,8 +24,6 @@ namespace LibraryInfoSystem.Pages
     public partial class LogIn : Page
     {
 
-        private MongoHandler logIn = new MongoHandler(DataType.Users); 
-
         public LogIn()
         {
             InitializeComponent();
@@ -42,9 +40,9 @@ namespace LibraryInfoSystem.Pages
             string username = usernameTxt.Text;
             string password = passwordTxt.Text;
 
-            if (logIn.Validation(username, password))
+            if (MongoHandler.Validation(username, password))
             {
-                if (logIn.AdminValidation(username))
+                if (MongoHandler.AdminValidation(username))
                 {
                     MessageBox.Show("Welcome, Admin.", "admin");
                     var ClickedButton = e.OriginalSource as NavButton;
@@ -52,8 +50,7 @@ namespace LibraryInfoSystem.Pages
                 }
                 else
                 {
-                    SessionManager.InitializeSession(logIn.CurrentUser);
-                    MessageBox.Show("Welcome.", "user");
+                    MessageBox.Show($"Welcome.", SessionManager.CurrentUser.FirstName);
                     var ClickedButton = e.OriginalSource as NavButton;
                     ClickedButton.NavUri = new Uri("/Pages/CustomerMenu.xaml", UriKind.Relative);
                     NavigationService.Navigate(ClickedButton.NavUri);
@@ -63,7 +60,7 @@ namespace LibraryInfoSystem.Pages
 
             
 
-            logIn.IsLoggedIn();
+            MongoHandler.IsLoggedIn();
         }
     }
 }

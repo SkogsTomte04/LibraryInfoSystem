@@ -21,7 +21,6 @@ namespace LibraryInfoSystem.Pages
     /// </summary>
     public partial class CustomerMenu : Page
     {
-        private MongoHandler Customer = new MongoHandler(DataType.Users);
         public CustomerMenu()
         {
             InitializeComponent();
@@ -53,7 +52,7 @@ namespace LibraryInfoSystem.Pages
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            Customer.LoggedOut();
+            MongoHandler.LoggedOut();
             SessionManager.ClearSession();
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);

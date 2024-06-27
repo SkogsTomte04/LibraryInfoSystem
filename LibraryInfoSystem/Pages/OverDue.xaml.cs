@@ -10,7 +10,6 @@ namespace LibraryInfoSystem.Pages
 {
     public partial class OverDue : Page
     {
-        private MongoHandler mongohandler = new MongoHandler(DataType.Overdue);
         private List<DataBaseOverdue> overdue = new List<DataBaseOverdue>();
         private List<DataBaseOverdue> originalOverdue = new List<DataBaseOverdue>();
 
@@ -28,7 +27,7 @@ namespace LibraryInfoSystem.Pages
         {
             try
             {
-                overdue = mongohandler.overdue;
+                overdue = SessionManager.ItemsOverdue;
                 originalOverdue = new List<DataBaseOverdue>(overdue);
                 OverDueDataGrid.ItemsSource = overdue;
             }
@@ -54,7 +53,7 @@ namespace LibraryInfoSystem.Pages
                         .Set(d => d._deadlineDate, overdue._deadlineDate)
                         .Set(d => d._isAdmin, overdue._isAdmin);
 
-                    mongohandler.GetCollection<DataBaseOverdue>("overdue_games").UpdateOne(filter, update);
+                    MongoHandler.GetCollection<DataBaseOverdue>("overdue_games").UpdateOne(filter, update);
                 }
 
                 MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
