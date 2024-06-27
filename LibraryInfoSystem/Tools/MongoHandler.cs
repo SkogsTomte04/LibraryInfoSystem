@@ -113,10 +113,9 @@ namespace LibraryInfoSystem.Tools
             //watch.Start();
             try
             {
-                var filter = Builders<DataBaseItem>.Filter.Empty;
                 var itemsCollection = GetCollection<DataBaseItem>("games");
                 
-                items = itemsCollection.Find(filter).ToList();
+                items = itemsCollection.AsQueryable().ToList();
             }
             catch (Exception ex)
             {

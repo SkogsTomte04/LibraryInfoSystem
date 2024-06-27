@@ -32,6 +32,17 @@ namespace LibraryInfoSystem.Pages
             InitializeComponent();
             data = mongohandler.items;
         }
+        private void build()
+        {
+
+            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
+            {
+                MessageBox.Show(baseItem._title);
+                GameComponent gameComponent = createcomponent(baseItem);
+                addComponent(gameComponent);
+            }
+
+        }
         private async Task buildasync()
         {
             List<GameComponent> dataBaseContainer = new List<GameComponent>();
@@ -58,36 +69,7 @@ namespace LibraryInfoSystem.Pages
             MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
 
         }
-        private async Task buildparalelasync()
-        {
-            List<Task> tasks = new List<Task>();
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
-
-            foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
-            {
-                GameComponent gameComponent = createcomponent(baseItem);
-                tasks.Add(Task.Run(() => AddComponentParalelAsync(gameComponent)));
-            }
-            await Task.WhenAll(tasks);
-
-            watch.Stop();
-            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
-
-        }
-        public async Task AddComponentParalelAsync(GameComponent component)
-        {
-            await Task.Run(() =>
-            {
-                this.Dispatcher.Invoke(() =>
-                {
-                    GamesWrap.Children.Add(component);
-
-                });
-            });
-            
-
-        }
+        
         public async Task addComponentsasync(List<GameComponent> list)
         {
             
@@ -112,6 +94,11 @@ namespace LibraryInfoSystem.Pages
             return gameComponent;
 
         }
+        public void addComponent(GameComponent gameComponent)
+        {
+            GamesWrap.Children.Add(gameComponent);
+
+        }
         private void Game_Click(object sender, RoutedEventArgs e)
         {
             GameComponent ClickedButton = sender as GameComponent;
@@ -130,19 +117,7 @@ namespace LibraryInfoSystem.Pages
 
         private async void Grid_Loaded(object sender, EventArgs e)
         {
-            //await buildasync();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
             await buildasync();
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
-            await buildparalelasync();
         }
     }
 }

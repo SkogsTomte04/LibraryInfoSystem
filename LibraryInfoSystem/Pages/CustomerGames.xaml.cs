@@ -37,8 +37,8 @@ namespace LibraryInfoSystem.Pages
 
         private void build()
         {
-            SessionManager.UpdateSession(customer.CurrentUser); // currentuser in mongohandler is null
-            if (SessionManager.CurrentUser != null)
+            var user = SessionManager.CurrentUser.UserId; // currentuser in mongohandler is null
+            if (user != null)
             {
                 var games = SessionManager.CurrentUser.Games;
                 var gameNames = new List<DataBaseItem>();
