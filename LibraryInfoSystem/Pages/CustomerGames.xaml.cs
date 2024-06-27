@@ -30,6 +30,7 @@ namespace LibraryInfoSystem.Pages
         private IMongoCollection<DataBaseItem> _gameCollection;
         public CustomerGames()
         {
+            customer.UpdateDataBase();
             _gameCollection = games.GetCollection<DataBaseItem>("games");
             _userCollection = customer.GetCollection<DataBaseUser>("users");
             InitializeComponent();

@@ -46,8 +46,7 @@ namespace LibraryInfoSystem.Pages
         private async Task buildasync()
         {
             List<GameComponent> dataBaseContainer = new List<GameComponent>();
-            var watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
+            
 
             int i = 0, maxwidth = 3;
             foreach (DataBaseItem baseItem in data) //Populate Grid with GameDataBase.games
@@ -64,9 +63,6 @@ namespace LibraryInfoSystem.Pages
                 }
                 
             }
-
-            watch.Stop();
-            MessageBox.Show($"elapsed time: {watch.ElapsedMilliseconds / 1000} Seconds");
 
         }
         
