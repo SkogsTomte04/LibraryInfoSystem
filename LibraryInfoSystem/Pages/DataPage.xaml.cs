@@ -130,18 +130,6 @@ namespace LibraryInfoSystem.Pages
 
         private async void Grid_Loaded(object sender, EventArgs e)
         {
-            //await buildasync();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
-            await buildasync();
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            GamesWrap.Children.Clear();
             await buildparalelasync();
         }
     }
